@@ -1,0 +1,73 @@
+---
+pagetitle: "Ocean Metrics"
+page-layout: custom
+section-divs: false
+toc: false
+css: index.css
+---
+
+::: {.hero-banner}
+::: {.hero-content}
+# Ocean Metrics
+
+## Measuring and Visualizing Ocean Health
+
+Empowering decision-makers with data-driven insights for ocean sustainability
+:::
+:::
+
+::: {.content-section}
+## Project Overview
+
+Ocean Metrics is a comprehensive platform designed to measure, analyze, and visualize key indicators of ocean health and sustainability. Our mission is to provide researchers, policymakers, and ocean advocates with accessible tools and data to understand and protect our marine ecosystems.
+
+### Key Features
+
+::: {.features-grid}
+::: {.feature-card}
+### 📊 Real-time Data
+Access up-to-date measurements of ocean temperature, pH levels, biodiversity indices, and pollution indicators from global monitoring networks.
+:::
+
+::: {.feature-card}
+### 🗺️ Interactive Visualizations
+Explore ocean data through interactive maps, charts, and dashboards that make complex information accessible and actionable.
+:::
+
+::: {.feature-card}
+### 🔬 Scientific Rigor
+Built on peer-reviewed methodologies and validated datasets, ensuring accuracy and reliability for research and policy applications.
+:::
+
+::: {.feature-card}
+### 🌍 Global Coverage
+Monitor ocean health indicators across all major ocean basins, from coastal waters to the deep sea.
+:::
+:::
+
+### Our Approach
+
+We combine multiple data sources including:
+
+- Satellite remote sensing data
+- In-situ measurements from buoys and research vessels
+- Historical oceanographic databases
+- Real-time sensor networks
+
+This integrated approach provides a holistic view of ocean health, enabling better understanding of:
+
+- Climate change impacts on marine ecosystems
+- Ocean acidification trends
+- Marine biodiversity patterns
+- Pollution distribution and impacts
+- Sustainable fisheries management
+
+### Get Started
+
+Explore our [applications](applications.qmd) to see how Ocean Metrics can support your ocean research and conservation efforts. Check out our [example analysis](examples/ocean-temperature.qmd) to see the platform in action.
+:::
+
+::: {.cta-section}
+[Explore Applications](applications.qmd){.btn .btn-primary .btn-lg}
+[View Example](examples/ocean-temperature.qmd){.btn .btn-outline-primary .btn-lg}
+:::

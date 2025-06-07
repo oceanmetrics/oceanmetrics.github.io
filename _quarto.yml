@@ -1,0 +1,38 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Ocean Metrics"
+  description: "Measuring and visualizing ocean health and sustainability"
+  favicon: favicon.svg
+  
+  navbar:
+    background: primary
+    left:
+      - href: index.qmd
+        text: Home
+      - href: applications.qmd
+        text: Applications
+      - href: examples/ocean-temperature.qmd
+        text: Example
+    right:
+      - icon: github
+        href: https://github.com/oceanmetrics
+        aria-label: GitHub
+
+  page-footer:
+    center: |
+      Ocean Metrics &copy; 2025
+    left: |
+      Measuring ocean health through data
+
+format:
+  html:
+    theme: 
+      light: cosmo
+      dark: slate
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    toc-location: right

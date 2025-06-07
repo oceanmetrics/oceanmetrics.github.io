@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- Ocean wave icon -->
+  <rect width="32" height="32" fill="#0066cc"/>
+  <path d="M4 20 Q8 16 12 20 T20 20 T28 20 L28 28 L4 28 Z" fill="#ffffff" opacity="0.9"/>
+  <path d="M4 24 Q8 20 12 24 T20 24 T28 24 L28 28 L4 28 Z" fill="#ffffff" opacity="0.6"/>
+  <!-- Data point -->
+  <circle cx="16" cy="12" r="3" fill="#ffffff"/>
+  <circle cx="10" cy="10" r="2" fill="#ffffff" opacity="0.7"/>
+  <circle cx="22" cy="10" r="2" fill="#ffffff" opacity="0.7"/>
+  <!-- Connecting lines -->
+  <line x1="10" y1="10" x2="16" y2="12" stroke="#ffffff" stroke-width="1" opacity="0.5"/>
+  <line x1="16" y1="12" x2="22" y2="10" stroke="#ffffff" stroke-width="1" opacity="0.5"/>
+</svg>

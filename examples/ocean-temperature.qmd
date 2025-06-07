@@ -1,0 +1,235 @@
+---
+title: "Ocean Temperature Monitoring"
+execute:
+  echo: true
+  warning: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# load libraries
+librarian::shelf(
+  tidyverse, 
+  plotly, 
+  leaflet, 
+  lubridate,
+  quiet = T
+)
+
+# set seed for reproducibility
+set.seed(42)
+```
+
+## Global Sea Surface Temperature Analysis
+
+This example demonstrates how Ocean Metrics can be used to analyze and visualize sea surface temperature (SST) data. We'll explore temperature anomalies, identify marine heatwaves, and examine long-term warming trends.
+
+### Data Overview
+
+For this demonstration, we're using simulated data that represents typical patterns observed in global SST measurements:
+
+```{r}
+#| label: generate-data
+
+# generate simulated sst data
+n_points <- 500
+lat <- runif(n_points, -70, 70)
+lon <- runif(n_points, -180, 180)
+
+# create realistic temperature patterns
+base_temp <- 25 - abs(lat) * 0.5  # temperature decreases with latitude
+seasonal_var <- sin(2 * pi * as.numeric(Sys.Date() - as.Date("2025-01-01")) / 365) * 3
+random_var <- rnorm(n_points, 0, 2)
+
+sst_data <- tibble(
+  latitude = lat,
+  longitude = lon,
+  temperature = base_temp + seasonal_var + random_var,
+  anomaly = rnorm(n_points, 0.5, 1.5),  # slight warming bias
+  date = Sys.Date()
+) |>
+  mutate(
+    temperature = round(temperature, 1),
+    anomaly = round(anomaly, 1)
+  )
+
+# create time series data
+dates <- seq(as.Date("2020-01-01"), as.Date("2025-01-01"), by = "month")
+global_mean_temp <- tibble(
+  date = dates,
+  temperature = 15 + 
+    sin(2 * pi * as.numeric(dates - as.Date("2020-01-01")) / 365) * 3 +  # seasonal
+    seq(0, 0.8, length.out = length(dates)) +  # warming trend
+    rnorm(length(dates), 0, 0.5)  # random variation
+)
+
+head(sst_data)
+```
+
+### Interactive Temperature Map
+
+The map below shows current sea surface temperatures across the globe. Warmer colors indicate higher temperatures:
+
+```{r}
+#| label: temperature-map
+
+# create color palette
+temp_pal <- colorNumeric(
+  palette = c("darkblue", "blue", "lightblue", "yellow", "orange", "red"),
+  domain = sst_data$temperature
+)
+
+# create interactive map
+leaflet(sst_data) |>
+  addTiles() |>
+  addCircleMarkers(
+    ~longitude, ~latitude,
+    radius = 3,
+    color = ~temp_pal(temperature),
+    fillOpacity = 0.8,
+    popup = ~paste(
+      "Temperature:", temperature, "°C<br>",
+      "Anomaly:", anomaly, "°C<br>",
+      "Location:", round(latitude, 2), "°N,", round(longitude, 2), "°E"
+    )
+  ) |>
+  addLegend(
+    "bottomright",
+    pal = temp_pal,
+    values = ~temperature,
+    title = "SST (°C)",
+    opacity = 1
+  )
+```
+
+### Temperature Anomalies
+
+Temperature anomalies show how current temperatures compare to long-term averages. Positive anomalies (red) indicate warmer than average conditions:
+
+```{r}
+#| label: anomaly-plot
+
+# create anomaly plot
+plot_ly(sst_data, type = "scatter", mode = "markers") |>
+  add_trace(
+    x = ~longitude,
+    y = ~latitude,
+    color = ~anomaly,
+    colors = c("darkblue", "white", "darkred"),
+    colorscale = list(
+      c(0, "darkblue"),
+      c(0.5, "white"),
+      c(1, "darkred")
+    ),
+    text = ~paste("Anomaly:", anomaly, "°C"),
+    hoverinfo = "text",
+    marker = list(
+      size = 8,
+      colorbar = list(title = "Temperature<br>Anomaly (°C)")
+    )
+  ) |>
+  layout(
+    title = "Sea Surface Temperature Anomalies",
+    xaxis = list(title = "Longitude"),
+    yaxis = list(title = "Latitude"),
+    geo = list(
+      showland = TRUE,
+      landcolor = toRGB("gray90"),
+      coastlinecolor = toRGB("gray50")
+    )
+  )
+```
+
+### Global Temperature Trends
+
+The time series below shows the global mean sea surface temperature over the past 5 years, revealing both seasonal patterns and long-term warming:
+
+```{r}
+#| label: time-series
+
+# create time series plot
+plot_ly(global_mean_temp, type = "scatter", mode = "lines+markers") |>
+  add_trace(
+    x = ~date,
+    y = ~temperature,
+    name = "Global Mean SST",
+    line = list(color = "rgb(22, 96, 167)", width = 2),
+    marker = list(size = 4)
+  ) |>
+  add_trace(
+    x = ~date,
+    y = ~predict(loess(temperature ~ as.numeric(date), data = global_mean_temp)),
+    name = "Trend",
+    line = list(color = "rgb(205, 12, 24)", width = 3, dash = "dash")
+  ) |>
+  layout(
+    title = "Global Mean Sea Surface Temperature (2020-2025)",
+    xaxis = list(title = "Date"),
+    yaxis = list(title = "Temperature (°C)"),
+    hovermode = "x unified"
+  )
+```
+
+### Key Findings
+
+Based on this analysis:
+
+1. **Spatial Patterns**: Temperature decreases from equator to poles, with the warmest waters in tropical regions
+2. **Anomalies**: Most regions show positive temperature anomalies, indicating warming above historical averages
+3. **Trends**: The 5-year time series reveals a warming trend of approximately 0.8°C, superimposed on natural seasonal cycles
+
+### Marine Heatwave Detection
+
+We can identify potential marine heatwave conditions where temperatures exceed the 90th percentile:
+
+```{r}
+#| label: heatwave-analysis
+
+# calculate temperature percentiles
+temp_90th <- quantile(sst_data$temperature, 0.9)
+
+# identify potential heatwave areas
+heatwave_regions <- sst_data |>
+  filter(temperature > temp_90th) |>
+  mutate(intensity = case_when(
+    temperature > quantile(sst_data$temperature, 0.95) ~ "Extreme",
+    temperature > quantile(sst_data$temperature, 0.92) ~ "Severe",
+    TRUE ~ "Moderate"
+  ))
+
+# summary statistics
+cat("Marine Heatwave Statistics:\n")
+cat("- Threshold temperature (90th percentile):", round(temp_90th, 1), "°C\n")
+cat("- Number of affected regions:", nrow(heatwave_regions), "\n")
+cat("- Intensity breakdown:\n")
+table(heatwave_regions$intensity)
+```
+
+### Data Export
+
+You can download this data for further analysis:
+
+```{r}
+#| label: export-example
+#| eval: false
+
+# export to csv
+write_csv(sst_data, "ocean_temperature_data.csv")
+
+# export time series
+write_csv(global_mean_temp, "global_sst_timeseries.csv")
+```
+
+### Next Steps
+
+This example demonstrates basic temperature monitoring capabilities. The full Ocean Metrics platform offers:
+
+- Real-time data updates from satellite and in-situ sensors
+- Advanced statistical analysis and forecasting
+- Integration with other ocean health indicators
+- Customizable alerts for extreme events
+- API access for automated workflows
+
+[Return to Applications](../applications.qmd){.btn .btn-primary}

@@ -1,0 +1,57 @@
+---
+title: "Applications"
+---
+
+## Ocean Metrics Applications
+
+Our platform offers a suite of applications designed to address critical ocean health challenges. Each application provides specialized tools and visualizations for different aspects of ocean monitoring and analysis.
+
+### Available Applications
+
+::: {.applications-grid}
+
+#### 🌡️ [Ocean Temperature Monitoring](examples/ocean-temperature.qmd)
+Track sea surface temperature anomalies, marine heatwaves, and long-term warming trends across global ocean basins. Essential for understanding climate change impacts on marine ecosystems.
+
+#### 🧪 Ocean Acidification Tracker
+Monitor pH levels and aragonite saturation states to assess ocean acidification impacts on coral reefs and shell-forming organisms. Includes projections under different emission scenarios.
+
+#### 🐟 Marine Biodiversity Index
+Visualize species distribution, abundance trends, and biodiversity hotspots. Integrates data from global observation networks to support conservation planning.
+
+#### 🚢 Maritime Traffic Analysis
+Analyze shipping routes, vessel density, and potential impacts on marine mammals. Includes noise pollution modeling and collision risk assessments.
+
+#### 🏭 Pollution Monitoring Dashboard
+Track plastic pollution, chemical contaminants, and nutrient runoff. Features real-time alerts for pollution events and trend analysis tools.
+
+#### 🎣 Sustainable Fisheries Tool
+Assess fish stock health, catch trends, and compliance with sustainable fishing practices. Supports evidence-based fisheries management decisions.
+
+#### 🌊 Coastal Vulnerability Assessment
+Evaluate coastal erosion, sea level rise impacts, and storm surge risks. Helps communities prepare for climate change impacts.
+
+#### 🏝️ Coral Reef Health Monitor
+Track coral bleaching events, reef recovery, and resilience indicators. Combines satellite imagery with in-situ observations for comprehensive monitoring.
+
+:::
+
+### Coming Soon
+
+- **Deep Sea Exploration Data Portal**: Access data from deep-sea research expeditions
+- **Blue Carbon Calculator**: Estimate carbon sequestration in coastal ecosystems
+- **Marine Protected Area Effectiveness Tool**: Evaluate conservation outcomes
+
+### Custom Applications
+
+Need a specialized application for your research or conservation project? Our platform can be customized to meet specific monitoring and analysis needs. Contact us to discuss your requirements.
+
+### Data Access
+
+All applications provide:
+- Data download in multiple formats (CSV, NetCDF, GeoJSON)
+- API access for programmatic integration
+- Citation information for academic use
+- Metadata and quality assurance documentation
+
+[Get Started with an Example →](examples/ocean-temperature.qmd){.btn .btn-primary}
