@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Ocean Temperature Monitoring – Ocean Metrics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6685f57f7611d95a701d58b4cc6878c0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-0e05691e2ff37a1b39a94f93f8ea530a.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="../site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="../site_libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="../site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="../site_libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="../site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="../site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="../site_libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<script src="../site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="../site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Ocean Metrics</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../applications.html"> 
+<span class="menu-text">Applications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../examples/ocean-temperature.html" aria-current="page"> 
+<span class="menu-text">Example</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/oceanmetrics"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#global-sea-surface-temperature-analysis" id="toc-global-sea-surface-temperature-analysis" class="nav-link active" data-scroll-target="#global-sea-surface-temperature-analysis">Global Sea Surface Temperature Analysis</a>
+  <ul class="collapse">
+  <li><a href="#data-overview" id="toc-data-overview" class="nav-link" data-scroll-target="#data-overview">Data Overview</a></li>
+  <li><a href="#interactive-temperature-map" id="toc-interactive-temperature-map" class="nav-link" data-scroll-target="#interactive-temperature-map">Interactive Temperature Map</a></li>
+  <li><a href="#temperature-anomalies" id="toc-temperature-anomalies" class="nav-link" data-scroll-target="#temperature-anomalies">Temperature Anomalies</a></li>
+  <li><a href="#global-temperature-trends" id="toc-global-temperature-trends" class="nav-link" data-scroll-target="#global-temperature-trends">Global Temperature Trends</a></li>
+  <li><a href="#key-findings" id="toc-key-findings" class="nav-link" data-scroll-target="#key-findings">Key Findings</a></li>
+  <li><a href="#marine-heatwave-detection" id="toc-marine-heatwave-detection" class="nav-link" data-scroll-target="#marine-heatwave-detection">Marine Heatwave Detection</a></li>
+  <li><a href="#data-export" id="toc-data-export" class="nav-link" data-scroll-target="#data-export">Data Export</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Ocean Temperature Monitoring</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="global-sea-surface-temperature-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="global-sea-surface-temperature-analysis">Global Sea Surface Temperature Analysis</h2>
+<p>This example demonstrates how Ocean Metrics can be used to analyze and visualize sea surface temperature (SST) data. We’ll explore temperature anomalies, identify marine heatwaves, and examine long-term warming trends.</p>
+<section id="data-overview" class="level3">
+<h3 class="anchored" data-anchor-id="data-overview">Data Overview</h3>
+<p>For this demonstration, we’re using simulated data that represents typical patterns observed in global SST measurements:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate simulated sst data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n_points <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>lat <span class="ot">&lt;-</span> <span class="fu">runif</span>(n_points, <span class="sc">-</span><span class="dv">70</span>, <span class="dv">70</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>lon <span class="ot">&lt;-</span> <span class="fu">runif</span>(n_points, <span class="sc">-</span><span class="dv">180</span>, <span class="dv">180</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># create realistic temperature patterns</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>base_temp <span class="ot">&lt;-</span> <span class="dv">25</span> <span class="sc">-</span> <span class="fu">abs</span>(lat) <span class="sc">*</span> <span class="fl">0.5</span>  <span class="co"># temperature decreases with latitude</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>seasonal_var <span class="ot">&lt;-</span> <span class="fu">sin</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> <span class="fu">as.numeric</span>(<span class="fu">Sys.Date</span>() <span class="sc">-</span> <span class="fu">as.Date</span>(<span class="st">"2025-01-01"</span>)) <span class="sc">/</span> <span class="dv">365</span>) <span class="sc">*</span> <span class="dv">3</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>random_var <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n_points, <span class="dv">0</span>, <span class="dv">2</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>sst_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">latitude =</span> lat,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">longitude =</span> lon,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">temperature =</span> base_temp <span class="sc">+</span> seasonal_var <span class="sc">+</span> random_var,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">anomaly =</span> <span class="fu">rnorm</span>(n_points, <span class="fl">0.5</span>, <span class="fl">1.5</span>),  <span class="co"># slight warming bias</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">date =</span> <span class="fu">Sys.Date</span>()</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">temperature =</span> <span class="fu">round</span>(temperature, <span class="dv">1</span>),</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">anomaly =</span> <span class="fu">round</span>(anomaly, <span class="dv">1</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># create time series data</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>dates <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">as.Date</span>(<span class="st">"2020-01-01"</span>), <span class="fu">as.Date</span>(<span class="st">"2025-01-01"</span>), <span class="at">by =</span> <span class="st">"month"</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>global_mean_temp <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">date =</span> dates,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">temperature =</span> <span class="dv">15</span> <span class="sc">+</span> </span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sin</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> <span class="fu">as.numeric</span>(dates <span class="sc">-</span> <span class="fu">as.Date</span>(<span class="st">"2020-01-01"</span>)) <span class="sc">/</span> <span class="dv">365</span>) <span class="sc">*</span> <span class="dv">3</span> <span class="sc">+</span>  <span class="co"># seasonal</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">seq</span>(<span class="dv">0</span>, <span class="fl">0.8</span>, <span class="at">length.out =</span> <span class="fu">length</span>(dates)) <span class="sc">+</span>  <span class="co"># warming trend</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="fu">length</span>(dates), <span class="dv">0</span>, <span class="fl">0.5</span>)  <span class="co"># random variation</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sst_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  latitude longitude temperature anomaly date      
+     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt; &lt;date&gt;    
+1    58.1    -131.          -0.7     4   2025-06-07
+2    61.2    -116.          -2.5     1.3 2025-06-07
+3   -29.9       7.04        11.3     2   2025-06-07
+4    46.3     112.           3.4     1.1 2025-06-07
+5    19.8    -138.          14.9    -1   2025-06-07
+6     2.67    142.          24.5    -0.4 2025-06-07</code></pre>
+</div>
+</div>
+</section>
+<section id="interactive-temperature-map" class="level3">
+<h3 class="anchored" data-anchor-id="interactive-temperature-map">Interactive Temperature Map</h3>
+<p>The map below shows current sea surface temperatures across the globe. Warmer colors indicate higher temperatures:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create color palette</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>temp_pal <span class="ot">&lt;-</span> <span class="fu">colorNumeric</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"blue"</span>, <span class="st">"lightblue"</span>, <span class="st">"yellow"</span>, <span class="st">"orange"</span>, <span class="st">"red"</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">domain =</span> sst_data<span class="sc">$</span>temperature</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create interactive map</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(sst_data) <span class="sc">|&gt;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircleMarkers</span>(</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span>longitude, <span class="sc">~</span>latitude,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">radius =</span> <span class="dv">3</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="sc">~</span><span class="fu">temp_pal</span>(temperature),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">fillOpacity =</span> <span class="fl">0.8</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup =</span> <span class="sc">~</span><span class="fu">paste</span>(</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Temperature:"</span>, temperature, <span class="st">"°C&lt;br&gt;"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Anomaly:"</span>, anomaly, <span class="st">"°C&lt;br&gt;"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Location:"</span>, <span class="fu">round</span>(latitude, <span class="dv">2</span>), <span class="st">"°N,"</span>, <span class="fu">round</span>(longitude, <span class="dv">2</span>), <span class="st">"°E"</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addLegend</span>(</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bottomright"</span>,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">pal =</span> temp_pal,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="sc">~</span>temperature,</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"SST (°C)"</span>,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">opacity =</span> <span class="dv">1</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-4ae85374ac7d4d5e84bc" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-4ae85374ac7d4d5e84bc">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[58.07284608948976,61.19055786170065,-29.9404651299119,46.26266764942557,19.84437264502048,2.673432878218591,33.12236404977739,-51.14667638670653,21.97892065625638,28.7090697651729,-5.916151325218379,30.67571523133665,60.85411460138857,-34.23996459227055,-5.279004843905568,61.6020331857726,66.95169997401536,-53.55176936835051,-3.500408581458032,8.446584474295378,56.56439422164112,-50.58057651855052,68.44484204892069,62.53355255816132,-58.45874186605215,1.989649808965623,-15.37151460535824,56.80333832744509,-7.424252065829933,47.04059639945626,33.26338648796082,43.54771977756172,-15.6648404058069,25.9237621165812,-69.44723256863654,46.60825123544782,-68.97321943659335,-40.92774380464107,56.924197091721,15.64901008270681,-16.861706324853,-8.991978103294969,-64.759655399248,66.29558792803437,-9.554825155064464,64.0607235301286,54.28568677045405,19.5970277255401,65.93532545026392,16.63734902627766,-23.32019042223692,-21.45524525083601,-14.21204240061343,39.85698859672993,-64.54889124259353,34.83135406393558,24.8187562264502,-46.02299374528229,-33.44768506474793,2.017810852266848,24.58501843269914,67.5944077083841,36.33619745727628,9.308379371650517,48.95656059961766,-43.47364904358983,-32.0198739413172,45.94218793325126,27.04867485444993,-36.32373644970357,-63.98156855721027,-50.33292682375759,-39.70604189205915,-2.884201011620462,-42.36255208030343,30.70981727447361,-68.89613657724112,-17.43140495382249,2.017079163342714,-69.78012240957469,11.42456035129726,-47.89327085483819,-19.73603717982769,20.38846297655255,38.61527076922357,8.910557818599045,-37.28152419440448,-57.40272771101445,-58.01431091036648,-27.26942827459425,23.43971205409616,-69.96655447874218,-40.80020602792501,60.62477782834321,59.5902648055926,32.77320214081556,-23.36992232128978,2.108866176567972,34.15645048487931,16.68229360599071,17.67434823326766,-39.59792224690318,-39.68057646416128,-15.5476959887892,61.94379687774926,64.76512192748487,33.57973909005523,32.65442680101842,5.006580599583685,-69.68178474809974,15.2512433566153,47.15221832040697,35.21315877791494,-6.617579841986299,5.010599135421216,5.232737343758345,-69.80668189935386,-20.20676646381617,15.69863262120634,46.05189827736467,-20.05892009008676,-12.51108238473535,10.28662585187703,12.55496249999851,30.75202092994004,-14.70377366989851,58.68855007924139,64.75984110031277,-37.30670642573386,31.42966399900615,56.5088335191831,14.48637186549604,18.41102184727788,61.23401895165443,49.06758509576321,11.17492586839944,44.99654934741557,-54.07939472701401,37.03108621295542,17.30588400736451,-49.21747506130487,-58.76297467853874,-5.030262814834714,39.11154260393232,32.69391433801502,44.41226221621037,-46.17725262418389,62.26084557361901,-28.89266220852733,-49.12991265766323,30.71300277952105,-24.62796665262431,39.03332979418337,-14.77825974579901,25.00300150830299,38.61550598405302,-43.69833383709192,-65.92798535246402,-51.00006841123104,25.22298493888229,60.87521352805197,7.069171811453998,14.24727295991033,-42.42077166214585,4.933125479146838,-44.86219650134444,-6.735890782438219,-25.6125307502225,-53.73554614372551,-43.94569805357605,32.16221353039145,-12.33791003003716,-12.0330445561558,-2.75658193975687,-10.1507748151198,-50.89134958107024,45.45511689037085,12.92259395588189,41.21557686943561,37.66453959979117,58.52789841592312,50.76816878747195,-25.62346670776606,-33.70351936202496,33.91730327159166,34.63055635336787,58.50656476337463,41.04676928836852,-51.33385344408453,-29.71503469627351,-42.74533986579627,39.77531357202679,-51.95789735764265,-51.92750030662864,-59.88456442020833,-62.5618723127991,4.462421098724008,-54.27684616763145,34.04628076124936,32.38416681997478,53.91647618729621,2.395547777414322,49.27033789921552,-8.008522442542017,-47.89678594097495,-8.074550563469529,65.48271341249347,-2.157689877785742,-34.65581847820431,-33.64340277388692,5.882231723517179,20.98261726554483,-22.90132147725672,-61.46703551989049,-6.816480970010161,47.42570468224585,10.44922680594027,-20.53094716276973,6.639650953002274,54.9806031351909,-1.401320118457079,-45.97150415647775,6.024339161813259,64.60547742433846,-26.08426491264254,44.87203673459589,-27.01238393783569,-44.03649863786995,-63.23145125526935,-35.60561938211322,-20.84503090009093,-47.73686655331403,-27.42628044914454,-67.54323453176767,69.5173750910908,42.61506377253681,-57.87871575448662,51.7906577559188,7.642020871862769,-11.00702094379812,-60.53084532730281,8.601313913241029,-60.09893480222672,-40.40512856096029,6.94685788359493,-2.522597229108214,-47.67422036267817,-49.05894069001079,-0.1017967471852899,61.67908292729408,-23.20761427748948,-43.61919385846704,-32.23973503801972,4.304170934483409,-66.99696800671518,41.82644304819405,-54.55308597069234,5.571760013699532,9.972745645791292,16.65321657434106,30.07951708976179,-52.73791898507625,-26.45305337384343,62.40348276682198,0.003512934781610966,-51.06773012783378,51.69609487522393,-41.29305430687964,59.50642473530024,54.14550375193357,-50.91858446598053,39.94892190210521,-6.537522017024457,-50.99606128409505,53.93094515893608,-22.86010438110679,-25.30162387993187,-13.47040593624115,-2.929177014157176,-18.49374516867101,-4.803320532664657,-63.01509859506041,-43.77006037626415,67.57231791969389,-24.04163025785238,-46.06050532776862,-1.644314769655466,-67.38376236520708,-22.47208828106523,-65.8471274189651,51.41201282851398,32.439063959755,-25.86348844692111,-15.89643835090101,-23.45756132621318,-57.43108403868973,35.98778435029089,14.41558960825205,-49.64400384109467,-65.44755231589079,-2.272460176609457,-7.760266098193824,-61.54601740650833,-24.14915691129863,52.98006662167609,60.28468407690525,-15.09501602035016,-47.7614515228197,-25.20733585115522,-27.02481316402555,-54.90642437711358,67.10680247750133,-0.433520064689219,-56.96954593062401,-40.35168785601854,60.27010447345674,-28.44150305259973,21.4505548402667,56.14986690692604,68.71141105424613,-9.753349013626575,-14.87123088445514,-50.13275463599712,-30.82706251181662,9.075111160054803,60.91953075956553,-19.82397968880832,47.88100532721728,31.13729001022875,35.10303850285709,59.35838330537081,-69.66706504579633,-47.53981190733612,-14.10178681835532,24.54474082682282,-2.747917715460062,4.736029305495322,-25.62697798013687,44.06606262549758,-29.0892670257017,-12.72150721400976,-57.27143692784011,41.80352932307869,-19.63006504345685,-64.33173925615847,-64.2479124199599,63.62079337239265,-17.73222571704537,42.8987534577027,57.40826125722378,-8.389330198988318,10.68711042404175,-59.68650867696851,-46.95216478314251,33.58470862265676,-3.40045821852982,25.97293345723301,63.2120919926092,-0.3549717413261533,-4.129912275820971,8.426873008720577,21.35141687467694,-30.85971017368138,67.18706252984703,20.14097512234002,11.56098100822419,16.22194363269955,59.51964122708887,-15.39679465815425,-29.69124409835786,-57.296964940615,-24.91525343619287,36.15781575907022,-55.38218985311687,29.43889936432242,65.30683370772749,-41.79122833069414,-54.81158837210387,-62.24369497038424,46.1612921115011,11.36768592055887,-4.187067458406091,-18.89802319929004,-30.78255217988044,13.96021969616413,44.59974580910057,-56.30348073784262,64.91653365083039,-46.376897925511,-57.94832317624241,50.56949739810079,3.470684285275638,21.95352253969759,-37.86728780716658,30.97164439968765,-1.294944700784981,65.1357829477638,56.97194726672024,7.175073898397386,-59.41612606868148,-66.82199842296541,1.853533894754946,18.30166122876108,-11.37197259347886,53.09723232407123,-54.8818097775802,67.23901749588549,-32.90467161685228,-58.20114674977958,-15.97299539949745,-52.51458419952542,11.41759103629738,-36.3790548639372,31.06430440675467,-49.56998330540955,-48.60257215797901,-33.70882616844028,38.90407640952617,-10.29471804387867,-61.59323293715715,-53.923444817774,-2.414034372195601,67.08430174738169,43.61235016956925,6.007794393226504,-59.86860781908035,-4.692065548151731,-22.41320956964046,26.58860472030938,1.982032088562846,2.089222185313702,6.372009562328458,-7.35597379039973,-58.2561223488301,60.21871684584767,-67.69725392572582,-12.02706408221275,-38.22334692813456,-56.05031777173281,-2.390657486394048,21.01801400072873,58.98616897407919,-19.23574700485915,49.71889860928059,-27.87313878536224,-4.807260478846729,-50.01770691014826,43.08065910823643,23.2130684517324,-61.32826281245798,-9.670420433394611,-14.44028859958053,27.57394519634545,22.30475108604878,-12.97090064734221,-27.03116914723068,-34.28497169166803,24.15954146999866,55.21508070174605,48.40306187048554,-14.99374003149569,-58.93292440101504,45.97922797780484,-59.79514451697469,-53.93322513904423,19.59779781289399,-25.1207319740206,-43.57506633736193,-14.86385023687035,50.68364223930985,-21.29240308422595,-69.79925421532243,57.57982351817191,63.24128285050392,-1.271342379041016,-5.088759856298566,13.50608655251563,56.84713401831686,-45.7798349391669,40.02335073892027,-37.38918615505099,10.78674926422536,47.72278466261923,-51.49147124029696,55.42476654052734,-6.980772237293422,55.17995529808104,-35.20367472432554,-58.28265889082104,-63.19024954456836,67.17422138433903,-2.216516239568591,48.35502475034446,-11.71889536548406,-1.492044003680348,-44.33970554731786,36.28260550554842,-27.27993764448911,-46.80504540447146,-65.40671998634934],[-130.8581250440329,-116.2308918870986,7.041762163862586,112.0034826267511,-138.4696754906327,141.6318431776017,27.12703719735146,-127.2339380532503,145.0100866891444,-88.91911100596189,-125.7848639041185,96.67697754688561,-97.15560081414878,-70.05624191835523,6.685060383751988,-59.54411996528506,-124.4034114293754,-84.10695528611541,-53.72833795845509,28.24501636438072,111.0966462828219,155.9773133788258,120.1908015087247,-134.2790011782199,53.80342254415154,68.52659672498703,-168.4638631995767,151.3760939519852,-7.751200664788485,-84.05259177088737,128.3438578527421,-97.5072680041194,105.1008743885905,52.83894971944392,-27.23951135762036,-145.775423515588,-178.7516265828162,11.20812082663178,8.750561736524105,-103.2532003428787,78.09554879553616,166.0836874321103,6.575975865125656,-117.1699119731784,22.51444855704904,93.33294108510017,60.10968150570989,-99.04574763961136,-55.49408552236855,-64.86056643538177,145.7634231448174,-108.2885831594467,65.1466859690845,-130.4936068877578,-141.4819127228111,-146.5706175193191,149.9216238688678,-80.25824309326708,138.885795827955,98.23127383366227,106.2184450216591,-105.9575064852834,-162.6504037342966,-166.0262647736818,-77.55331325344741,-54.42846030928195,85.48319715075195,-89.40111075527966,6.277321111410856,93.40010016225278,48.99043005891144,-106.5813532657921,177.4963015504181,-179.8541843891144,-105.6347909756005,48.25011262670159,-173.7749429047108,-170.3752303216606,38.82261422462761,25.39488698355854,-91.49279474280775,151.0290311090648,61.99783260002732,52.36215814948082,-105.0172363221645,-6.977615123614669,175.1466899737716,177.5231451820582,-17.72134683094919,77.345563005656,-66.03781948797405,120.127521827817,-23.76879064366221,178.5572129487991,110.0920367985964,-4.952819729223847,13.95792033523321,-57.22563299350441,-161.2743823975325,-14.85967925749719,-0.6636274605989456,-78.20487890392542,99.52022965997458,-70.61300572939217,5.598425511270761,-7.937721647322178,96.78680084645748,-120.9856119565666,-20.96130603924394,8.426761105656624,-8.309092093259096,8.87158359400928,66.68216899037361,-53.35487203672528,122.2672627028078,151.8889289628714,-141.7285363096744,-105.6495894771069,-4.80855175293982,-63.42407142743468,-10.18298699520528,30.99186074919999,-99.37799546867609,84.25069922581315,-125.8257243409753,71.11921207979321,-84.92115424945951,-26.47262798622251,79.68008640222251,-9.190185433253646,-58.10869406908751,-93.38683001697063,-102.1465159580112,-92.85907714627683,23.36568228900433,76.52451200410724,-141.0852247383446,6.867314474657178,126.7885240539908,77.26749915629625,-66.96659345179796,-138.3058287296444,27.00146430172026,119.2938919365406,7.322312844917178,69.84397030435503,-0.03456378355622292,-52.50225646421313,167.3294972442091,152.0140514988452,-106.346625611186,163.7650557886809,134.6374196559191,71.04413931258023,4.533762540668249,-6.906054457649589,-107.3516676854342,-143.9174324367195,-9.868005132302642,-67.61532668955624,98.06374984793365,144.3866404797882,-59.31745771318674,116.6199287027121,-100.7881704624742,95.80454581417143,21.85482638888061,-27.55600640550256,121.8851237744093,-76.56458848156035,-10.5405477527529,101.1040320061147,-150.2219385746866,-37.97368191182613,-145.5618933588266,-132.0000350475311,-100.3945759031922,-81.3169652223587,-72.33867011032999,-45.07676188834012,-3.077102685347199,136.296944450587,89.54273834824562,163.8669683318585,-60.50872329622507,116.6986066941172,-132.2404619771987,-135.1091326307505,82.11949624121189,17.43149827234447,39.06626860611141,-135.7391878031194,135.5164916161448,123.2455736305565,-163.3543871250004,74.52659829519689,12.52477984875441,160.3646042570472,148.330792458728,-15.84773406386375,95.58737229555845,1.816048622131348,-107.0825461484492,78.16994003020227,96.5077071916312,74.29573629051447,-111.0153109766543,-72.75607162155211,-62.95274410396814,25.87544454261661,137.696949178353,135.7572155166417,-41.09308663755655,85.5979757476598,106.6749710775912,80.69812587462366,-41.24210799112916,-72.66517826355994,-159.3103851377964,62.52946713007987,-108.7229063082486,45.03884366713464,-130.2541774045676,-45.69173256866634,-66.92766018211842,113.4665639419109,-47.40548509173095,-21.72811456024647,-21.93911011330783,36.65818286128342,-34.59350293502212,164.994581155479,169.4764669239521,149.230088358745,-150.1654649991542,-8.330540042370558,-57.91130427271128,62.43689303286374,49.13494027219713,129.3401212245226,161.3823929429054,26.62814372219145,12.69685998558998,159.0099994372576,141.2478547822684,-32.28971807286143,-161.9889309257269,100.1769460737705,153.346100281924,-44.10820514895022,-91.82844193652272,-148.4510729368776,-39.20094114728272,-114.2778869066387,-131.8950775265694,-87.31335117481649,19.16893721558154,-126.6950604692101,166.6428566817194,160.0282363872975,177.2228858806193,74.23580543138087,-129.3197919242084,-176.7662553023547,67.1383938845247,65.23854902945459,150.3039176948369,-32.96836288645864,-27.92181956581771,13.43522946350276,-31.08727329410613,-144.847922930494,-43.10364947654307,-108.7197920959443,81.00872148759663,-176.0367452446371,150.7887936104089,144.0823442861438,91.49539120495319,162.6918534189463,45.2113532088697,56.14218760281801,-42.7047776710242,-156.381971295923,68.71710615232587,-134.1058077570051,-75.12533331289887,47.59952070191503,-39.59136080928147,-154.6467624418437,130.8862551301718,-41.33152546361089,61.47364815697074,-172.3693311866373,34.28235386498272,-80.55318198166788,-36.31431419402361,-127.5064453762025,116.6694222483784,-129.4524422474205,147.2571054473519,143.9729321189225,-110.7542685884982,11.62449496798217,7.9649065900594,-122.2791368421167,7.04412636347115,-99.17873667553067,-78.65568347275257,1.327528757974505,-122.7741664275527,151.4270661491901,-0.3493945207446814,41.52386776171625,87.81511570326984,42.05455589108169,154.8507765401155,-151.0637522209436,-169.8763712123036,14.95024873875082,-93.16707520745695,52.14150790125132,-44.01475229300559,-163.1326727941632,-162.669420260936,166.6233692597598,-98.47196982242167,-175.898314928636,-101.3487702514976,-159.8624752834439,-95.41002715006471,-35.02934278920293,-174.8504030238837,-49.76525939069688,30.41990633122623,38.08574577793479,-85.06129925139248,63.05352374911308,156.8902377504855,-178.7070936989039,103.3096229564399,110.4959328845143,-153.7061815615743,24.11974931135774,14.10870457068086,-130.4369441326708,-80.52024638280272,-53.33633755333722,112.6098850741982,-118.2451146841049,7.618353366851807,95.26422327384353,-76.04796694591641,-22.75980622507632,61.00227280519903,-166.7074384074658,21.83268567547202,155.6579653825611,-23.53590290062129,157.0437420811504,172.1889460925013,63.63442392088473,-72.62319766916335,-105.0287779513747,-65.19728559069335,127.5749886408448,-158.0184335354716,-114.4634019769728,-5.818823631852865,-58.2179132848978,112.8105713054538,133.3556928019971,-173.1019396148622,116.9093455933034,-35.54334171116352,61.9409837666899,-137.2780023794621,-8.487237794324756,153.1223869509995,26.94216300733387,148.5905686765909,91.90869270823896,47.15997269377112,105.9914341662079,152.4767264351249,-120.7912284974009,-110.5617800261825,-144.8486404214054,118.479382339865,110.1110248267651,-79.46280492469668,-18.34935153834522,45.3163346182555,-46.46829016506672,-42.36517857760191,149.2131155077368,-39.49280831962824,-154.6942465938628,74.70237988047302,69.47885300964117,-145.3869755286723,-166.7148373648524,-35.66155646927655,-175.8465989213437,24.44076572544873,160.1819733157754,-56.41121618449688,-91.98061924427748,15.00371186994016,-137.6264239288867,-45.03295613452792,-62.09599792957306,160.9940704330802,147.8069684375077,94.48009757325053,92.90696983225644,179.4567003753036,28.94450571388006,-103.2176946848631,-131.9213165715337,105.2216338086873,173.4861014317721,173.537565311417,-134.8403489682823,42.5826518330723,128.94724952057,-129.8204870894551,-48.03101227618754,-123.4331182111055,-18.77765966579318,-5.085151456296444,162.0730945374817,145.7113968394697,158.4592926409096,98.45756518654525,-146.8040451407433,-174.1523653361946,-59.936548685655,-92.93288676068187,105.1454585697502,-1.300666434690356,4.996472513303161,-153.935323683545,-55.74992408975959,92.27697886526585,-41.35714357718825,-177.5084256380796,78.63812288269401,20.50895961932838,-154.7702544461936,-54.78604881092906,-31.31800035014749,-67.80412838794291,85.5244685523212,-40.19749780185521,42.99274013377726,44.4748564157635,108.8684391975403,55.46445742249489,64.60312248207629,-32.12826359085739,58.77113129943609,-170.2376000583172,113.7344272714108,-152.9845995269716,144.3475052062422,-154.5021954830736,-111.1955819930881,99.69452932476997,-106.8719386775047,-34.64477621018887,-19.37497386708856,38.2663687504828,27.52046738751233,-158.577564060688,-114.2405694164336,-73.39620175771415,-44.61152896285057,76.71453905291855,-134.9465090408921,-25.47596337273717,-169.0642661321908,-16.49927901104093,105.9509257692844,-10.34046133048832,-94.89974015392363,139.3326060008258,-134.6569973509759,-83.04789637215436,137.6849329657853,90.18713587895036,-144.830541042611,113.6041257251054,129.0214903838933,-137.8233720827848,-130.537021541968,17.37251909449697,-158.7493259366602,-1.611615177243948,-177.3296916950494],3,null,null,{"interactive":true,"className":"","stroke":true,"color":["#7A68F7","#553DFC","#F6F850","#A7C3EA","#FFE800","#FF7A00","#D9E7A5","#715DF9","#FFFE00","#FFF600","#FF6C00","#EEF270","#0000DD","#E5ED89","#FF3D00","#7F6FF6","#0000A3","#715DF9","#FF4800","#FF9A00","#9392F2","#887EF4","#0000D9","#0000F8","#A8C5EA","#FF5100","#FFDA00","#3B25FD","#FF8A00","#7561F8","#C6DFC6","#9EABEE","#FFCA00","#FFDF00","#0000B8","#A6C1EA","#0000C2","#AED8E5","#8B83F4","#FFD900","#FFCE00","#FFA500","#0000F1","#2615FE","#FF9400","#462FFD","#8D87F3","#FFE500","#0000DB","#FFAA00","#F8F94A","#FFDA00","#FFBD00","#DDE89C","#0000F8","#E9EF7E","#FFD300","#877CF5","#F7F84D","#FF9900","#FFE500","#0000D0","#EDF173","#FF9D00","#705AF9","#8B83F4","#F6F850","#A5BEEB","#F8F947","#D7E6A9","#0000D3","#8F8AF3","#B1D9E1","#FFA700","#B3D9DF","#FFFC00","#0000F9","#FFCB00","#FF7100","#0000D9","#FFAA00","#9699F1","#FFFD00","#FFF600","#DAE7A3","#FFBD00","#EBF07A","#0000EF","#432CFD","#FEFE14","#FFEC00","#0000C1","#D3E4B1","#0000FB","#0401FF","#EFF26E","#FFF500","#FF3800","#B6DADC","#FFB100","#FFD300","#D5E5AD","#E0EA96","#FFAF00","#0000E2","#462FFD","#C8E0C2","#F9FA43","#FF9200","#00008B","#FFE800","#A5BEEB","#FFFB00","#FF8700","#FF6400","#FF6F00","#0000AC","#FFC600","#FFBB00","#A9C9E9","#FFC500","#FFA000","#FFB300","#FFA900","#E6ED87","#FFAF00","#1509FF","#0000EE","#E0EA96","#EDF173","#7561F8","#FFAF00","#FFD600","#614AFB","#AFD9E3","#FFB800","#9DA8EE","#887EF4","#C4DFC8","#FFD500","#A6C1EA","#0000FB","#FFB300","#DCE89E","#CEE2B9","#9597F1","#4D35FC","#3F29FD","#FCFD2A","#A1B1ED","#FEFE14","#FFF300","#AFD9E3","#FFB100","#FFD800","#ABD0E8","#A5BEEB","#0000D0","#664EFA","#FFE600","#0000EB","#FF6F00","#FFB900","#CCE1BD","#FF5500","#AED8E5","#FF7100","#FFF300","#2C1AFE","#ADD7E6","#F8F947","#FFA500","#FFB300","#FF9400","#FF9400","#7561F8","#918EF2","#FFA600","#A5BEEB","#DBE8A0","#462FFD","#664EFA","#FFDF00","#DEE99A","#F9FA43","#DCE89E","#0000FE","#C2DECC","#8376F6","#F2F561","#A5BCEB","#ABD0E8","#9699F1","#705AF9","#0000DD","#0000E2","#FF9500","#0000EE","#E3EB90","#F0F369","#8376F6","#FF6500","#7F6FF6","#FF9F00","#887EF4","#FFA600","#0000BA","#FF8E00","#EFF26E","#E4EC8B","#FF9000","#FFBA00","#FFEA00","#0000EA","#FF7B00","#979BF0","#FF8300","#FFE400","#FF9E00","#2C1AFE","#FF6100","#C8E0C2","#FF9300","#0000EA","#FFF300","#CEE2B9","#FFF100","#9CA6EF","#0000D9","#D2E3B3","#FFDB00","#9FADEE","#FFF900","#0000BB","#0000B6","#CCE1BD","#4932FD","#7764F8","#FF7B00","#FFA900","#0000E5","#FF6D00","#0000E1","#A0AFED","#FFC400","#FF5F00","#9597F1","#9392F2","#FF5700","#0000EA","#F8F94A","#8C85F4","#E9EF7E","#FF7A00","#000093","#C4DFC8","#8173F6","#FF6200","#FF9F00","#FFC300","#FDFD24","#8376F6","#FFFD00","#0000F5","#FF4300","#8376F6","#7B6AF7","#AACEE8","#0000EB","#8376F6","#AACEE8","#AED8E5","#FF9300","#705AF9","#9290F2","#FFF000","#FFF200","#FFAF00","#FF9200","#FFD400","#FF8900","#1509FF","#9AA2EF","#0000AC","#FFDF00","#9CA6EF","#FF7F00","#0000D1","#FFED00","#4932FD","#9290F2","#F0F369","#FFE500","#FFC500","#FFEB00","#0000F7","#A9C9E9","#FFD500","#989DF0","#0000BF","#FF5C00","#FF8300","#0000FE","#FFF400","#4932FD","#0000F8","#FFC900","#A9C9E9","#FFD900","#FFF400","#3622FE","#1509FF","#FF3D00","#664EFA","#989DF0","#0000E5","#FAFB3C","#FFD100","#0000FC","#6851FA","#FFD900","#FFC300","#8D87F3","#E9EF7E","#FFA500","#5037FC","#FFEB00","#664EFA","#F4F65C","#E3EB90","#3622FE","#0000D1","#A0AFED","#FFA900","#EDF173","#FF9300","#FF7900","#FFFE00","#C7DFC4","#EBF07A","#FFA200","#2615FE","#A5BCEB","#FFDF00","#0000E5","#0000C2","#0000D3","#FFE800","#D1E3B5","#7561F8","#FFB100","#FF9A00","#0000FE","#8C85F4","#EFF36B","#FF8200","#FFE700","#0000E7","#FF3200","#FF8B00","#FF9400","#FFD900","#F7F84D","#0000D6","#FFDA00","#FFAE00","#FFA700","#6851FA","#FFCE00","#FFF000","#5F47FB","#FEFE1D","#E1EA94","#6851FA","#F9FA40","#0000C2","#A9C9E9","#979BF0","#4932FD","#9597F1","#FFBE00","#FF4800","#FFAB00","#E8EE83","#FFD500","#E7EE85","#6E58F9","#0000E5","#A5BEEB","#867AF5","#8C85F4","#FF4A00","#FFE800","#E0EA96","#E3EB90","#FF6400","#1509FF","#553DFC","#FF6F00","#9BA4EF","#0000EC","#FF7400","#FFCF00","#FFB500","#ABD2E7","#0000D3","#0000D1","#EDF173","#583FFB","#FFE500","#8B83F4","#FFA700","#F2F464","#F9FA40","#A9C9E9","#867AF5","#E7EE85","#D4E4AF","#FF9E00","#0000E4","#9EABEE","#FF8300","#0000A4","#BCDCD4","#FF7900","#664EFA","#FF9A00","#FFEB00","#EFF36B","#FF5300","#FF6500","#FF7400","#FF8300","#0000FE","#321EFE","#000098","#FFA300","#E6ED87","#321EFE","#FFA900","#FFFF07","#0000EB","#FFBB00","#9597F1","#ECF175","#FF7300","#432CFD","#ACD4E7","#FFD300","#0000EF","#FF7F00","#FF9300","#EFF26E","#FFFE00","#FFC700","#FFF400","#F3F55E","#FFD600","#9495F1","#ACD4E7","#FFAA00","#4932FD","#9699F1","#0000EF","#867AF5","#FFB400","#FFD100","#8C85F4","#FFD000","#AACCE8","#FFF700","#000092","#705AF9","#644CFA","#FF0000","#FF7600","#FFA600","#7561F8","#A6C1EA","#7D6DF7","#E6ED87","#FFB000","#AED8E5","#7A68F7","#0000F5","#FF6F00","#7561F8","#FFE000","#7561F8","#3F29FD","#0000E5","#FF8100","#9597F1","#FF9400","#FF4800","#BCDCD4","#C8E0C2","#FFDD00","#867AF5","#0000D0"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#7A68F7","#553DFC","#F6F850","#A7C3EA","#FFE800","#FF7A00","#D9E7A5","#715DF9","#FFFE00","#FFF600","#FF6C00","#EEF270","#0000DD","#E5ED89","#FF3D00","#7F6FF6","#0000A3","#715DF9","#FF4800","#FF9A00","#9392F2","#887EF4","#0000D9","#0000F8","#A8C5EA","#FF5100","#FFDA00","#3B25FD","#FF8A00","#7561F8","#C6DFC6","#9EABEE","#FFCA00","#FFDF00","#0000B8","#A6C1EA","#0000C2","#AED8E5","#8B83F4","#FFD900","#FFCE00","#FFA500","#0000F1","#2615FE","#FF9400","#462FFD","#8D87F3","#FFE500","#0000DB","#FFAA00","#F8F94A","#FFDA00","#FFBD00","#DDE89C","#0000F8","#E9EF7E","#FFD300","#877CF5","#F7F84D","#FF9900","#FFE500","#0000D0","#EDF173","#FF9D00","#705AF9","#8B83F4","#F6F850","#A5BEEB","#F8F947","#D7E6A9","#0000D3","#8F8AF3","#B1D9E1","#FFA700","#B3D9DF","#FFFC00","#0000F9","#FFCB00","#FF7100","#0000D9","#FFAA00","#9699F1","#FFFD00","#FFF600","#DAE7A3","#FFBD00","#EBF07A","#0000EF","#432CFD","#FEFE14","#FFEC00","#0000C1","#D3E4B1","#0000FB","#0401FF","#EFF26E","#FFF500","#FF3800","#B6DADC","#FFB100","#FFD300","#D5E5AD","#E0EA96","#FFAF00","#0000E2","#462FFD","#C8E0C2","#F9FA43","#FF9200","#00008B","#FFE800","#A5BEEB","#FFFB00","#FF8700","#FF6400","#FF6F00","#0000AC","#FFC600","#FFBB00","#A9C9E9","#FFC500","#FFA000","#FFB300","#FFA900","#E6ED87","#FFAF00","#1509FF","#0000EE","#E0EA96","#EDF173","#7561F8","#FFAF00","#FFD600","#614AFB","#AFD9E3","#FFB800","#9DA8EE","#887EF4","#C4DFC8","#FFD500","#A6C1EA","#0000FB","#FFB300","#DCE89E","#CEE2B9","#9597F1","#4D35FC","#3F29FD","#FCFD2A","#A1B1ED","#FEFE14","#FFF300","#AFD9E3","#FFB100","#FFD800","#ABD0E8","#A5BEEB","#0000D0","#664EFA","#FFE600","#0000EB","#FF6F00","#FFB900","#CCE1BD","#FF5500","#AED8E5","#FF7100","#FFF300","#2C1AFE","#ADD7E6","#F8F947","#FFA500","#FFB300","#FF9400","#FF9400","#7561F8","#918EF2","#FFA600","#A5BEEB","#DBE8A0","#462FFD","#664EFA","#FFDF00","#DEE99A","#F9FA43","#DCE89E","#0000FE","#C2DECC","#8376F6","#F2F561","#A5BCEB","#ABD0E8","#9699F1","#705AF9","#0000DD","#0000E2","#FF9500","#0000EE","#E3EB90","#F0F369","#8376F6","#FF6500","#7F6FF6","#FF9F00","#887EF4","#FFA600","#0000BA","#FF8E00","#EFF26E","#E4EC8B","#FF9000","#FFBA00","#FFEA00","#0000EA","#FF7B00","#979BF0","#FF8300","#FFE400","#FF9E00","#2C1AFE","#FF6100","#C8E0C2","#FF9300","#0000EA","#FFF300","#CEE2B9","#FFF100","#9CA6EF","#0000D9","#D2E3B3","#FFDB00","#9FADEE","#FFF900","#0000BB","#0000B6","#CCE1BD","#4932FD","#7764F8","#FF7B00","#FFA900","#0000E5","#FF6D00","#0000E1","#A0AFED","#FFC400","#FF5F00","#9597F1","#9392F2","#FF5700","#0000EA","#F8F94A","#8C85F4","#E9EF7E","#FF7A00","#000093","#C4DFC8","#8173F6","#FF6200","#FF9F00","#FFC300","#FDFD24","#8376F6","#FFFD00","#0000F5","#FF4300","#8376F6","#7B6AF7","#AACEE8","#0000EB","#8376F6","#AACEE8","#AED8E5","#FF9300","#705AF9","#9290F2","#FFF000","#FFF200","#FFAF00","#FF9200","#FFD400","#FF8900","#1509FF","#9AA2EF","#0000AC","#FFDF00","#9CA6EF","#FF7F00","#0000D1","#FFED00","#4932FD","#9290F2","#F0F369","#FFE500","#FFC500","#FFEB00","#0000F7","#A9C9E9","#FFD500","#989DF0","#0000BF","#FF5C00","#FF8300","#0000FE","#FFF400","#4932FD","#0000F8","#FFC900","#A9C9E9","#FFD900","#FFF400","#3622FE","#1509FF","#FF3D00","#664EFA","#989DF0","#0000E5","#FAFB3C","#FFD100","#0000FC","#6851FA","#FFD900","#FFC300","#8D87F3","#E9EF7E","#FFA500","#5037FC","#FFEB00","#664EFA","#F4F65C","#E3EB90","#3622FE","#0000D1","#A0AFED","#FFA900","#EDF173","#FF9300","#FF7900","#FFFE00","#C7DFC4","#EBF07A","#FFA200","#2615FE","#A5BCEB","#FFDF00","#0000E5","#0000C2","#0000D3","#FFE800","#D1E3B5","#7561F8","#FFB100","#FF9A00","#0000FE","#8C85F4","#EFF36B","#FF8200","#FFE700","#0000E7","#FF3200","#FF8B00","#FF9400","#FFD900","#F7F84D","#0000D6","#FFDA00","#FFAE00","#FFA700","#6851FA","#FFCE00","#FFF000","#5F47FB","#FEFE1D","#E1EA94","#6851FA","#F9FA40","#0000C2","#A9C9E9","#979BF0","#4932FD","#9597F1","#FFBE00","#FF4800","#FFAB00","#E8EE83","#FFD500","#E7EE85","#6E58F9","#0000E5","#A5BEEB","#867AF5","#8C85F4","#FF4A00","#FFE800","#E0EA96","#E3EB90","#FF6400","#1509FF","#553DFC","#FF6F00","#9BA4EF","#0000EC","#FF7400","#FFCF00","#FFB500","#ABD2E7","#0000D3","#0000D1","#EDF173","#583FFB","#FFE500","#8B83F4","#FFA700","#F2F464","#F9FA40","#A9C9E9","#867AF5","#E7EE85","#D4E4AF","#FF9E00","#0000E4","#9EABEE","#FF8300","#0000A4","#BCDCD4","#FF7900","#664EFA","#FF9A00","#FFEB00","#EFF36B","#FF5300","#FF6500","#FF7400","#FF8300","#0000FE","#321EFE","#000098","#FFA300","#E6ED87","#321EFE","#FFA900","#FFFF07","#0000EB","#FFBB00","#9597F1","#ECF175","#FF7300","#432CFD","#ACD4E7","#FFD300","#0000EF","#FF7F00","#FF9300","#EFF26E","#FFFE00","#FFC700","#FFF400","#F3F55E","#FFD600","#9495F1","#ACD4E7","#FFAA00","#4932FD","#9699F1","#0000EF","#867AF5","#FFB400","#FFD100","#8C85F4","#FFD000","#AACCE8","#FFF700","#000092","#705AF9","#644CFA","#FF0000","#FF7600","#FFA600","#7561F8","#A6C1EA","#7D6DF7","#E6ED87","#FFB000","#AED8E5","#7A68F7","#0000F5","#FF6F00","#7561F8","#FFE000","#7561F8","#3F29FD","#0000E5","#FF8100","#9597F1","#FF9400","#FF4800","#BCDCD4","#C8E0C2","#FFDD00","#867AF5","#0000D0"],"fillOpacity":0.8},null,null,["Temperature: -0.7 °C<br> Anomaly: 4 °C<br> Location: 58.07 °N, -130.86 °E","Temperature: -2.5 °C<br> Anomaly: 1.3 °C<br> Location: 61.19 °N, -116.23 °E","Temperature: 11.3 °C<br> Anomaly: 2 °C<br> Location: -29.94 °N, 7.04 °E","Temperature: 3.4 °C<br> Anomaly: 1.1 °C<br> Location: 46.26 °N, 112 °E","Temperature: 14.9 °C<br> Anomaly: -1 °C<br> Location: 19.84 °N, -138.47 °E","Temperature: 24.5 °C<br> Anomaly: -0.4 °C<br> Location: 2.67 °N, 141.63 °E","Temperature: 7.7 °C<br> Anomaly: 0.7 °C<br> Location: 33.12 °N, 27.13 °E","Temperature: -1.2 °C<br> Anomaly: -3.9 °C<br> Location: -51.15 °N, -127.23 °E","Temperature: 12.8 °C<br> Anomaly: -0.8 °C<br> Location: 21.98 °N, 145.01 °E","Temperature: 13.6 °C<br> Anomaly: 1.7 °C<br> Location: 28.71 °N, -88.92 °E","Temperature: 25.5 °C<br> Anomaly: 0.1 °C<br> Location: -5.92 °N, -125.78 °E","Temperature: 10.1 °C<br> Anomaly: 0.1 °C<br> Location: 30.68 °N, 96.68 °E","Temperature: -6.4 °C<br> Anomaly: 1.8 °C<br> Location: 60.85 °N, -97.16 °E","Temperature: 9 °C<br> Anomaly: -0.3 °C<br> Location: -34.24 °N, -70.06 °E","Temperature: 28.1 °C<br> Anomaly: 1.4 °C<br> Location: -5.28 °N, 6.69 °E","Temperature: -0.4 °C<br> Anomaly: -1.6 °C<br> Location: 61.6 °N, -59.54 °E","Temperature: -10.6 °C<br> Anomaly: -1.3 °C<br> Location: 66.95 °N, -124.4 °E","Temperature: -1.2 °C<br> Anomaly: -2 °C<br> Location: -53.55 °N, -84.11 °E","Temperature: 27.6 °C<br> Anomaly: 0.6 °C<br> Location: -3.5 °N, -53.73 °E","Temperature: 22 °C<br> Anomaly: 0.2 °C<br> Location: 8.45 °N, 28.25 °E","Temperature: 1.2 °C<br> Anomaly: 2.7 °C<br> Location: 56.56 °N, 111.1 °E","Temperature: 0.3 °C<br> Anomaly: 0.4 °C<br> Location: -50.58 °N, 155.98 °E","Temperature: -6.7 °C<br> Anomaly: 2.5 °C<br> Location: 68.44 °N, 120.19 °E","Temperature: -4.5 °C<br> Anomaly: 3.4 °C<br> Location: 62.53 °N, -134.28 °E","Temperature: 3.5 °C<br> Anomaly: -0.2 °C<br> Location: -58.46 °N, 53.8 °E","Temperature: 27.1 °C<br> Anomaly: 1.1 °C<br> Location: 1.99 °N, 68.53 °E","Temperature: 16.2 °C<br> Anomaly: -0.8 °C<br> Location: -15.37 °N, -168.46 °E","Temperature: -3.3 °C<br> Anomaly: 1.6 °C<br> Location: 56.8 °N, 151.38 °E","Temperature: 23.3 °C<br> Anomaly: -1.1 °C<br> Location: -7.42 °N, -7.75 °E","Temperature: -1 °C<br> Anomaly: -1 °C<br> Location: 47.04 °N, -84.05 °E","Temperature: 6 °C<br> Anomaly: 0.9 °C<br> Location: 33.26 °N, 128.34 °E","Temperature: 2.3 °C<br> Anomaly: 0.6 °C<br> Location: 43.55 °N, -97.51 °E","Temperature: 17.7 °C<br> Anomaly: 0.9 °C<br> Location: -15.66 °N, 105.1 °E","Temperature: 15.8 °C<br> Anomaly: 0.6 °C<br> Location: 25.92 °N, 52.84 °E","Temperature: -9 °C<br> Anomaly: -0.3 °C<br> Location: -69.45 °N, -27.24 °E","Temperature: 3.3 °C<br> Anomaly: 0.3 °C<br> Location: 46.61 °N, -145.78 °E","Temperature: -8.3 °C<br> Anomaly: 2.9 °C<br> Location: -68.97 °N, -178.75 °E","Temperature: 4.4 °C<br> Anomaly: 0.5 °C<br> Location: -40.93 °N, 11.21 °E","Temperature: 0.5 °C<br> Anomaly: -1.5 °C<br> Location: 56.92 °N, 8.75 °E","Temperature: 16.3 °C<br> Anomaly: -0.8 °C<br> Location: 15.65 °N, -103.25 °E","Temperature: 17.4 °C<br> Anomaly: -1.2 °C<br> Location: -16.86 °N, 78.1 °E","Temperature: 21.1 °C<br> Anomaly: -0.9 °C<br> Location: -8.99 °N, 166.08 °E","Temperature: -5 °C<br> Anomaly: -1.4 °C<br> Location: -64.76 °N, 6.58 °E","Temperature: -3.7 °C<br> Anomaly: -3.4 °C<br> Location: 66.3 °N, -117.17 °E","Temperature: 22.5 °C<br> Anomaly: 1.5 °C<br> Location: -9.55 °N, 22.51 °E","Temperature: -3 °C<br> Anomaly: 1.5 °C<br> Location: 64.06 °N, 93.33 °E","Temperature: 0.7 °C<br> Anomaly: 0.1 °C<br> Location: 54.29 °N, 60.11 °E","Temperature: 15.2 °C<br> Anomaly: -0.6 °C<br> Location: 19.6 °N, -99.05 °E","Temperature: -6.5 °C<br> Anomaly: -0.7 °C<br> Location: 65.94 °N, -55.49 °E","Temperature: 20.7 °C<br> Anomaly: 1.1 °C<br> Location: 16.64 °N, -64.86 °E","Temperature: 11.5 °C<br> Anomaly: 0.8 °C<br> Location: -23.32 °N, 145.76 °E","Temperature: 16.2 °C<br> Anomaly: 1.1 °C<br> Location: -21.46 °N, -108.29 °E","Temperature: 18.9 °C<br> Anomaly: 0.5 °C<br> Location: -14.21 °N, 65.15 °E","Temperature: 8.1 °C<br> Anomaly: 1.4 °C<br> Location: 39.86 °N, -130.49 °E","Temperature: -4.5 °C<br> Anomaly: 1.1 °C<br> Location: -64.55 °N, -141.48 °E","Temperature: 9.5 °C<br> Anomaly: 1.3 °C<br> Location: 34.83 °N, -146.57 °E","Temperature: 16.9 °C<br> Anomaly: 1.2 °C<br> Location: 24.82 °N, 149.92 °E","Temperature: 0.2 °C<br> Anomaly: 3 °C<br> Location: -46.02 °N, -80.26 °E","Temperature: 11.4 °C<br> Anomaly: -1.1 °C<br> Location: -33.45 °N, 138.89 °E","Temperature: 22.1 °C<br> Anomaly: 2.8 °C<br> Location: 2.02 °N, 98.23 °E","Temperature: 15.2 °C<br> Anomaly: 0 °C<br> Location: 24.59 °N, 106.22 °E","Temperature: -7.3 °C<br> Anomaly: 0.4 °C<br> Location: 67.59 °N, -105.96 °E","Temperature: 10 °C<br> Anomaly: 0.6 °C<br> Location: 36.34 °N, -162.65 °E","Temperature: 21.8 °C<br> Anomaly: -0.2 °C<br> Location: 9.31 °N, -166.03 °E","Temperature: -1.3 °C<br> Anomaly: -3.3 °C<br> Location: 48.96 °N, -77.55 °E","Temperature: 0.5 °C<br> Anomaly: 0 °C<br> Location: -43.47 °N, -54.43 °E","Temperature: 11.3 °C<br> Anomaly: 0.6 °C<br> Location: -32.02 °N, 85.48 °E","Temperature: 3.2 °C<br> Anomaly: -2.1 °C<br> Location: 45.94 °N, -89.4 °E","Temperature: 11.6 °C<br> Anomaly: 1.3 °C<br> Location: 27.05 °N, 6.28 °E","Temperature: 7.5 °C<br> Anomaly: -0.4 °C<br> Location: -36.32 °N, 93.4 °E","Temperature: -7.1 °C<br> Anomaly: 2.7 °C<br> Location: -63.98 °N, 48.99 °E","Temperature: 0.8 °C<br> Anomaly: 0.9 °C<br> Location: -50.33 °N, -106.58 °E","Temperature: 4.6 °C<br> Anomaly: -0.7 °C<br> Location: -39.71 °N, 177.5 °E","Temperature: 20.9 °C<br> Anomaly: 0.8 °C<br> Location: -2.88 °N, -179.85 °E","Temperature: 4.7 °C<br> Anomaly: 0.9 °C<br> Location: -42.36 °N, -105.63 °E","Temperature: 13 °C<br> Anomaly: 1.9 °C<br> Location: 30.71 °N, 48.25 °E","Temperature: -4.4 °C<br> Anomaly: 0.3 °C<br> Location: -68.9 °N, -173.77 °E","Temperature: 17.6 °C<br> Anomaly: -2.6 °C<br> Location: -17.43 °N, -170.38 °E","Temperature: 25.1 °C<br> Anomaly: -1.4 °C<br> Location: 2.02 °N, 38.82 °E","Temperature: -6.7 °C<br> Anomaly: -0.8 °C<br> Location: -69.78 °N, 25.39 °E","Temperature: 20.7 °C<br> Anomaly: 1.1 °C<br> Location: 11.42 °N, -91.49 °E","Temperature: 1.5 °C<br> Anomaly: 0.1 °C<br> Location: -47.89 °N, 151.03 °E","Temperature: 12.9 °C<br> Anomaly: -0.4 °C<br> Location: -19.74 °N, 62 °E","Temperature: 13.6 °C<br> Anomaly: -0.8 °C<br> Location: 20.39 °N, 52.36 °E","Temperature: 7.8 °C<br> Anomaly: 0.7 °C<br> Location: 38.62 °N, -105.02 °E","Temperature: 18.9 °C<br> Anomaly: -0.8 °C<br> Location: 8.91 °N, -6.98 °E","Temperature: 9.7 °C<br> Anomaly: -0.1 °C<br> Location: -37.28 °N, 175.15 °E","Temperature: -5.1 °C<br> Anomaly: -0.9 °C<br> Location: -57.4 °N, 177.52 °E","Temperature: -3.1 °C<br> Anomaly: -1.6 °C<br> Location: -58.01 °N, -17.72 °E","Temperature: 12.6 °C<br> Anomaly: 1.9 °C<br> Location: -27.27 °N, 77.35 °E","Temperature: 14.5 °C<br> Anomaly: -1.5 °C<br> Location: 23.44 °N, -66.04 °E","Temperature: -8.4 °C<br> Anomaly: 0.6 °C<br> Location: -69.97 °N, 120.13 °E","Temperature: 7.1 °C<br> Anomaly: -0.4 °C<br> Location: -40.8 °N, -23.77 °E","Temperature: -4.3 °C<br> Anomaly: -1.1 °C<br> Location: 60.62 °N, 178.56 °E","Temperature: -4 °C<br> Anomaly: 0.9 °C<br> Location: 59.59 °N, 110.09 °E","Temperature: 10.2 °C<br> Anomaly: 1.1 °C<br> Location: 32.77 °N, -4.95 °E","Temperature: 13.7 °C<br> Anomaly: 2.4 °C<br> Location: -23.37 °N, 13.96 °E","Temperature: 28.3 °C<br> Anomaly: 1 °C<br> Location: 2.11 °N, -57.23 °E","Temperature: 4.9 °C<br> Anomaly: 0.3 °C<br> Location: 34.16 °N, -161.27 °E","Temperature: 20 °C<br> Anomaly: 4.4 °C<br> Location: 16.68 °N, -14.86 °E","Temperature: 16.9 °C<br> Anomaly: -0.5 °C<br> Location: 17.67 °N, -0.66 °E","Temperature: 7.3 °C<br> Anomaly: -1 °C<br> Location: -39.6 °N, -78.2 °E","Temperature: 8.4 °C<br> Anomaly: -0.3 °C<br> Location: -39.68 °N, 99.52 °E","Temperature: 20.2 °C<br> Anomaly: 0.3 °C<br> Location: -15.55 °N, -70.61 °E","Temperature: -6 °C<br> Anomaly: 1.4 °C<br> Location: 61.94 °N, 5.6 °E","Temperature: -3 °C<br> Anomaly: 1.1 °C<br> Location: 64.77 °N, -7.94 °E","Temperature: 6.2 °C<br> Anomaly: 0.3 °C<br> Location: 33.58 °N, 96.79 °E","Temperature: 11.7 °C<br> Anomaly: -0.8 °C<br> Location: 32.65 °N, -120.99 °E","Temperature: 22.7 °C<br> Anomaly: 2.2 °C<br> Location: 5.01 °N, -20.96 °E","Temperature: -12.4 °C<br> Anomaly: 1.9 °C<br> Location: -69.68 °N, 8.43 °E","Temperature: 14.9 °C<br> Anomaly: -0.6 °C<br> Location: 15.25 °N, -8.31 °E","Temperature: 3.2 °C<br> Anomaly: 1.5 °C<br> Location: 47.15 °N, 8.87 °E","Temperature: 13.1 °C<br> Anomaly: 1.2 °C<br> Location: 35.21 °N, 66.68 °E","Temperature: 23.5 °C<br> Anomaly: 2.1 °C<br> Location: -6.62 °N, -53.35 °E","Temperature: 26 °C<br> Anomaly: 0.7 °C<br> Location: 5.01 °N, 122.27 °E","Temperature: 25.3 °C<br> Anomaly: -1.2 °C<br> Location: 5.23 °N, 151.89 °E","Temperature: -9.9 °C<br> Anomaly: 1.7 °C<br> Location: -69.81 °N, -141.73 °E","Temperature: 18.1 °C<br> Anomaly: -0.6 °C<br> Location: -20.21 °N, -105.65 °E","Temperature: 19.1 °C<br> Anomaly: 1.3 °C<br> Location: 15.7 °N, -4.81 °E","Temperature: 3.7 °C<br> Anomaly: 3 °C<br> Location: 46.05 °N, -63.42 °E","Temperature: 18.2 °C<br> Anomaly: -1.6 °C<br> Location: -20.06 °N, -10.18 °E","Temperature: 21.5 °C<br> Anomaly: 2.8 °C<br> Location: -12.51 °N, 30.99 °E","Temperature: 19.9 °C<br> Anomaly: 2.5 °C<br> Location: 10.29 °N, -99.38 °E","Temperature: 20.8 °C<br> Anomaly: -0.3 °C<br> Location: 12.55 °N, 84.25 °E","Temperature: 9.1 °C<br> Anomaly: 0.1 °C<br> Location: 30.75 °N, -125.83 °E","Temperature: 20.2 °C<br> Anomaly: -0.5 °C<br> Location: -14.7 °N, 71.12 °E","Temperature: -3.9 °C<br> Anomaly: -0.4 °C<br> Location: 58.69 °N, -84.92 °E","Temperature: -5.2 °C<br> Anomaly: 1.4 °C<br> Location: 64.76 °N, -26.47 °E","Temperature: 8.4 °C<br> Anomaly: -0.8 °C<br> Location: -37.31 °N, 79.68 °E","Temperature: 10 °C<br> Anomaly: 0.2 °C<br> Location: 31.43 °N, -9.19 °E","Temperature: -1 °C<br> Anomaly: 0.3 °C<br> Location: 56.51 °N, -58.11 °E","Temperature: 20.2 °C<br> Anomaly: 0.4 °C<br> Location: 14.49 °N, -93.39 °E","Temperature: 16.6 °C<br> Anomaly: 0.8 °C<br> Location: 18.41 °N, -102.15 °E","Temperature: -2 °C<br> Anomaly: 2.9 °C<br> Location: 61.23 °N, -92.86 °E","Temperature: 4.5 °C<br> Anomaly: -0.2 °C<br> Location: 49.07 °N, 23.37 °E","Temperature: 19.4 °C<br> Anomaly: -0.7 °C<br> Location: 11.17 °N, 76.52 °E","Temperature: 2.2 °C<br> Anomaly: 1.7 °C<br> Location: 45 °N, -141.09 °E","Temperature: 0.3 °C<br> Anomaly: 1.1 °C<br> Location: -54.08 °N, 6.87 °E","Temperature: 5.9 °C<br> Anomaly: 0.9 °C<br> Location: 37.03 °N, 126.79 °E","Temperature: 16.7 °C<br> Anomaly: 1.4 °C<br> Location: 17.31 °N, 77.27 °E","Temperature: 3.3 °C<br> Anomaly: -1.6 °C<br> Location: -49.22 °N, -66.97 °E","Temperature: -4.3 °C<br> Anomaly: 2.1 °C<br> Location: -58.76 °N, -138.31 °E","Temperature: 19.9 °C<br> Anomaly: 1.2 °C<br> Location: -5.03 °N, 27 °E","Temperature: 8 °C<br> Anomaly: 1.9 °C<br> Location: 39.11 °N, 119.29 °E","Temperature: 6.7 °C<br> Anomaly: -0.4 °C<br> Location: 32.69 °N, 7.32 °E","Temperature: 1.4 °C<br> Anomaly: -2.3 °C<br> Location: 44.41 °N, 69.84 °E","Temperature: -2.8 °C<br> Anomaly: -0.2 °C<br> Location: -46.18 °N, -0.03 °E","Temperature: -3.2 °C<br> Anomaly: -0.9 °C<br> Location: 62.26 °N, -52.5 °E","Temperature: 12.3 °C<br> Anomaly: 3.8 °C<br> Location: -28.89 °N, 167.33 °E","Temperature: 2.6 °C<br> Anomaly: -0.1 °C<br> Location: -49.13 °N, 152.01 °E","Temperature: 12.6 °C<br> Anomaly: 0.2 °C<br> Location: 30.71 °N, -106.35 °E","Temperature: 13.9 °C<br> Anomaly: 2.1 °C<br> Location: -24.63 °N, 163.77 °E","Temperature: 4.5 °C<br> Anomaly: 1.4 °C<br> Location: 39.03 °N, 134.64 °E","Temperature: 20 °C<br> Anomaly: 1.5 °C<br> Location: -14.78 °N, 71.04 °E","Temperature: 16.4 °C<br> Anomaly: 4.5 °C<br> Location: 25 °N, 4.53 °E","Temperature: 4 °C<br> Anomaly: 0.7 °C<br> Location: 38.62 °N, -6.91 °E","Temperature: 3.2 °C<br> Anomaly: 3.4 °C<br> Location: -43.7 °N, -107.35 °E","Temperature: -7.3 °C<br> Anomaly: 0.9 °C<br> Location: -65.93 °N, -143.92 °E","Temperature: -1.8 °C<br> Anomaly: -1.7 °C<br> Location: -51 °N, -9.87 °E","Temperature: 15.1 °C<br> Anomaly: -2.8 °C<br> Location: 25.22 °N, -67.62 °E","Temperature: -5.4 °C<br> Anomaly: 1.5 °C<br> Location: 60.88 °N, 98.06 °E","Temperature: 25.3 °C<br> Anomaly: -1 °C<br> Location: 7.07 °N, 144.39 °E","Temperature: 19.3 °C<br> Anomaly: 0.6 °C<br> Location: 14.25 °N, -59.32 °E","Temperature: 6.5 °C<br> Anomaly: 3.2 °C<br> Location: -42.42 °N, 116.62 °E","Temperature: 26.9 °C<br> Anomaly: 1 °C<br> Location: 4.93 °N, -100.79 °E","Temperature: 4.4 °C<br> Anomaly: 0.1 °C<br> Location: -44.86 °N, 95.8 °E","Temperature: 25.1 °C<br> Anomaly: -2.4 °C<br> Location: -6.74 °N, 21.85 °E","Temperature: 13.9 °C<br> Anomaly: -0.7 °C<br> Location: -25.61 °N, -27.56 °E","Temperature: -3.6 °C<br> Anomaly: -0.4 °C<br> Location: -53.74 °N, 121.89 °E","Temperature: 4.3 °C<br> Anomaly: 1.5 °C<br> Location: -43.95 °N, -76.56 °E","Temperature: 11.6 °C<br> Anomaly: 1.2 °C<br> Location: 32.16 °N, -10.54 °E","Temperature: 21.1 °C<br> Anomaly: 0.5 °C<br> Location: -12.34 °N, 101.1 °E","Temperature: 19.9 °C<br> Anomaly: 0.8 °C<br> Location: -12.03 °N, -150.22 °E","Temperature: 22.5 °C<br> Anomaly: 0.1 °C<br> Location: -2.76 °N, -37.97 °E","Temperature: 22.5 °C<br> Anomaly: 0.5 °C<br> Location: -10.15 °N, -145.56 °E","Temperature: -1 °C<br> Anomaly: 0.9 °C<br> Location: -50.89 °N, -132 °E","Temperature: 1 °C<br> Anomaly: 1.2 °C<br> Location: 45.46 °N, -100.39 °E","Temperature: 21 °C<br> Anomaly: 3.2 °C<br> Location: 12.92 °N, -81.32 °E","Temperature: 3.2 °C<br> Anomaly: -1.2 °C<br> Location: 41.22 °N, -72.34 °E","Temperature: 7.9 °C<br> Anomaly: 2.7 °C<br> Location: 37.66 °N, -45.08 °E","Temperature: -3 °C<br> Anomaly: 1.5 °C<br> Location: 58.53 °N, -3.08 °E","Temperature: -1.8 °C<br> Anomaly: -1.8 °C<br> Location: 50.77 °N, 136.3 °E","Temperature: 15.8 °C<br> Anomaly: 0.1 °C<br> Location: -25.62 °N, 89.54 °E","Temperature: 8.2 °C<br> Anomaly: -0.4 °C<br> Location: -33.7 °N, 163.87 °E","Temperature: 11.7 °C<br> Anomaly: -0.9 °C<br> Location: 33.92 °N, -60.51 °E","Temperature: 8 °C<br> Anomaly: -1.8 °C<br> Location: 34.63 °N, 116.7 °E","Temperature: -4.1 °C<br> Anomaly: -0.2 °C<br> Location: 58.51 °N, -132.24 °E","Temperature: 5.7 °C<br> Anomaly: -0.2 °C<br> Location: 41.05 °N, -135.11 °E","Temperature: -0.1 °C<br> Anomaly: 0 °C<br> Location: -51.33 °N, 82.12 °E","Temperature: 10.7 °C<br> Anomaly: -2.6 °C<br> Location: -29.72 °N, 17.43 °E","Temperature: 3.1 °C<br> Anomaly: 1.2 °C<br> Location: -42.75 °N, 39.07 °E","Temperature: 4 °C<br> Anomaly: 1.6 °C<br> Location: 39.78 °N, -135.74 °E","Temperature: 1.5 °C<br> Anomaly: 1.7 °C<br> Location: -51.96 °N, 135.52 °E","Temperature: -1.3 °C<br> Anomaly: 1.7 °C<br> Location: -51.93 °N, 123.25 °E","Temperature: -6.4 °C<br> Anomaly: 0.8 °C<br> Location: -59.88 °N, -163.35 °E","Temperature: -6 °C<br> Anomaly: 2.7 °C<br> Location: -62.56 °N, 74.53 °E","Temperature: 22.4 °C<br> Anomaly: -0.8 °C<br> Location: 4.46 °N, 12.52 °E","Temperature: -5.2 °C<br> Anomaly: -1.3 °C<br> Location: -54.28 °N, 160.36 °E","Temperature: 8.7 °C<br> Anomaly: 1 °C<br> Location: 34.05 °N, 148.33 °E","Temperature: 10.4 °C<br> Anomaly: 1.2 °C<br> Location: 32.38 °N, -15.85 °E","Temperature: -0.1 °C<br> Anomaly: -0.6 °C<br> Location: 53.92 °N, 95.59 °E","Temperature: 25.9 °C<br> Anomaly: 0.6 °C<br> Location: 2.4 °N, 1.82 °E","Temperature: -0.4 °C<br> Anomaly: 1 °C<br> Location: 49.27 °N, -107.08 °E","Temperature: 21.6 °C<br> Anomaly: 1.1 °C<br> Location: -8.01 °N, 78.17 °E","Temperature: 0.3 °C<br> Anomaly: 1.8 °C<br> Location: -47.9 °N, 96.51 °E","Temperature: 21 °C<br> Anomaly: 1.9 °C<br> Location: -8.07 °N, 74.3 °E","Temperature: -8.9 °C<br> Anomaly: -3.1 °C<br> Location: 65.48 °N, -111.02 °E","Temperature: 23 °C<br> Anomaly: 3.1 °C<br> Location: -2.16 °N, -72.76 °E","Temperature: 10.2 °C<br> Anomaly: 1.2 °C<br> Location: -34.66 °N, -62.95 °E","Temperature: 8.9 °C<br> Anomaly: -0.4 °C<br> Location: -33.64 °N, 25.88 °E","Temperature: 22.8 °C<br> Anomaly: -1.2 °C<br> Location: 5.88 °N, 137.7 °E","Temperature: 19.2 °C<br> Anomaly: 1.9 °C<br> Location: 20.98 °N, 135.76 °E","Temperature: 14.7 °C<br> Anomaly: 1 °C<br> Location: -22.9 °N, -41.09 °E","Temperature: -5.5 °C<br> Anomaly: 2.1 °C<br> Location: -61.47 °N, 85.6 °E","Temperature: 24.4 °C<br> Anomaly: 0.4 °C<br> Location: -6.82 °N, 106.67 °E","Temperature: 1.6 °C<br> Anomaly: 0.1 °C<br> Location: 47.43 °N, 80.7 °E","Temperature: 23.8 °C<br> Anomaly: 3.9 °C<br> Location: 10.45 °N, -41.24 °E","Temperature: 15.3 °C<br> Anomaly: -2.6 °C<br> Location: -20.53 °N, -72.67 °E","Temperature: 21.7 °C<br> Anomaly: 1.1 °C<br> Location: 6.64 °N, -159.31 °E","Temperature: -3.6 °C<br> Anomaly: 1.1 °C<br> Location: 54.98 °N, 62.53 °E","Temperature: 26.2 °C<br> Anomaly: 1.2 °C<br> Location: -1.4 °N, -108.72 °E","Temperature: 6.2 °C<br> Anomaly: 1.3 °C<br> Location: -45.97 °N, 45.04 °E","Temperature: 22.6 °C<br> Anomaly: 0.1 °C<br> Location: 6.02 °N, -130.25 °E","Temperature: -5.5 °C<br> Anomaly: 2.2 °C<br> Location: 64.61 °N, -45.69 °E","Temperature: 13.9 °C<br> Anomaly: -3.2 °C<br> Location: -26.08 °N, -66.93 °E","Temperature: 6.7 °C<br> Anomaly: -0.7 °C<br> Location: 44.87 °N, 113.47 °E","Temperature: 14.1 °C<br> Anomaly: 0.3 °C<br> Location: -27.01 °N, -47.41 °E","Temperature: 2.1 °C<br> Anomaly: 0.7 °C<br> Location: -44.04 °N, -21.73 °E","Temperature: -6.7 °C<br> Anomaly: 1.1 °C<br> Location: -63.23 °N, -21.94 °E","Temperature: 7 °C<br> Anomaly: 1.5 °C<br> Location: -35.61 °N, 36.66 °E","Temperature: 16.1 °C<br> Anomaly: -1.8 °C<br> Location: -20.85 °N, -34.59 °E","Temperature: 2.4 °C<br> Anomaly: 0.5 °C<br> Location: -47.74 °N, 164.99 °E","Temperature: 13.3 °C<br> Anomaly: 1.3 °C<br> Location: -27.43 °N, 169.48 °E","Temperature: -8.8 °C<br> Anomaly: 2.5 °C<br> Location: -67.54 °N, 149.23 °E","Temperature: -9.2 °C<br> Anomaly: 0.3 °C<br> Location: 69.52 °N, -150.17 °E","Temperature: 6.5 °C<br> Anomaly: 2.9 °C<br> Location: 42.62 °N, -8.33 °E","Temperature: -2.9 °C<br> Anomaly: 0.1 °C<br> Location: -57.88 °N, -57.91 °E","Temperature: -0.9 °C<br> Anomaly: 0.4 °C<br> Location: 51.79 °N, 62.44 °E","Temperature: 24.4 °C<br> Anomaly: 0.7 °C<br> Location: 7.64 °N, 49.13 °E","Temperature: 20.8 °C<br> Anomaly: -0.3 °C<br> Location: -11.01 °N, 129.34 °E","Temperature: -5.8 °C<br> Anomaly: 1.6 °C<br> Location: -60.53 °N, 161.38 °E","Temperature: 25.4 °C<br> Anomaly: -1.5 °C<br> Location: 8.6 °N, 26.63 °E","Temperature: -6.1 °C<br> Anomaly: 0.5 °C<br> Location: -60.1 °N, 12.7 °E","Temperature: 2.5 °C<br> Anomaly: -0.3 °C<br> Location: -40.41 °N, 159.01 °E","Temperature: 18.3 °C<br> Anomaly: -0.3 °C<br> Location: 6.95 °N, 141.25 °E","Temperature: 26.3 °C<br> Anomaly: 2.2 °C<br> Location: -2.52 °N, -32.29 °E","Temperature: 1.4 °C<br> Anomaly: 2.1 °C<br> Location: -47.67 °N, -161.99 °E","Temperature: 1.2 °C<br> Anomaly: 2.9 °C<br> Location: -49.06 °N, 100.18 °E","Temperature: 26.8 °C<br> Anomaly: 0.1 °C<br> Location: -0.1 °N, 153.35 °E","Temperature: -5.5 °C<br> Anomaly: 0.5 °C<br> Location: 61.68 °N, -44.11 °E","Temperature: 11.5 °C<br> Anomaly: -1.8 °C<br> Location: -23.21 °N, -91.83 °E","Temperature: 0.6 °C<br> Anomaly: -0.1 °C<br> Location: -43.62 °N, -148.45 °E","Temperature: 9.5 °C<br> Anomaly: 3.1 °C<br> Location: -32.24 °N, -39.2 °E","Temperature: 24.5 °C<br> Anomaly: -0.1 °C<br> Location: 4.3 °N, -114.28 °E","Temperature: -11.8 °C<br> Anomaly: -1.2 °C<br> Location: -67 °N, -131.9 °E","Temperature: 5.9 °C<br> Anomaly: 0.6 °C<br> Location: 41.83 °N, -87.31 °E","Temperature: -0.2 °C<br> Anomaly: 2.4 °C<br> Location: -54.55 °N, 19.17 °E","Temperature: 26.1 °C<br> Anomaly: -1.9 °C<br> Location: 5.57 °N, -126.7 °E","Temperature: 21.6 °C<br> Anomaly: 0.1 °C<br> Location: 9.97 °N, 166.64 °E","Temperature: 18.4 °C<br> Anomaly: 1.2 °C<br> Location: 16.65 °N, 160.03 °E","Temperature: 12.4 °C<br> Anomaly: 3.5 °C<br> Location: 30.08 °N, 177.22 °E","Temperature: -0.1 °C<br> Anomaly: -0.4 °C<br> Location: -52.74 °N, 74.24 °E","Temperature: 12.9 °C<br> Anomaly: 2.8 °C<br> Location: -26.45 °N, -129.32 °E","Temperature: -4.7 °C<br> Anomaly: -0.1 °C<br> Location: 62.4 °N, -176.77 °E","Temperature: 27.8 °C<br> Anomaly: -1 °C<br> Location: 0 °N, 67.14 °E","Temperature: -0.1 °C<br> Anomaly: -1.2 °C<br> Location: -51.07 °N, 65.24 °E","Temperature: -0.6 °C<br> Anomaly: 0.2 °C<br> Location: 51.7 °N, 150.3 °E","Temperature: 3.9 °C<br> Anomaly: 0.5 °C<br> Location: -41.29 °N, -32.97 °E","Temperature: -5.4 °C<br> Anomaly: 0 °C<br> Location: 59.51 °N, -27.92 °E","Temperature: -0.1 °C<br> Anomaly: 2.1 °C<br> Location: 54.15 °N, 13.44 °E","Temperature: 3.9 °C<br> Anomaly: 0.8 °C<br> Location: -50.92 °N, -31.09 °E","Temperature: 4.4 °C<br> Anomaly: 0.3 °C<br> Location: 39.95 °N, -144.85 °E","Temperature: 22.6 °C<br> Anomaly: -0.4 °C<br> Location: -6.54 °N, -43.1 °E","Temperature: -1.3 °C<br> Anomaly: -1.4 °C<br> Location: -51 °N, -108.72 °E","Temperature: 1.1 °C<br> Anomaly: -2.4 °C<br> Location: 53.93 °N, 81.01 °E","Temperature: 14.2 °C<br> Anomaly: 0.8 °C<br> Location: -22.86 °N, -176.04 °E","Temperature: 14 °C<br> Anomaly: 0.5 °C<br> Location: -25.3 °N, 150.79 °E","Temperature: 20.2 °C<br> Anomaly: 2.5 °C<br> Location: -13.47 °N, 144.08 °E","Temperature: 22.7 °C<br> Anomaly: 0.9 °C<br> Location: -2.93 °N, 91.5 °E","Temperature: 16.8 °C<br> Anomaly: 1.7 °C<br> Location: -18.49 °N, 162.69 °E","Temperature: 23.4 °C<br> Anomaly: 0.6 °C<br> Location: -4.8 °N, 45.21 °E","Temperature: -3.9 °C<br> Anomaly: -0.7 °C<br> Location: -63.02 °N, 56.14 °E","Temperature: 1.9 °C<br> Anomaly: 0.9 °C<br> Location: -43.77 °N, -42.7 °E","Temperature: -9.9 °C<br> Anomaly: 1 °C<br> Location: 67.57 °N, -156.38 °E","Temperature: 15.8 °C<br> Anomaly: -0.7 °C<br> Location: -24.04 °N, 68.72 °E","Temperature: 2.1 °C<br> Anomaly: 0.5 °C<br> Location: -46.06 °N, -134.11 °E","Temperature: 24.1 °C<br> Anomaly: 3.5 °C<br> Location: -1.64 °N, -75.13 °E","Temperature: -7.2 °C<br> Anomaly: -1.2 °C<br> Location: -67.38 °N, 47.6 °E","Temperature: 14.4 °C<br> Anomaly: 2.7 °C<br> Location: -22.47 °N, -39.59 °E","Temperature: -2.9 °C<br> Anomaly: 0.2 °C<br> Location: -65.85 °N, -154.65 °E","Temperature: 1.1 °C<br> Anomaly: 2.7 °C<br> Location: 51.41 °N, 130.89 °E","Temperature: 10.4 °C<br> Anomaly: -0.8 °C<br> Location: 32.44 °N, -41.33 °E","Temperature: 15.2 °C<br> Anomaly: 0.4 °C<br> Location: -25.86 °N, 61.47 °E","Temperature: 18.2 °C<br> Anomaly: 1 °C<br> Location: -15.9 °N, -172.37 °E","Temperature: 14.6 °C<br> Anomaly: 0.3 °C<br> Location: -23.46 °N, 34.28 °E","Temperature: -4.6 °C<br> Anomaly: 1.5 °C<br> Location: -57.43 °N, -80.55 °E","Temperature: 3.7 °C<br> Anomaly: 0.2 °C<br> Location: 35.99 °N, -36.31 °E","Temperature: 16.7 °C<br> Anomaly: 2.3 °C<br> Location: 14.42 °N, -127.51 °E","Temperature: 1.7 °C<br> Anomaly: 0.8 °C<br> Location: -49.64 °N, 116.67 °E","Temperature: -8.5 °C<br> Anomaly: 1.5 °C<br> Location: -65.45 °N, -129.45 °E","Temperature: 26.5 °C<br> Anomaly: -1.3 °C<br> Location: -2.27 °N, 147.26 °E","Temperature: 23.8 °C<br> Anomaly: -0.5 °C<br> Location: -7.76 °N, 143.97 °E","Temperature: -4.1 °C<br> Anomaly: 2.1 °C<br> Location: -61.55 °N, -110.75 °E","Temperature: 13.8 °C<br> Anomaly: 1.3 °C<br> Location: -24.15 °N, 11.62 °E","Temperature: -2.9 °C<br> Anomaly: 0.3 °C<br> Location: 52.98 °N, 7.96 °E","Temperature: -4.5 °C<br> Anomaly: 0.3 °C<br> Location: 60.28 °N, -122.28 °E","Temperature: 17.8 °C<br> Anomaly: 1.6 °C<br> Location: -15.1 °N, 7.04 °E","Temperature: 3.7 °C<br> Anomaly: 0.2 °C<br> Location: -47.76 °N, -99.18 °E","Temperature: 16.3 °C<br> Anomaly: 0.6 °C<br> Location: -25.21 °N, -78.66 °E","Temperature: 13.8 °C<br> Anomaly: -2 °C<br> Location: -27.02 °N, 1.33 °E","Temperature: -3.4 °C<br> Anomaly: 3.2 °C<br> Location: -54.91 °N, -122.77 °E","Temperature: -3.9 °C<br> Anomaly: 1.6 °C<br> Location: 67.11 °N, 151.43 °E","Temperature: 28.1 °C<br> Anomaly: 1.7 °C<br> Location: -0.43 °N, -0.35 °E","Temperature: -1.8 °C<br> Anomaly: -2.4 °C<br> Location: -56.97 °N, 41.52 °E","Temperature: 1.7 °C<br> Anomaly: 0.5 °C<br> Location: -40.35 °N, 87.82 °E","Temperature: -5.8 °C<br> Anomaly: -0.1 °C<br> Location: 60.27 °N, 42.05 °E","Temperature: 11.9 °C<br> Anomaly: -1.6 °C<br> Location: -28.44 °N, 154.85 °E","Temperature: 17.1 °C<br> Anomaly: 1.6 °C<br> Location: 21.45 °N, -151.06 °E","Temperature: -4.2 °C<br> Anomaly: 2.4 °C<br> Location: 56.15 °N, -169.88 °E","Temperature: -1.7 °C<br> Anomaly: -0.3 °C<br> Location: 68.71 °N, 14.95 °E","Temperature: 16.3 °C<br> Anomaly: 0.2 °C<br> Location: -9.75 °N, -93.17 °E","Temperature: 18.4 °C<br> Anomaly: 3.1 °C<br> Location: -14.87 °N, 52.14 °E","Temperature: 0.7 °C<br> Anomaly: -2 °C<br> Location: -50.13 °N, -44.01 °E","Temperature: 9.5 °C<br> Anomaly: 1.6 °C<br> Location: -30.83 °N, -163.13 °E","Temperature: 21.1 °C<br> Anomaly: 0 °C<br> Location: 9.08 °N, -162.67 °E","Temperature: -2.7 °C<br> Anomaly: 0.3 °C<br> Location: 60.92 °N, 166.62 °E","Temperature: 14.6 °C<br> Anomaly: -0.4 °C<br> Location: -19.82 °N, -98.47 °E","Temperature: -1.8 °C<br> Anomaly: 2.1 °C<br> Location: 47.88 °N, -175.9 °E","Temperature: 10.9 °C<br> Anomaly: -1.2 °C<br> Location: 31.14 °N, -101.35 °E","Temperature: 8.7 °C<br> Anomaly: 1.9 °C<br> Location: 35.1 °N, -159.86 °E","Temperature: -3.4 °C<br> Anomaly: 2.6 °C<br> Location: 59.36 °N, -95.41 °E","Temperature: -7.2 °C<br> Anomaly: -2 °C<br> Location: -69.67 °N, -35.03 °E","Temperature: 2.5 °C<br> Anomaly: -1.2 °C<br> Location: -47.54 °N, -174.85 °E","Temperature: 20.8 °C<br> Anomaly: 1.4 °C<br> Location: -14.1 °N, -49.77 °E","Temperature: 10 °C<br> Anomaly: -0.9 °C<br> Location: 24.54 °N, 30.42 °E","Temperature: 22.6 °C<br> Anomaly: -0.5 °C<br> Location: -2.75 °N, 38.09 °E","Temperature: 24.6 °C<br> Anomaly: -0.2 °C<br> Location: 4.74 °N, -85.06 °E","Temperature: 12.8 °C<br> Anomaly: 0 °C<br> Location: -25.63 °N, 63.05 °E","Temperature: 6.1 °C<br> Anomaly: 1.6 °C<br> Location: 44.07 °N, 156.89 °E","Temperature: 9.7 °C<br> Anomaly: -0.4 °C<br> Location: -29.09 °N, -178.71 °E","Temperature: 21.4 °C<br> Anomaly: 0.6 °C<br> Location: -12.72 °N, 103.31 °E","Temperature: -3.7 °C<br> Anomaly: 1.6 °C<br> Location: -57.27 °N, 110.5 °E","Temperature: 3.1 °C<br> Anomaly: -1.8 °C<br> Location: 41.8 °N, -153.71 °E","Temperature: 15.8 °C<br> Anomaly: -0.5 °C<br> Location: -19.63 °N, 24.12 °E","Temperature: -5.8 °C<br> Anomaly: 1.8 °C<br> Location: -64.33 °N, 14.11 °E","Temperature: -8.3 °C<br> Anomaly: -0.1 °C<br> Location: -64.25 °N, -130.44 °E","Temperature: -7.1 °C<br> Anomaly: -3.3 °C<br> Location: 63.62 °N, -80.52 °E","Temperature: 14.9 °C<br> Anomaly: -0.8 °C<br> Location: -17.73 °N, -53.34 °E","Temperature: 6.9 °C<br> Anomaly: 1.7 °C<br> Location: 42.9 °N, 112.61 °E","Temperature: -1 °C<br> Anomaly: -0.1 °C<br> Location: 57.41 °N, -118.25 °E","Temperature: 20 °C<br> Anomaly: -0.1 °C<br> Location: -8.39 °N, 7.62 °E","Temperature: 22 °C<br> Anomaly: 0.3 °C<br> Location: 10.69 °N, 95.26 °E","Temperature: -4.1 °C<br> Anomaly: 1.6 °C<br> Location: -59.69 °N, -76.05 °E","Temperature: 0.6 °C<br> Anomaly: -0.2 °C<br> Location: -46.95 °N, -22.76 °E","Temperature: 10.3 °C<br> Anomaly: 1.2 °C<br> Location: 33.58 °N, 61 °E","Temperature: 23.9 °C<br> Anomaly: 1.4 °C<br> Location: -3.4 °N, -166.71 °E","Temperature: 15 °C<br> Anomaly: -1 °C<br> Location: 25.97 °N, 21.83 °E","Temperature: -5.7 °C<br> Anomaly: 0.4 °C<br> Location: 63.21 °N, 155.66 °E","Temperature: 28.5 °C<br> Anomaly: -0.3 °C<br> Location: -0.35 °N, -23.54 °E","Temperature: 23.2 °C<br> Anomaly: 1.1 °C<br> Location: -4.13 °N, 157.04 °E","Temperature: 22.5 °C<br> Anomaly: -1.8 °C<br> Location: 8.43 °N, 172.19 °E","Temperature: 16.3 °C<br> Anomaly: 2.8 °C<br> Location: 21.35 °N, 63.63 °E","Temperature: 11.4 °C<br> Anomaly: 2.5 °C<br> Location: -30.86 °N, -72.62 °E","Temperature: -6.9 °C<br> Anomaly: -0.8 °C<br> Location: 67.19 °N, -105.03 °E","Temperature: 16.2 °C<br> Anomaly: -0.5 °C<br> Location: 20.14 °N, -65.2 °E","Temperature: 20.3 °C<br> Anomaly: -0.9 °C<br> Location: 11.56 °N, 127.57 °E","Temperature: 20.9 °C<br> Anomaly: 0.3 °C<br> Location: 16.22 °N, -158.02 °E","Temperature: -1.7 °C<br> Anomaly: -0.3 °C<br> Location: 59.52 °N, -114.46 °E","Temperature: 17.4 °C<br> Anomaly: 0.7 °C<br> Location: -15.4 °N, -5.82 °E","Temperature: 14.2 °C<br> Anomaly: -2.3 °C<br> Location: -29.69 °N, -58.22 °E","Temperature: -2.1 °C<br> Anomaly: 0.7 °C<br> Location: -57.3 °N, 112.81 °E","Temperature: 12.5 °C<br> Anomaly: 0.5 °C<br> Location: -24.92 °N, 133.36 °E","Temperature: 8.5 °C<br> Anomaly: -1.9 °C<br> Location: 36.16 °N, -173.1 °E","Temperature: -1.7 °C<br> Anomaly: 0.9 °C<br> Location: -55.38 °N, 116.91 °E","Temperature: 11.8 °C<br> Anomaly: 0.6 °C<br> Location: 29.44 °N, -35.54 °E","Temperature: -8.3 °C<br> Anomaly: 0.2 °C<br> Location: 65.31 °N, 61.94 °E","Temperature: 3.7 °C<br> Anomaly: 0.5 °C<br> Location: -41.79 °N, -137.28 °E","Temperature: 1.6 °C<br> Anomaly: 1.1 °C<br> Location: -54.81 °N, -8.49 °E","Temperature: -2.9 °C<br> Anomaly: 1 °C<br> Location: -62.24 °N, 153.12 °E","Temperature: 1.4 °C<br> Anomaly: -0.1 °C<br> Location: 46.16 °N, 26.94 °E","Temperature: 18.8 °C<br> Anomaly: 2.2 °C<br> Location: 11.37 °N, 148.59 °E","Temperature: 27.6 °C<br> Anomaly: 0.4 °C<br> Location: -4.19 °N, 91.91 °E","Temperature: 20.6 °C<br> Anomaly: 0.3 °C<br> Location: -18.9 °N, 47.16 °E","Temperature: 9.3 °C<br> Anomaly: 1.9 °C<br> Location: -30.78 °N, 105.99 °E","Temperature: 16.7 °C<br> Anomaly: 2 °C<br> Location: 13.96 °N, 152.48 °E","Temperature: 9.2 °C<br> Anomaly: -0.6 °C<br> Location: 44.6 °N, -120.79 °E","Temperature: -1.4 °C<br> Anomaly: -1 °C<br> Location: -56.3 °N, -110.56 °E","Temperature: -5.8 °C<br> Anomaly: -0.6 °C<br> Location: 64.92 °N, -144.85 °E","Temperature: 3.2 °C<br> Anomaly: -1.3 °C<br> Location: -46.38 °N, 118.48 °E","Temperature: 0.1 °C<br> Anomaly: -2.2 °C<br> Location: -57.95 °N, 110.11 °E","Temperature: 0.6 °C<br> Anomaly: 1 °C<br> Location: 50.57 °N, -79.46 °E","Temperature: 27.5 °C<br> Anomaly: 0.3 °C<br> Location: 3.47 °N, -18.35 °E","Temperature: 14.9 °C<br> Anomaly: 1.5 °C<br> Location: 21.95 °N, 45.32 °E","Temperature: 8.4 °C<br> Anomaly: 0.5 °C<br> Location: -37.87 °N, -46.47 °E","Temperature: 8.7 °C<br> Anomaly: 1.1 °C<br> Location: 30.97 °N, -42.37 °E","Temperature: 26 °C<br> Anomaly: -0.2 °C<br> Location: -1.29 °N, 149.21 °E","Temperature: -3.9 °C<br> Anomaly: -0.9 °C<br> Location: 65.14 °N, -39.49 °E","Temperature: -2.5 °C<br> Anomaly: 1.7 °C<br> Location: 56.97 °N, -154.69 °E","Temperature: 25.3 °C<br> Anomaly: 1.6 °C<br> Location: 7.18 °N, 74.7 °E","Temperature: 2 °C<br> Anomaly: -2.1 °C<br> Location: -59.42 °N, 69.48 °E","Temperature: -5.3 °C<br> Anomaly: 1.8 °C<br> Location: -66.82 °N, -145.39 °E","Temperature: 24.9 °C<br> Anomaly: -2.2 °C<br> Location: 1.85 °N, -166.71 °E","Temperature: 17.3 °C<br> Anomaly: 0.4 °C<br> Location: 18.3 °N, -35.66 °E","Temperature: 19.7 °C<br> Anomaly: -0.1 °C<br> Location: -11.37 °N, -175.85 °E","Temperature: 4.1 °C<br> Anomaly: 0.3 °C<br> Location: 53.1 °N, 24.44 °E","Temperature: -7.1 °C<br> Anomaly: 2.1 °C<br> Location: -54.88 °N, 160.18 °E","Temperature: -7.2 °C<br> Anomaly: -1.4 °C<br> Location: 67.24 °N, -56.41 °E","Temperature: 10 °C<br> Anomaly: 0.1 °C<br> Location: -32.9 °N, -91.98 °E","Temperature: -2.4 °C<br> Anomaly: 4.3 °C<br> Location: -58.2 °N, 15 °E","Temperature: 15.2 °C<br> Anomaly: -1.7 °C<br> Location: -15.97 °N, -137.63 °E","Temperature: 0.5 °C<br> Anomaly: -0.4 °C<br> Location: -52.51 °N, -45.03 °E","Temperature: 20.9 °C<br> Anomaly: 0.4 °C<br> Location: 11.42 °N, -62.1 °E","Temperature: 10.6 °C<br> Anomaly: 0.8 °C<br> Location: -36.38 °N, 160.99 °E","Temperature: 11.8 °C<br> Anomaly: -0.3 °C<br> Location: 31.06 °N, 147.81 °E","Temperature: 3.7 °C<br> Anomaly: 0.1 °C<br> Location: -49.57 °N, 94.48 °E","Temperature: 0.1 °C<br> Anomaly: 2.1 °C<br> Location: -48.6 °N, 92.91 °E","Temperature: 9.2 °C<br> Anomaly: 0.2 °C<br> Location: -33.71 °N, 179.46 °E","Temperature: 7.2 °C<br> Anomaly: 0.9 °C<br> Location: 38.9 °N, 28.94 °E","Temperature: 21.7 °C<br> Anomaly: 1.1 °C<br> Location: -10.29 °N, -103.22 °E","Temperature: -5.9 °C<br> Anomaly: 1.1 °C<br> Location: -61.59 °N, -131.92 °E","Temperature: 2.3 °C<br> Anomaly: 1.2 °C<br> Location: -53.92 °N, 105.22 °E","Temperature: 23.8 °C<br> Anomaly: 0.6 °C<br> Location: -2.41 °N, 173.49 °E","Temperature: -10.5 °C<br> Anomaly: -0.6 °C<br> Location: 67.08 °N, 173.54 °E","Temperature: 5.3 °C<br> Anomaly: 0.4 °C<br> Location: 43.61 °N, -134.84 °E","Temperature: 24.6 °C<br> Anomaly: -0.9 °C<br> Location: 6.01 °N, 42.58 °E","Temperature: -1.8 °C<br> Anomaly: 0.6 °C<br> Location: -59.87 °N, 128.95 °E","Temperature: 22 °C<br> Anomaly: 0 °C<br> Location: -4.69 °N, -129.82 °E","Temperature: 14.6 °C<br> Anomaly: 0.3 °C<br> Location: -22.41 °N, -48.03 °E","Temperature: 10.3 °C<br> Anomaly: -1.1 °C<br> Location: 26.59 °N, -123.43 °E","Temperature: 27 °C<br> Anomaly: 0.1 °C<br> Location: 1.98 °N, -18.78 °E","Temperature: 25.9 °C<br> Anomaly: -1.1 °C<br> Location: 2.09 °N, -5.09 °E","Temperature: 24.9 °C<br> Anomaly: -0.1 °C<br> Location: 6.37 °N, 162.07 °E","Temperature: 23.8 °C<br> Anomaly: 1.3 °C<br> Location: -7.36 °N, 145.71 °E","Temperature: -4.1 °C<br> Anomaly: 0.9 °C<br> Location: -58.26 °N, 158.46 °E","Temperature: -3.5 °C<br> Anomaly: 1.8 °C<br> Location: 60.22 °N, 98.46 °E","Temperature: -11.4 °C<br> Anomaly: 1.2 °C<br> Location: -67.7 °N, -146.8 °E","Temperature: 21.3 °C<br> Anomaly: 0.7 °C<br> Location: -12.03 °N, -174.15 °E","Temperature: 9.1 °C<br> Anomaly: 2 °C<br> Location: -38.22 °N, -59.94 °E","Temperature: -3.5 °C<br> Anomaly: 2.3 °C<br> Location: -56.05 °N, -92.93 °E","Temperature: 20.8 °C<br> Anomaly: -1.6 °C<br> Location: -2.39 °N, 105.15 °E","Temperature: 12.7 °C<br> Anomaly: 1.8 °C<br> Location: 21.02 °N, -1.3 °E","Temperature: -5.4 °C<br> Anomaly: 1.7 °C<br> Location: 58.99 °N, 5 °E","Temperature: 19.1 °C<br> Anomaly: 1.9 °C<br> Location: -19.24 °N, -153.94 °E","Temperature: 1.4 °C<br> Anomaly: -0.9 °C<br> Location: 49.72 °N, -55.75 °E","Temperature: 9.9 °C<br> Anomaly: 4.1 °C<br> Location: -27.87 °N, 92.28 °E","Temperature: 25 °C<br> Anomaly: -3.4 °C<br> Location: -4.81 °N, -41.36 °E","Temperature: -3.1 °C<br> Anomaly: 0.5 °C<br> Location: -50.02 °N, -177.51 °E","Temperature: 4.2 °C<br> Anomaly: 0.7 °C<br> Location: 43.08 °N, 78.64 °E","Temperature: 16.9 °C<br> Anomaly: 0.3 °C<br> Location: 23.21 °N, 20.51 °E","Temperature: -5.1 °C<br> Anomaly: 1.6 °C<br> Location: -61.33 °N, -154.77 °E","Temperature: 24.1 °C<br> Anomaly: 0.7 °C<br> Location: -9.67 °N, -54.79 °E","Temperature: 22.6 °C<br> Anomaly: -0.7 °C<br> Location: -14.44 °N, -31.32 °E","Temperature: 10.2 °C<br> Anomaly: 2.6 °C<br> Location: 27.57 °N, -67.8 °E","Temperature: 12.8 °C<br> Anomaly: 0.1 °C<br> Location: 22.3 °N, 85.52 °E","Temperature: 18 °C<br> Anomaly: 1.4 °C<br> Location: -12.97 °N, -40.2 °E","Temperature: 13.8 °C<br> Anomaly: -0.5 °C<br> Location: -27.03 °N, 42.99 °E","Temperature: 10.8 °C<br> Anomaly: -1.1 °C<br> Location: -34.28 °N, 44.47 °E","Temperature: 16.6 °C<br> Anomaly: -0.4 °C<br> Location: 24.16 °N, 108.87 °E","Temperature: 1.3 °C<br> Anomaly: -1.1 °C<br> Location: 55.22 °N, 55.46 °E","Temperature: 4.2 °C<br> Anomaly: 1.3 °C<br> Location: 48.4 °N, 64.6 °E","Temperature: 20.7 °C<br> Anomaly: -1.8 °C<br> Location: -14.99 °N, -32.13 °E","Temperature: -2.9 °C<br> Anomaly: -1 °C<br> Location: -58.93 °N, 58.77 °E","Temperature: 1.5 °C<br> Anomaly: 0.5 °C<br> Location: 45.98 °N, -170.24 °E","Temperature: -5.1 °C<br> Anomaly: -2.1 °C<br> Location: -59.8 °N, 113.73 °E","Temperature: 0.1 °C<br> Anomaly: -0.3 °C<br> Location: -53.93 °N, -152.98 °E","Temperature: 19.8 °C<br> Anomaly: 0 °C<br> Location: 19.6 °N, 144.35 °E","Temperature: 17.1 °C<br> Anomaly: 2.5 °C<br> Location: -25.12 °N, -154.5 °E","Temperature: 0.6 °C<br> Anomaly: 0.1 °C<br> Location: -43.58 °N, -111.2 °E","Temperature: 17.2 °C<br> Anomaly: -0.3 °C<br> Location: -14.86 °N, 99.69 °E","Temperature: 3.8 °C<br> Anomaly: -0.5 °C<br> Location: 50.68 °N, -106.87 °E","Temperature: 13.5 °C<br> Anomaly: 1.2 °C<br> Location: -21.29 °N, -34.64 °E","Temperature: -11.9 °C<br> Anomaly: 0 °C<br> Location: -69.8 °N, -19.37 °E","Temperature: -1.3 °C<br> Anomaly: -0.3 °C<br> Location: 57.58 °N, 38.27 °E","Temperature: -1.9 °C<br> Anomaly: 0.1 °C<br> Location: 63.24 °N, 27.52 °E","Temperature: 29.5 °C<br> Anomaly: 2.1 °C<br> Location: -1.27 °N, -158.58 °E","Temperature: 24.8 °C<br> Anomaly: 2.9 °C<br> Location: -5.09 °N, -114.24 °E","Temperature: 21 °C<br> Anomaly: -0.5 °C<br> Location: 13.51 °N, -73.4 °E","Temperature: -1 °C<br> Anomaly: 0.5 °C<br> Location: 56.85 °N, -44.61 °E","Temperature: 3.3 °C<br> Anomaly: 0 °C<br> Location: -45.78 °N, 76.71 °E","Temperature: -0.5 °C<br> Anomaly: 3.3 °C<br> Location: 40.02 °N, -134.95 °E","Temperature: 9.1 °C<br> Anomaly: 1.4 °C<br> Location: -37.39 °N, -25.48 °E","Temperature: 20.1 °C<br> Anomaly: -2.2 °C<br> Location: 10.79 °N, -169.06 °E","Temperature: 4.4 °C<br> Anomaly: -0.2 °C<br> Location: 47.72 °N, -16.5 °E","Temperature: -0.7 °C<br> Anomaly: -2.9 °C<br> Location: -51.49 °N, 105.95 °E","Temperature: -4.7 °C<br> Anomaly: 0.4 °C<br> Location: 55.42 °N, -10.34 °E","Temperature: 25.3 °C<br> Anomaly: 1.6 °C<br> Location: -6.98 °N, -94.9 °E","Temperature: -1 °C<br> Anomaly: -0.8 °C<br> Location: 55.18 °N, 139.33 °E","Temperature: 15.7 °C<br> Anomaly: -1.4 °C<br> Location: -35.2 °N, -134.66 °E","Temperature: -1 °C<br> Anomaly: 2.4 °C<br> Location: -58.28 °N, -83.05 °E","Temperature: -3.2 °C<br> Anomaly: -0.9 °C<br> Location: -63.19 °N, 137.68 °E","Temperature: -5.8 °C<br> Anomaly: 1.9 °C<br> Location: 67.17 °N, 90.19 °E","Temperature: 24 °C<br> Anomaly: 0.8 °C<br> Location: -2.22 °N, -144.83 °E","Temperature: 1.4 °C<br> Anomaly: 1.8 °C<br> Location: 48.36 °N, 113.6 °E","Temperature: 22.5 °C<br> Anomaly: 2 °C<br> Location: -11.72 °N, 129.02 °E","Temperature: 27.6 °C<br> Anomaly: 2.2 °C<br> Location: -1.49 °N, -137.82 °E","Temperature: 5.3 °C<br> Anomaly: 2.4 °C<br> Location: -44.34 °N, -130.54 °E","Temperature: 6.2 °C<br> Anomaly: 0.9 °C<br> Location: 36.28 °N, 17.37 °E","Temperature: 16 °C<br> Anomaly: 0.8 °C<br> Location: -27.28 °N, -158.75 °E","Temperature: 0.1 °C<br> Anomaly: -0.9 °C<br> Location: -46.81 °N, -1.61 °E","Temperature: -7.3 °C<br> Anomaly: -1.3 °C<br> Location: -65.41 °N, -177.33 °E"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#00008B , #0000AB 5.72792362768496%, #0000F1 17.6610978520286%, #8478F5 29.5942720763723%, #B8DBDA 41.527446300716%, #EDF173 53.4606205250597%, #FFE700 65.3937947494033%, #FFB100 77.326968973747%, #FF7300 89.2601431980907%, #FF0000 "],"labels":["-10","-5","0","5","10","15","20","25"],"na_color":null,"na_label":"NA","opacity":1,"position":"bottomright","type":"numeric","title":"SST (°C)","extra":{"p_1":0.05727923627684965,"p_n":0.8926014319809069},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[-69.96655447874218,69.5173750910908],"lng":[-179.8541843891144,179.4567003753036]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="temperature-anomalies" class="level3">
+<h3 class="anchored" data-anchor-id="temperature-anomalies">Temperature Anomalies</h3>
+<p>Temperature anomalies show how current temperatures compare to long-term averages. Positive anomalies (red) indicate warmer than average conditions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create anomaly plot</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(sst_data, <span class="at">type =</span> <span class="st">"scatter"</span>, <span class="at">mode =</span> <span class="st">"markers"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_trace</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="sc">~</span>longitude,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="sc">~</span>latitude,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="sc">~</span>anomaly,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"white"</span>, <span class="st">"darkred"</span>),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">colorscale =</span> <span class="fu">list</span>(</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="dv">0</span>, <span class="st">"darkblue"</span>),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="st">"white"</span>),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">"darkred"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="sc">~</span><span class="fu">paste</span>(<span class="st">"Anomaly:"</span>, anomaly, <span class="st">"°C"</span>),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">hoverinfo =</span> <span class="st">"text"</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">marker =</span> <span class="fu">list</span>(</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="dv">8</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">colorbar =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Temperature&lt;br&gt;Anomaly (°C)"</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Sea Surface Temperature Anomalies"</span>,</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Longitude"</span>),</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Latitude"</span>),</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">geo =</span> <span class="fu">list</span>(</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">showland =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">landcolor =</span> <span class="fu">toRGB</span>(<span class="st">"gray90"</span>),</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">coastlinecolor =</span> <span class="fu">toRGB</span>(<span class="st">"gray50"</span>)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-659f34fb475914c879e9" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-659f34fb475914c879e9">{"x":{"visdat":{"e48c2f28f3bd":["function () ","plotlyVisDat"]},"cur_data":"e48c2f28f3bd","attrs":{"e48c2f28f3bd":{"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"e48c2f28f3bd.1":{"mode":"markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":{},"y":{},"color":{},"colors":["darkblue","white","darkred"],"colorscale":[["0","darkblue"],["0.5","white"],["1","darkred"]],"text":{},"hoverinfo":"text","marker":{"size":8,"colorbar":{"title":"Temperature<br>Anomaly (°C)"}},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Sea Surface Temperature Anomalies","xaxis":{"domain":[0,1],"automargin":true,"title":"Longitude"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Latitude"},"geo":{"showland":true,"landcolor":"rgba(229,229,229,1)","coastlinecolor":"rgba(127,127,127,1)"},"hovermode":"closest","showlegend":true,"legend":{"yanchor":"top","y":0.5}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"mode":"markers","type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"markers","type":"scatter","x":[-130.85812504403293,-116.23089188709855,7.041762163862586,112.00348262675107,-138.46967549063265,141.6318431776017,27.127037197351456,-127.23393805325031,145.01008668914437,-88.919111005961895,-125.78486390411854,96.67697754688561,-97.155600814148784,-70.056241918355227,6.6850603837519884,-59.544119965285063,-124.40341142937541,-84.106955286115408,-53.728337958455086,28.245016364380717,111.09664628282189,155.97731337882578,120.19080150872469,-134.27900117821991,53.803422544151545,68.52659672498703,-168.46386319957674,151.37609395198524,-7.7512006647884846,-84.052591770887375,128.34385785274208,-97.507268004119396,105.10087438859046,52.838949719443917,-27.239511357620358,-145.77542351558805,-178.75162658281624,11.208120826631784,8.7505617365241051,-103.2532003428787,78.09554879553616,166.08368743211031,6.5759758651256561,-117.16991197317839,22.514448557049036,93.332941085100174,60.109681505709887,-99.045747639611363,-55.49408552236855,-64.86056643538177,145.76342314481735,-108.28858315944672,65.146685969084501,-130.49360688775778,-141.4819127228111,-146.57061751931906,149.92162386886775,-80.258243093267083,138.88579582795501,98.231273833662271,106.21844502165914,-105.95750648528337,-162.65040373429656,-166.02626477368176,-77.553313253447413,-54.428460309281945,85.483197150751948,-89.40111075527966,6.2773211114108562,93.400100162252784,48.990430058911443,-106.58135326579213,177.49630155041814,-179.85418438911438,-105.63479097560048,48.250112626701593,-173.77494290471077,-170.37523032166064,38.822614224627614,25.394886983558536,-91.492794742807746,151.02903110906482,61.997832600027323,52.36215814948082,-105.01723632216454,-6.9776151236146688,175.14668997377157,177.52314518205822,-17.721346830949187,77.345563005656004,-66.037819487974048,120.12752182781696,-23.768790643662214,178.55721294879913,110.09203679859638,-4.9528197292238474,13.957920335233212,-57.225632993504405,-161.27438239753246,-14.859679257497191,-0.66362746059894562,-78.204878903925419,99.520229659974575,-70.613005729392171,5.5984255112707615,-7.9377216473221779,96.786800846457481,-120.98561195656657,-20.961306039243937,8.4267611056566238,-8.3090920932590961,8.8715835940092802,66.682168990373611,-53.354872036725283,122.26726270280778,151.88892896287143,-141.72853630967438,-105.64958947710693,-4.8085517529398203,-63.424071427434683,-10.182986995205283,30.991860749199986,-99.37799546867609,84.25069922581315,-125.82572434097528,71.119212079793215,-84.921154249459505,-26.472627986222506,79.680086402222514,-9.1901854332536459,-58.108694069087505,-93.386830016970634,-102.14651595801115,-92.859077146276832,23.365682289004326,76.524512004107237,-141.08522473834455,6.8673144746571779,126.78852405399084,77.267499156296253,-66.966593451797962,-138.30582872964442,27.001464301720262,119.2938919365406,7.3223128449171782,69.843970304355025,-0.034563783556222916,-52.502256464213133,167.32949724420905,152.01405149884522,-106.34662561118603,163.76505578868091,134.63741965591908,71.044139312580228,4.5337625406682491,-6.9060544576495886,-107.35166768543422,-143.91743243671954,-9.8680051323026419,-67.615326689556241,98.06374984793365,144.38664047978818,-59.317457713186741,116.61992870271206,-100.78817046247423,95.804545814171433,21.85482638888061,-27.556006405502558,121.88512377440929,-76.564588481560349,-10.5405477527529,101.10403200611472,-150.22193857468665,-37.973681911826134,-145.56189335882664,-132.00003504753113,-100.39457590319216,-81.316965222358704,-72.338670110329986,-45.076761888340116,-3.0771026853471994,136.29694445058703,89.542738348245621,163.86696833185852,-60.508723296225071,116.69860669411719,-132.24046197719872,-135.10913263075054,82.119496241211891,17.43149827234447,39.066268606111407,-135.73918780311942,135.51649161614478,123.24557363055646,-163.35438712500036,74.526598295196891,12.524779848754406,160.36460425704718,148.33079245872796,-15.847734063863754,95.587372295558453,1.8160486221313477,-107.08254614844918,78.16994003020227,96.507707191631198,74.295736290514469,-111.01531097665429,-72.75607162155211,-62.952744103968143,25.875444542616606,137.69694917835295,135.75721551664174,-41.093086637556553,85.597975747659802,106.67497107759118,80.698125874623656,-41.24210799112916,-72.665178263559937,-159.3103851377964,62.529467130079865,-108.72290630824864,45.038843667134643,-130.2541774045676,-45.691732568666339,-66.927660182118416,113.46656394191086,-47.405485091730952,-21.728114560246468,-21.939110113307834,36.658182861283422,-34.593502935022116,164.99458115547895,169.4764669239521,149.23008835874498,-150.16546499915421,-8.3305400423705578,-57.911304272711277,62.436893032863736,49.134940272197127,129.34012122452259,161.38239294290543,26.628143722191453,12.696859985589981,159.00999943725765,141.2478547822684,-32.289718072861433,-161.98893092572689,100.17694607377052,153.34610028192401,-44.108205148950219,-91.828441936522722,-148.45107293687761,-39.20094114728272,-114.27788690663874,-131.89507752656937,-87.313351174816489,19.168937215581536,-126.69506046921015,166.64285668171942,160.02823638729751,177.22288588061929,74.235805431380868,-129.3197919242084,-176.76625530235469,67.138393884524703,65.238549029454589,150.30391769483685,-32.968362886458635,-27.921819565817714,13.435229463502765,-31.087273294106126,-144.84792293049395,-43.103649476543069,-108.71979209594429,81.008721487596631,-176.03674524463713,150.7887936104089,144.08234428614378,91.495391204953194,162.69185341894627,45.211353208869696,56.142187602818012,-42.704777671024203,-156.38197129592299,68.717106152325869,-134.1058077570051,-75.125333312898874,47.599520701915026,-39.591360809281468,-154.64676244184375,130.88625513017178,-41.331525463610888,61.473648156970739,-172.36933118663728,34.282353864982724,-80.553181981667876,-36.314314194023609,-127.50644537620246,116.6694222483784,-129.45244224742055,147.25710544735193,143.97293211892247,-110.75426858849823,11.624494967982173,7.9649065900593996,-122.27913684211671,7.0441263634711504,-99.178736675530672,-78.655683472752571,1.3275287579745054,-122.7741664275527,151.42706614919007,-0.34939452074468136,41.523867761716247,87.815115703269839,42.054555891081691,154.85077654011548,-151.06375222094357,-169.87637121230364,14.950248738750815,-93.167075207456946,52.141507901251316,-44.014752293005586,-163.13267279416323,-162.66942026093602,166.62336925975978,-98.47196982242167,-175.89831492863595,-101.34877025149763,-159.86247528344393,-95.410027150064707,-35.029342789202929,-174.8504030238837,-49.765259390696883,30.41990633122623,38.08574577793479,-85.061299251392484,63.053523749113083,156.89023775048554,-178.70709369890392,103.30962295643985,110.49593288451433,-153.70618156157434,24.119749311357737,14.108704570680857,-130.43694413267076,-80.520246382802725,-53.336337553337216,112.60988507419825,-118.24511468410492,7.6183533668518066,95.264223273843527,-76.047966945916414,-22.759806225076318,61.002272805199027,-166.70743840746582,21.832685675472021,155.65796538256109,-23.535902900621295,157.04374208115041,172.18894609250128,63.634423920884728,-72.623197669163346,-105.02877795137465,-65.197285590693355,127.57498864084482,-158.01843353547156,-114.46340197697282,-5.8188236318528652,-58.217913284897804,112.81057130545378,133.35569280199707,-173.1019396148622,116.90934559330344,-35.543341711163521,61.940983766689897,-137.27800237946212,-8.4872377943247557,153.1223869509995,26.942163007333875,148.59056867659092,91.908692708238959,47.159972693771124,105.99143416620791,152.47672643512487,-120.79122849740088,-110.56178002618253,-144.84864042140543,118.47938233986497,110.11102482676506,-79.462804924696684,-18.349351538345218,45.316334618255496,-46.468290165066719,-42.36517857760191,149.2131155077368,-39.492808319628239,-154.69424659386277,74.702379880473018,69.478853009641171,-145.38697552867234,-166.71483736485243,-35.661556469276547,-175.84659892134368,24.440765725448728,160.18197331577539,-56.41121618449688,-91.980619244277477,15.003711869940162,-137.62642392888665,-45.032956134527922,-62.095997929573059,160.9940704330802,147.80696843750775,94.480097573250532,92.906969832256436,179.45670037530363,28.944505713880062,-103.21769468486309,-131.92131657153368,105.22163380868733,173.48610143177211,173.53756531141698,-134.84034896828234,42.582651833072305,128.94724952057004,-129.82048708945513,-48.031012276187539,-123.43311821110547,-18.77765966579318,-5.0851514562964439,162.07309453748167,145.71139683946967,158.45929264090955,98.457565186545253,-146.80404514074326,-174.15236533619463,-59.936548685654998,-92.932886760681868,105.14545856975019,-1.3006664346903563,4.9964725133031607,-153.93532368354499,-55.749924089759588,92.276978865265846,-41.357143577188253,-177.50842563807964,78.638122882694006,20.50895961932838,-154.77025444619358,-54.78604881092906,-31.318000350147486,-67.80412838794291,85.524468552321196,-40.197497801855206,42.992740133777261,44.474856415763497,108.86843919754028,55.464457422494888,64.603122482076287,-32.128263590857387,58.771131299436092,-170.23760005831718,113.73442727141082,-152.98459952697158,144.3475052062422,-154.50219548307359,-111.19558199308813,99.694529324769974,-106.87193867750466,-34.644776210188866,-19.374973867088556,38.266368750482798,27.520467387512326,-158.57756406068802,-114.24056941643357,-73.396201757714152,-44.611528962850571,76.714539052918553,-134.94650904089212,-25.475963372737169,-169.06426613219082,-16.499279011040926,105.95092576928437,-10.340461330488324,-94.899740153923631,139.33260600082576,-134.65699735097587,-83.047896372154355,137.68493296578526,90.187135878950357,-144.830541042611,113.6041257251054,129.02149038389325,-137.82337208278477,-130.53702154196799,17.372519094496965,-158.74932593666017,-1.611615177243948,-177.32969169504941],"y":[58.072846089489758,61.190557861700654,-29.9404651299119,46.262667649425566,19.844372645020485,2.6734328782185912,33.122364049777389,-51.146676386706531,21.978920656256378,28.709069765172899,-5.9161513252183795,30.675715231336653,60.854114601388574,-34.239964592270553,-5.2790048439055681,61.602033185772598,66.951699974015355,-53.551769368350506,-3.5004085814580321,8.4465844742953777,56.564394221641123,-50.580576518550515,68.444842048920691,62.533552558161318,-58.458741866052151,1.9896498089656234,-15.371514605358243,56.80333832744509,-7.4242520658299327,47.040596399456263,33.263386487960815,43.547719777561724,-15.664840405806899,25.923762116581202,-69.447232568636537,46.608251235447824,-68.973219436593354,-40.927743804641068,56.924197091720998,15.649010082706809,-16.861706324853003,-8.9919781032949686,-64.759655399248004,66.295587928034365,-9.5548251550644636,64.060723530128598,54.285686770454049,19.597027725540102,65.935325450263917,16.637349026277661,-23.320190422236919,-21.455245250836015,-14.212042400613427,39.856988596729934,-64.548891242593527,34.831354063935578,24.818756226450205,-46.022993745282292,-33.44768506474793,2.0178108522668481,24.585018432699144,67.594407708384097,36.336197457276285,9.308379371650517,48.95656059961766,-43.47364904358983,-32.019873941317201,45.942187933251262,27.048674854449928,-36.323736449703574,-63.981568557210267,-50.332926823757589,-39.706041892059147,-2.8842010116204619,-42.362552080303431,30.709817274473608,-68.896136577241123,-17.431404953822494,2.0170791633427143,-69.780122409574687,11.424560351297259,-47.893270854838192,-19.73603717982769,20.388462976552546,38.615270769223571,8.9105578185990453,-37.281524194404483,-57.40272771101445,-58.014310910366476,-27.269428274594247,23.439712054096162,-69.966554478742182,-40.800206027925014,60.624777828343213,59.590264805592597,32.773202140815556,-23.369922321289778,2.1088661765679717,34.156450484879315,16.682293605990708,17.674348233267665,-39.597922246903181,-39.680576464161277,-15.547695988789201,61.943796877749264,64.76512192748487,33.579739090055227,32.654426801018417,5.0065805995836854,-69.681784748099744,15.251243356615305,47.152218320406973,35.213158777914941,-6.6175798419862986,5.0105991354212165,5.2327373437583447,-69.806681899353862,-20.206766463816166,15.698632621206343,46.051898277364671,-20.058920090086758,-12.511082384735346,10.286625851877034,12.55496249999851,30.752020929940045,-14.70377366989851,58.688550079241395,64.759841100312769,-37.306706425733864,31.429663999006152,56.508833519183099,14.486371865496039,18.41102184727788,61.234018951654434,49.067585095763206,11.174925868399441,44.996549347415566,-54.079394727014005,37.031086212955415,17.305884007364511,-49.217475061304867,-58.76297467853874,-5.0302628148347139,39.111542603932321,32.69391433801502,44.412262216210365,-46.177252624183893,62.260845573619008,-28.892662208527327,-49.129912657663226,30.713002779521048,-24.627966652624309,39.033329794183373,-14.778259745799005,25.003001508302987,38.615505984053016,-43.698333837091923,-65.92798535246402,-51.000068411231041,25.222984938882291,60.875213528051972,7.0691718114539981,14.247272959910333,-42.420771662145853,4.9331254791468382,-44.862196501344442,-6.7358907824382186,-25.612530750222504,-53.735546143725514,-43.945698053576052,32.162213530391455,-12.337910030037165,-12.033044556155801,-2.7565819397568703,-10.150774815119803,-50.891349581070244,45.455116890370846,12.922593955881894,41.215576869435608,37.664539599791169,58.527898415923119,50.76816878747195,-25.623466707766056,-33.703519362024963,33.917303271591663,34.630556353367865,58.506564763374627,41.046769288368523,-51.333853444084525,-29.715034696273506,-42.745339865796268,39.775313572026789,-51.957897357642651,-51.927500306628644,-59.884564420208335,-62.561872312799096,4.4624210987240076,-54.276846167631447,34.046280761249363,32.38416681997478,53.916476187296212,2.3955477774143219,49.270337899215519,-8.0085224425420165,-47.896785940974951,-8.0745505634695292,65.482713412493467,-2.1576898777857423,-34.65581847820431,-33.643402773886919,5.8822317235171795,20.982617265544832,-22.901321477256715,-61.467035519890487,-6.8164809700101614,47.425704682245851,10.44922680594027,-20.530947162769735,6.639650953002274,54.980603135190904,-1.4013201184570789,-45.971504156477749,6.0243391618132591,64.60547742433846,-26.084264912642539,44.872036734595895,-27.012383937835693,-44.036498637869954,-63.231451255269349,-35.605619382113218,-20.845030900090933,-47.73686655331403,-27.426280449144542,-67.543234531767666,69.517375091090798,42.615063772536814,-57.87871575448662,51.790657755918801,7.6420208718627691,-11.007020943798125,-60.530845327302814,8.6013139132410288,-60.098934802226722,-40.405128560960293,6.9468578835949302,-2.5225972291082144,-47.67422036267817,-49.058940690010786,-0.10179674718528986,61.679082927294075,-23.207614277489483,-43.619193858467042,-32.239735038019717,4.3041709344834089,-66.996968006715178,41.826443048194051,-54.553085970692337,5.5717600136995316,9.9727456457912922,16.653216574341059,30.079517089761794,-52.737918985076249,-26.453053373843431,62.40348276682198,0.0035129347816109657,-51.067730127833784,51.696094875223935,-41.29305430687964,59.506424735300243,54.145503751933575,-50.91858446598053,39.948921902105212,-6.5375220170244575,-50.996061284095049,53.930945158936083,-22.860104381106794,-25.301623879931867,-13.47040593624115,-2.929177014157176,-18.493745168671012,-4.8033205326646566,-63.015098595060408,-43.770060376264155,67.572317919693887,-24.041630257852376,-46.060505327768624,-1.6443147696554661,-67.383762365207076,-22.472088281065226,-65.847127418965101,51.41201282851398,32.439063959755003,-25.86348844692111,-15.896438350901008,-23.457561326213181,-57.431084038689733,35.987784350290895,14.415589608252048,-49.644003841094673,-65.447552315890789,-2.2724601766094565,-7.7602660981938243,-61.546017406508327,-24.149156911298633,52.980066621676087,60.284684076905251,-15.095016020350158,-47.761451522819698,-25.207335851155221,-27.024813164025545,-54.906424377113581,67.106802477501333,-0.433520064689219,-56.969545930624008,-40.351687856018543,60.27010447345674,-28.441503052599728,21.450554840266705,56.149866906926036,68.711411054246128,-9.7533490136265755,-14.871230884455144,-50.132754635997117,-30.827062511816621,9.0751111600548029,60.919530759565532,-19.823979688808322,47.881005327217281,31.137290010228753,35.103038502857089,59.358383305370808,-69.667065045796335,-47.539811907336116,-14.101786818355322,24.544740826822817,-2.747917715460062,4.7360293054953218,-25.626977980136871,44.06606262549758,-29.089267025701702,-12.721507214009762,-57.271436927840114,41.803529323078692,-19.630065043456852,-64.331739256158471,-64.247912419959903,63.620793372392654,-17.732225717045367,42.898753457702696,57.408261257223785,-8.3893301989883184,10.687110424041748,-59.686508676968515,-46.952164783142507,33.584708622656763,-3.4004582185298204,25.972933457233012,63.212091992609203,-0.35497174132615328,-4.1299122758209705,8.4268730087205768,21.351416874676943,-30.859710173681378,67.187062529847026,20.140975122340024,11.560981008224189,16.221943632699549,59.519641227088869,-15.396794658154249,-29.691244098357856,-57.296964940614998,-24.91525343619287,36.157815759070218,-55.38218985311687,29.438899364322424,65.306833707727492,-41.791228330694139,-54.81158837210387,-62.24369497038424,46.161292111501098,11.36768592055887,-4.1870674584060907,-18.898023199290037,-30.78255217988044,13.960219696164131,44.599745809100568,-56.303480737842619,64.916533650830388,-46.376897925511003,-57.948323176242411,50.569497398100793,3.4706842852756381,21.953522539697587,-37.867287807166576,30.971644399687648,-1.2949447007849813,65.135782947763801,56.971947266720235,7.1750738983973861,-59.416126068681479,-66.821998422965407,1.8535338947549462,18.301661228761077,-11.371972593478858,53.097232324071229,-54.881809777580202,67.239017495885491,-32.904671616852283,-58.201146749779582,-15.972995399497449,-52.514584199525416,11.417591036297381,-36.379054863937199,31.064304406754673,-49.569983305409551,-48.602572157979012,-33.708826168440282,38.904076409526169,-10.294718043878675,-61.593232937157154,-53.923444817773998,-2.4140343721956015,67.084301747381687,43.612350169569254,6.0077943932265043,-59.868607819080353,-4.6920655481517315,-22.413209569640458,26.588604720309377,1.9820320885628462,2.0892221853137016,6.3720095623284578,-7.3559737903997302,-58.256122348830104,60.218716845847666,-67.697253925725818,-12.027064082212746,-38.223346928134561,-56.050317771732807,-2.3906574863940477,21.018014000728726,58.986168974079192,-19.235747004859149,49.718898609280586,-27.873138785362244,-4.8072604788467288,-50.017706910148263,43.080659108236432,23.213068451732397,-61.328262812457979,-9.6704204333946109,-14.440288599580526,27.573945196345448,22.304751086048782,-12.970900647342205,-27.031169147230685,-34.284971691668034,24.159541469998658,55.215080701746047,48.403061870485544,-14.99374003149569,-58.932924401015043,45.97922797780484,-59.795144516974688,-53.933225139044225,19.597797812893987,-25.1207319740206,-43.575066337361932,-14.863850236870348,50.683642239309847,-21.292403084225953,-69.799254215322435,57.579823518171906,63.241282850503922,-1.2713423790410161,-5.0887598562985659,13.506086552515626,56.847134018316865,-45.779834939166903,40.023350738920271,-37.389186155050993,10.786749264225364,47.722784662619233,-51.49147124029696,55.424766540527344,-6.9807722372934222,55.17995529808104,-35.203674724325538,-58.28265889082104,-63.19024954456836,67.174221384339035,-2.2165162395685911,48.355024750344455,-11.718895365484059,-1.4920440036803484,-44.339705547317863,36.282605505548418,-27.27993764448911,-46.805045404471457,-65.406719986349344],"colorscale":[["0","darkblue"],["0.5","white"],["1","darkred"]],"text":["Anomaly: 4 °C","Anomaly: 1.3 °C","Anomaly: 2 °C","Anomaly: 1.1 °C","Anomaly: -1 °C","Anomaly: -0.4 °C","Anomaly: 0.7 °C","Anomaly: -3.9 °C","Anomaly: -0.8 °C","Anomaly: 1.7 °C","Anomaly: 0.1 °C","Anomaly: 0.1 °C","Anomaly: 1.8 °C","Anomaly: -0.3 °C","Anomaly: 1.4 °C","Anomaly: -1.6 °C","Anomaly: -1.3 °C","Anomaly: -2 °C","Anomaly: 0.6 °C","Anomaly: 0.2 °C","Anomaly: 2.7 °C","Anomaly: 0.4 °C","Anomaly: 2.5 °C","Anomaly: 3.4 °C","Anomaly: -0.2 °C","Anomaly: 1.1 °C","Anomaly: -0.8 °C","Anomaly: 1.6 °C","Anomaly: -1.1 °C","Anomaly: -1 °C","Anomaly: 0.9 °C","Anomaly: 0.6 °C","Anomaly: 0.9 °C","Anomaly: 0.6 °C","Anomaly: -0.3 °C","Anomaly: 0.3 °C","Anomaly: 2.9 °C","Anomaly: 0.5 °C","Anomaly: -1.5 °C","Anomaly: -0.8 °C","Anomaly: -1.2 °C","Anomaly: -0.9 °C","Anomaly: -1.4 °C","Anomaly: -3.4 °C","Anomaly: 1.5 °C","Anomaly: 1.5 °C","Anomaly: 0.1 °C","Anomaly: -0.6 °C","Anomaly: -0.7 °C","Anomaly: 1.1 °C","Anomaly: 0.8 °C","Anomaly: 1.1 °C","Anomaly: 0.5 °C","Anomaly: 1.4 °C","Anomaly: 1.1 °C","Anomaly: 1.3 °C","Anomaly: 1.2 °C","Anomaly: 3 °C","Anomaly: -1.1 °C","Anomaly: 2.8 °C","Anomaly: 0 °C","Anomaly: 0.4 °C","Anomaly: 0.6 °C","Anomaly: -0.2 °C","Anomaly: -3.3 °C","Anomaly: 0 °C","Anomaly: 0.6 °C","Anomaly: -2.1 °C","Anomaly: 1.3 °C","Anomaly: -0.4 °C","Anomaly: 2.7 °C","Anomaly: 0.9 °C","Anomaly: -0.7 °C","Anomaly: 0.8 °C","Anomaly: 0.9 °C","Anomaly: 1.9 °C","Anomaly: 0.3 °C","Anomaly: -2.6 °C","Anomaly: -1.4 °C","Anomaly: -0.8 °C","Anomaly: 1.1 °C","Anomaly: 0.1 °C","Anomaly: -0.4 °C","Anomaly: -0.8 °C","Anomaly: 0.7 °C","Anomaly: -0.8 °C","Anomaly: -0.1 °C","Anomaly: -0.9 °C","Anomaly: -1.6 °C","Anomaly: 1.9 °C","Anomaly: -1.5 °C","Anomaly: 0.6 °C","Anomaly: -0.4 °C","Anomaly: -1.1 °C","Anomaly: 0.9 °C","Anomaly: 1.1 °C","Anomaly: 2.4 °C","Anomaly: 1 °C","Anomaly: 0.3 °C","Anomaly: 4.4 °C","Anomaly: -0.5 °C","Anomaly: -1 °C","Anomaly: -0.3 °C","Anomaly: 0.3 °C","Anomaly: 1.4 °C","Anomaly: 1.1 °C","Anomaly: 0.3 °C","Anomaly: -0.8 °C","Anomaly: 2.2 °C","Anomaly: 1.9 °C","Anomaly: -0.6 °C","Anomaly: 1.5 °C","Anomaly: 1.2 °C","Anomaly: 2.1 °C","Anomaly: 0.7 °C","Anomaly: -1.2 °C","Anomaly: 1.7 °C","Anomaly: -0.6 °C","Anomaly: 1.3 °C","Anomaly: 3 °C","Anomaly: -1.6 °C","Anomaly: 2.8 °C","Anomaly: 2.5 °C","Anomaly: -0.3 °C","Anomaly: 0.1 °C","Anomaly: -0.5 °C","Anomaly: -0.4 °C","Anomaly: 1.4 °C","Anomaly: -0.8 °C","Anomaly: 0.2 °C","Anomaly: 0.3 °C","Anomaly: 0.4 °C","Anomaly: 0.8 °C","Anomaly: 2.9 °C","Anomaly: -0.2 °C","Anomaly: -0.7 °C","Anomaly: 1.7 °C","Anomaly: 1.1 °C","Anomaly: 0.9 °C","Anomaly: 1.4 °C","Anomaly: -1.6 °C","Anomaly: 2.1 °C","Anomaly: 1.2 °C","Anomaly: 1.9 °C","Anomaly: -0.4 °C","Anomaly: -2.3 °C","Anomaly: -0.2 °C","Anomaly: -0.9 °C","Anomaly: 3.8 °C","Anomaly: -0.1 °C","Anomaly: 0.2 °C","Anomaly: 2.1 °C","Anomaly: 1.4 °C","Anomaly: 1.5 °C","Anomaly: 4.5 °C","Anomaly: 0.7 °C","Anomaly: 3.4 °C","Anomaly: 0.9 °C","Anomaly: -1.7 °C","Anomaly: -2.8 °C","Anomaly: 1.5 °C","Anomaly: -1 °C","Anomaly: 0.6 °C","Anomaly: 3.2 °C","Anomaly: 1 °C","Anomaly: 0.1 °C","Anomaly: -2.4 °C","Anomaly: -0.7 °C","Anomaly: -0.4 °C","Anomaly: 1.5 °C","Anomaly: 1.2 °C","Anomaly: 0.5 °C","Anomaly: 0.8 °C","Anomaly: 0.1 °C","Anomaly: 0.5 °C","Anomaly: 0.9 °C","Anomaly: 1.2 °C","Anomaly: 3.2 °C","Anomaly: -1.2 °C","Anomaly: 2.7 °C","Anomaly: 1.5 °C","Anomaly: -1.8 °C","Anomaly: 0.1 °C","Anomaly: -0.4 °C","Anomaly: -0.9 °C","Anomaly: -1.8 °C","Anomaly: -0.2 °C","Anomaly: -0.2 °C","Anomaly: 0 °C","Anomaly: -2.6 °C","Anomaly: 1.2 °C","Anomaly: 1.6 °C","Anomaly: 1.7 °C","Anomaly: 1.7 °C","Anomaly: 0.8 °C","Anomaly: 2.7 °C","Anomaly: -0.8 °C","Anomaly: -1.3 °C","Anomaly: 1 °C","Anomaly: 1.2 °C","Anomaly: -0.6 °C","Anomaly: 0.6 °C","Anomaly: 1 °C","Anomaly: 1.1 °C","Anomaly: 1.8 °C","Anomaly: 1.9 °C","Anomaly: -3.1 °C","Anomaly: 3.1 °C","Anomaly: 1.2 °C","Anomaly: -0.4 °C","Anomaly: -1.2 °C","Anomaly: 1.9 °C","Anomaly: 1 °C","Anomaly: 2.1 °C","Anomaly: 0.4 °C","Anomaly: 0.1 °C","Anomaly: 3.9 °C","Anomaly: -2.6 °C","Anomaly: 1.1 °C","Anomaly: 1.1 °C","Anomaly: 1.2 °C","Anomaly: 1.3 °C","Anomaly: 0.1 °C","Anomaly: 2.2 °C","Anomaly: -3.2 °C","Anomaly: -0.7 °C","Anomaly: 0.3 °C","Anomaly: 0.7 °C","Anomaly: 1.1 °C","Anomaly: 1.5 °C","Anomaly: -1.8 °C","Anomaly: 0.5 °C","Anomaly: 1.3 °C","Anomaly: 2.5 °C","Anomaly: 0.3 °C","Anomaly: 2.9 °C","Anomaly: 0.1 °C","Anomaly: 0.4 °C","Anomaly: 0.7 °C","Anomaly: -0.3 °C","Anomaly: 1.6 °C","Anomaly: -1.5 °C","Anomaly: 0.5 °C","Anomaly: -0.3 °C","Anomaly: -0.3 °C","Anomaly: 2.2 °C","Anomaly: 2.1 °C","Anomaly: 2.9 °C","Anomaly: 0.1 °C","Anomaly: 0.5 °C","Anomaly: -1.8 °C","Anomaly: -0.1 °C","Anomaly: 3.1 °C","Anomaly: -0.1 °C","Anomaly: -1.2 °C","Anomaly: 0.6 °C","Anomaly: 2.4 °C","Anomaly: -1.9 °C","Anomaly: 0.1 °C","Anomaly: 1.2 °C","Anomaly: 3.5 °C","Anomaly: -0.4 °C","Anomaly: 2.8 °C","Anomaly: -0.1 °C","Anomaly: -1 °C","Anomaly: -1.2 °C","Anomaly: 0.2 °C","Anomaly: 0.5 °C","Anomaly: 0 °C","Anomaly: 2.1 °C","Anomaly: 0.8 °C","Anomaly: 0.3 °C","Anomaly: -0.4 °C","Anomaly: -1.4 °C","Anomaly: -2.4 °C","Anomaly: 0.8 °C","Anomaly: 0.5 °C","Anomaly: 2.5 °C","Anomaly: 0.9 °C","Anomaly: 1.7 °C","Anomaly: 0.6 °C","Anomaly: -0.7 °C","Anomaly: 0.9 °C","Anomaly: 1 °C","Anomaly: -0.7 °C","Anomaly: 0.5 °C","Anomaly: 3.5 °C","Anomaly: -1.2 °C","Anomaly: 2.7 °C","Anomaly: 0.2 °C","Anomaly: 2.7 °C","Anomaly: -0.8 °C","Anomaly: 0.4 °C","Anomaly: 1 °C","Anomaly: 0.3 °C","Anomaly: 1.5 °C","Anomaly: 0.2 °C","Anomaly: 2.3 °C","Anomaly: 0.8 °C","Anomaly: 1.5 °C","Anomaly: -1.3 °C","Anomaly: -0.5 °C","Anomaly: 2.1 °C","Anomaly: 1.3 °C","Anomaly: 0.3 °C","Anomaly: 0.3 °C","Anomaly: 1.6 °C","Anomaly: 0.2 °C","Anomaly: 0.6 °C","Anomaly: -2 °C","Anomaly: 3.2 °C","Anomaly: 1.6 °C","Anomaly: 1.7 °C","Anomaly: -2.4 °C","Anomaly: 0.5 °C","Anomaly: -0.1 °C","Anomaly: -1.6 °C","Anomaly: 1.6 °C","Anomaly: 2.4 °C","Anomaly: -0.3 °C","Anomaly: 0.2 °C","Anomaly: 3.1 °C","Anomaly: -2 °C","Anomaly: 1.6 °C","Anomaly: 0 °C","Anomaly: 0.3 °C","Anomaly: -0.4 °C","Anomaly: 2.1 °C","Anomaly: -1.2 °C","Anomaly: 1.9 °C","Anomaly: 2.6 °C","Anomaly: -2 °C","Anomaly: -1.2 °C","Anomaly: 1.4 °C","Anomaly: -0.9 °C","Anomaly: -0.5 °C","Anomaly: -0.2 °C","Anomaly: 0 °C","Anomaly: 1.6 °C","Anomaly: -0.4 °C","Anomaly: 0.6 °C","Anomaly: 1.6 °C","Anomaly: -1.8 °C","Anomaly: -0.5 °C","Anomaly: 1.8 °C","Anomaly: -0.1 °C","Anomaly: -3.3 °C","Anomaly: -0.8 °C","Anomaly: 1.7 °C","Anomaly: -0.1 °C","Anomaly: -0.1 °C","Anomaly: 0.3 °C","Anomaly: 1.6 °C","Anomaly: -0.2 °C","Anomaly: 1.2 °C","Anomaly: 1.4 °C","Anomaly: -1 °C","Anomaly: 0.4 °C","Anomaly: -0.3 °C","Anomaly: 1.1 °C","Anomaly: -1.8 °C","Anomaly: 2.8 °C","Anomaly: 2.5 °C","Anomaly: -0.8 °C","Anomaly: -0.5 °C","Anomaly: -0.9 °C","Anomaly: 0.3 °C","Anomaly: -0.3 °C","Anomaly: 0.7 °C","Anomaly: -2.3 °C","Anomaly: 0.7 °C","Anomaly: 0.5 °C","Anomaly: -1.9 °C","Anomaly: 0.9 °C","Anomaly: 0.6 °C","Anomaly: 0.2 °C","Anomaly: 0.5 °C","Anomaly: 1.1 °C","Anomaly: 1 °C","Anomaly: -0.1 °C","Anomaly: 2.2 °C","Anomaly: 0.4 °C","Anomaly: 0.3 °C","Anomaly: 1.9 °C","Anomaly: 2 °C","Anomaly: -0.6 °C","Anomaly: -1 °C","Anomaly: -0.6 °C","Anomaly: -1.3 °C","Anomaly: -2.2 °C","Anomaly: 1 °C","Anomaly: 0.3 °C","Anomaly: 1.5 °C","Anomaly: 0.5 °C","Anomaly: 1.1 °C","Anomaly: -0.2 °C","Anomaly: -0.9 °C","Anomaly: 1.7 °C","Anomaly: 1.6 °C","Anomaly: -2.1 °C","Anomaly: 1.8 °C","Anomaly: -2.2 °C","Anomaly: 0.4 °C","Anomaly: -0.1 °C","Anomaly: 0.3 °C","Anomaly: 2.1 °C","Anomaly: -1.4 °C","Anomaly: 0.1 °C","Anomaly: 4.3 °C","Anomaly: -1.7 °C","Anomaly: -0.4 °C","Anomaly: 0.4 °C","Anomaly: 0.8 °C","Anomaly: -0.3 °C","Anomaly: 0.1 °C","Anomaly: 2.1 °C","Anomaly: 0.2 °C","Anomaly: 0.9 °C","Anomaly: 1.1 °C","Anomaly: 1.1 °C","Anomaly: 1.2 °C","Anomaly: 0.6 °C","Anomaly: -0.6 °C","Anomaly: 0.4 °C","Anomaly: -0.9 °C","Anomaly: 0.6 °C","Anomaly: 0 °C","Anomaly: 0.3 °C","Anomaly: -1.1 °C","Anomaly: 0.1 °C","Anomaly: -1.1 °C","Anomaly: -0.1 °C","Anomaly: 1.3 °C","Anomaly: 0.9 °C","Anomaly: 1.8 °C","Anomaly: 1.2 °C","Anomaly: 0.7 °C","Anomaly: 2 °C","Anomaly: 2.3 °C","Anomaly: -1.6 °C","Anomaly: 1.8 °C","Anomaly: 1.7 °C","Anomaly: 1.9 °C","Anomaly: -0.9 °C","Anomaly: 4.1 °C","Anomaly: -3.4 °C","Anomaly: 0.5 °C","Anomaly: 0.7 °C","Anomaly: 0.3 °C","Anomaly: 1.6 °C","Anomaly: 0.7 °C","Anomaly: -0.7 °C","Anomaly: 2.6 °C","Anomaly: 0.1 °C","Anomaly: 1.4 °C","Anomaly: -0.5 °C","Anomaly: -1.1 °C","Anomaly: -0.4 °C","Anomaly: -1.1 °C","Anomaly: 1.3 °C","Anomaly: -1.8 °C","Anomaly: -1 °C","Anomaly: 0.5 °C","Anomaly: -2.1 °C","Anomaly: -0.3 °C","Anomaly: 0 °C","Anomaly: 2.5 °C","Anomaly: 0.1 °C","Anomaly: -0.3 °C","Anomaly: -0.5 °C","Anomaly: 1.2 °C","Anomaly: 0 °C","Anomaly: -0.3 °C","Anomaly: 0.1 °C","Anomaly: 2.1 °C","Anomaly: 2.9 °C","Anomaly: -0.5 °C","Anomaly: 0.5 °C","Anomaly: 0 °C","Anomaly: 3.3 °C","Anomaly: 1.4 °C","Anomaly: -2.2 °C","Anomaly: -0.2 °C","Anomaly: -2.9 °C","Anomaly: 0.4 °C","Anomaly: 1.6 °C","Anomaly: -0.8 °C","Anomaly: -1.4 °C","Anomaly: 2.4 °C","Anomaly: -0.9 °C","Anomaly: 1.9 °C","Anomaly: 0.8 °C","Anomaly: 1.8 °C","Anomaly: 2 °C","Anomaly: 2.2 °C","Anomaly: 2.4 °C","Anomaly: 0.9 °C","Anomaly: 0.8 °C","Anomaly: -0.9 °C","Anomaly: -1.3 °C"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"marker":{"colorbar":{"title":"Temperature<br>Anomaly (°C)","ticklen":2},"cmin":-3.8999999999999999,"cmax":4.5,"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666667","rgba(70,19,97,1)"],["0.0833333333333334","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":false,"color":[4,1.3,2,1.1000000000000001,-1,-0.40000000000000002,0.69999999999999996,-3.8999999999999999,-0.80000000000000004,1.7,0.10000000000000001,0.10000000000000001,1.8,-0.29999999999999999,1.3999999999999999,-1.6000000000000001,-1.3,-2,0.59999999999999998,0.20000000000000001,2.7000000000000002,0.40000000000000002,2.5,3.3999999999999999,-0.20000000000000001,1.1000000000000001,-0.80000000000000004,1.6000000000000001,-1.1000000000000001,-1,0.90000000000000002,0.59999999999999998,0.90000000000000002,0.59999999999999998,-0.29999999999999999,0.29999999999999999,2.8999999999999999,0.5,-1.5,-0.80000000000000004,-1.2,-0.90000000000000002,-1.3999999999999999,-3.3999999999999999,1.5,1.5,0.10000000000000001,-0.59999999999999998,-0.69999999999999996,1.1000000000000001,0.80000000000000004,1.1000000000000001,0.5,1.3999999999999999,1.1000000000000001,1.3,1.2,3,-1.1000000000000001,2.7999999999999998,-0,0.40000000000000002,0.59999999999999998,-0.20000000000000001,-3.2999999999999998,0,0.59999999999999998,-2.1000000000000001,1.3,-0.40000000000000002,2.7000000000000002,0.90000000000000002,-0.69999999999999996,0.80000000000000004,0.90000000000000002,1.8999999999999999,0.29999999999999999,-2.6000000000000001,-1.3999999999999999,-0.80000000000000004,1.1000000000000001,0.10000000000000001,-0.40000000000000002,-0.80000000000000004,0.69999999999999996,-0.80000000000000004,-0.10000000000000001,-0.90000000000000002,-1.6000000000000001,1.8999999999999999,-1.5,0.59999999999999998,-0.40000000000000002,-1.1000000000000001,0.90000000000000002,1.1000000000000001,2.3999999999999999,1,0.29999999999999999,4.4000000000000004,-0.5,-1,-0.29999999999999999,0.29999999999999999,1.3999999999999999,1.1000000000000001,0.29999999999999999,-0.80000000000000004,2.2000000000000002,1.8999999999999999,-0.59999999999999998,1.5,1.2,2.1000000000000001,0.69999999999999996,-1.2,1.7,-0.59999999999999998,1.3,3,-1.6000000000000001,2.7999999999999998,2.5,-0.29999999999999999,0.10000000000000001,-0.5,-0.40000000000000002,1.3999999999999999,-0.80000000000000004,0.20000000000000001,0.29999999999999999,0.40000000000000002,0.80000000000000004,2.8999999999999999,-0.20000000000000001,-0.69999999999999996,1.7,1.1000000000000001,0.90000000000000002,1.3999999999999999,-1.6000000000000001,2.1000000000000001,1.2,1.8999999999999999,-0.40000000000000002,-2.2999999999999998,-0.20000000000000001,-0.90000000000000002,3.7999999999999998,-0.10000000000000001,0.20000000000000001,2.1000000000000001,1.3999999999999999,1.5,4.5,0.69999999999999996,3.3999999999999999,0.90000000000000002,-1.7,-2.7999999999999998,1.5,-1,0.59999999999999998,3.2000000000000002,1,0.10000000000000001,-2.3999999999999999,-0.69999999999999996,-0.40000000000000002,1.5,1.2,0.5,0.80000000000000004,0.10000000000000001,0.5,0.90000000000000002,1.2,3.2000000000000002,-1.2,2.7000000000000002,1.5,-1.8,0.10000000000000001,-0.40000000000000002,-0.90000000000000002,-1.8,-0.20000000000000001,-0.20000000000000001,0,-2.6000000000000001,1.2,1.6000000000000001,1.7,1.7,0.80000000000000004,2.7000000000000002,-0.80000000000000004,-1.3,1,1.2,-0.59999999999999998,0.59999999999999998,1,1.1000000000000001,1.8,1.8999999999999999,-3.1000000000000001,3.1000000000000001,1.2,-0.40000000000000002,-1.2,1.8999999999999999,1,2.1000000000000001,0.40000000000000002,0.10000000000000001,3.8999999999999999,-2.6000000000000001,1.1000000000000001,1.1000000000000001,1.2,1.3,0.10000000000000001,2.2000000000000002,-3.2000000000000002,-0.69999999999999996,0.29999999999999999,0.69999999999999996,1.1000000000000001,1.5,-1.8,0.5,1.3,2.5,0.29999999999999999,2.8999999999999999,0.10000000000000001,0.40000000000000002,0.69999999999999996,-0.29999999999999999,1.6000000000000001,-1.5,0.5,-0.29999999999999999,-0.29999999999999999,2.2000000000000002,2.1000000000000001,2.8999999999999999,0.10000000000000001,0.5,-1.8,-0.10000000000000001,3.1000000000000001,-0.10000000000000001,-1.2,0.59999999999999998,2.3999999999999999,-1.8999999999999999,0.10000000000000001,1.2,3.5,-0.40000000000000002,2.7999999999999998,-0.10000000000000001,-1,-1.2,0.20000000000000001,0.5,0,2.1000000000000001,0.80000000000000004,0.29999999999999999,-0.40000000000000002,-1.3999999999999999,-2.3999999999999999,0.80000000000000004,0.5,2.5,0.90000000000000002,1.7,0.59999999999999998,-0.69999999999999996,0.90000000000000002,1,-0.69999999999999996,0.5,3.5,-1.2,2.7000000000000002,0.20000000000000001,2.7000000000000002,-0.80000000000000004,0.40000000000000002,1,0.29999999999999999,1.5,0.20000000000000001,2.2999999999999998,0.80000000000000004,1.5,-1.3,-0.5,2.1000000000000001,1.3,0.29999999999999999,0.29999999999999999,1.6000000000000001,0.20000000000000001,0.59999999999999998,-2,3.2000000000000002,1.6000000000000001,1.7,-2.3999999999999999,0.5,-0.10000000000000001,-1.6000000000000001,1.6000000000000001,2.3999999999999999,-0.29999999999999999,0.20000000000000001,3.1000000000000001,-2,1.6000000000000001,0,0.29999999999999999,-0.40000000000000002,2.1000000000000001,-1.2,1.8999999999999999,2.6000000000000001,-2,-1.2,1.3999999999999999,-0.90000000000000002,-0.5,-0.20000000000000001,-0,1.6000000000000001,-0.40000000000000002,0.59999999999999998,1.6000000000000001,-1.8,-0.5,1.8,-0.10000000000000001,-3.2999999999999998,-0.80000000000000004,1.7,-0.10000000000000001,-0.10000000000000001,0.29999999999999999,1.6000000000000001,-0.20000000000000001,1.2,1.3999999999999999,-1,0.40000000000000002,-0.29999999999999999,1.1000000000000001,-1.8,2.7999999999999998,2.5,-0.80000000000000004,-0.5,-0.90000000000000002,0.29999999999999999,-0.29999999999999999,0.69999999999999996,-2.2999999999999998,0.69999999999999996,0.5,-1.8999999999999999,0.90000000000000002,0.59999999999999998,0.20000000000000001,0.5,1.1000000000000001,1,-0.10000000000000001,2.2000000000000002,0.40000000000000002,0.29999999999999999,1.8999999999999999,2,-0.59999999999999998,-1,-0.59999999999999998,-1.3,-2.2000000000000002,1,0.29999999999999999,1.5,0.5,1.1000000000000001,-0.20000000000000001,-0.90000000000000002,1.7,1.6000000000000001,-2.1000000000000001,1.8,-2.2000000000000002,0.40000000000000002,-0.10000000000000001,0.29999999999999999,2.1000000000000001,-1.3999999999999999,0.10000000000000001,4.2999999999999998,-1.7,-0.40000000000000002,0.40000000000000002,0.80000000000000004,-0.29999999999999999,0.10000000000000001,2.1000000000000001,0.20000000000000001,0.90000000000000002,1.1000000000000001,1.1000000000000001,1.2,0.59999999999999998,-0.59999999999999998,0.40000000000000002,-0.90000000000000002,0.59999999999999998,-0,0.29999999999999999,-1.1000000000000001,0.10000000000000001,-1.1000000000000001,-0.10000000000000001,1.3,0.90000000000000002,1.8,1.2,0.69999999999999996,2,2.2999999999999998,-1.6000000000000001,1.8,1.7,1.8999999999999999,-0.90000000000000002,4.0999999999999996,-3.3999999999999999,0.5,0.69999999999999996,0.29999999999999999,1.6000000000000001,0.69999999999999996,-0.69999999999999996,2.6000000000000001,0.10000000000000001,1.3999999999999999,-0.5,-1.1000000000000001,-0.40000000000000002,-1.1000000000000001,1.3,-1.8,-1,0.5,-2.1000000000000001,-0.29999999999999999,0,2.5,0.10000000000000001,-0.29999999999999999,-0.5,1.2,0,-0.29999999999999999,0.10000000000000001,2.1000000000000001,2.8999999999999999,-0.5,0.5,0,3.2999999999999998,1.3999999999999999,-2.2000000000000002,-0.20000000000000001,-2.8999999999999999,0.40000000000000002,1.6000000000000001,-0.80000000000000004,-1.3999999999999999,2.3999999999999999,-0.90000000000000002,1.8999999999999999,0.80000000000000004,1.8,2,2.2000000000000002,2.3999999999999999,0.90000000000000002,0.80000000000000004,-0.90000000000000002,-1.3],"size":8,"line":{"colorbar":{"title":"","ticklen":2},"cmin":-3.8999999999999999,"cmax":4.5,"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666667","rgba(70,19,97,1)"],["0.0833333333333334","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":false,"color":[4,1.3,2,1.1000000000000001,-1,-0.40000000000000002,0.69999999999999996,-3.8999999999999999,-0.80000000000000004,1.7,0.10000000000000001,0.10000000000000001,1.8,-0.29999999999999999,1.3999999999999999,-1.6000000000000001,-1.3,-2,0.59999999999999998,0.20000000000000001,2.7000000000000002,0.40000000000000002,2.5,3.3999999999999999,-0.20000000000000001,1.1000000000000001,-0.80000000000000004,1.6000000000000001,-1.1000000000000001,-1,0.90000000000000002,0.59999999999999998,0.90000000000000002,0.59999999999999998,-0.29999999999999999,0.29999999999999999,2.8999999999999999,0.5,-1.5,-0.80000000000000004,-1.2,-0.90000000000000002,-1.3999999999999999,-3.3999999999999999,1.5,1.5,0.10000000000000001,-0.59999999999999998,-0.69999999999999996,1.1000000000000001,0.80000000000000004,1.1000000000000001,0.5,1.3999999999999999,1.1000000000000001,1.3,1.2,3,-1.1000000000000001,2.7999999999999998,-0,0.40000000000000002,0.59999999999999998,-0.20000000000000001,-3.2999999999999998,0,0.59999999999999998,-2.1000000000000001,1.3,-0.40000000000000002,2.7000000000000002,0.90000000000000002,-0.69999999999999996,0.80000000000000004,0.90000000000000002,1.8999999999999999,0.29999999999999999,-2.6000000000000001,-1.3999999999999999,-0.80000000000000004,1.1000000000000001,0.10000000000000001,-0.40000000000000002,-0.80000000000000004,0.69999999999999996,-0.80000000000000004,-0.10000000000000001,-0.90000000000000002,-1.6000000000000001,1.8999999999999999,-1.5,0.59999999999999998,-0.40000000000000002,-1.1000000000000001,0.90000000000000002,1.1000000000000001,2.3999999999999999,1,0.29999999999999999,4.4000000000000004,-0.5,-1,-0.29999999999999999,0.29999999999999999,1.3999999999999999,1.1000000000000001,0.29999999999999999,-0.80000000000000004,2.2000000000000002,1.8999999999999999,-0.59999999999999998,1.5,1.2,2.1000000000000001,0.69999999999999996,-1.2,1.7,-0.59999999999999998,1.3,3,-1.6000000000000001,2.7999999999999998,2.5,-0.29999999999999999,0.10000000000000001,-0.5,-0.40000000000000002,1.3999999999999999,-0.80000000000000004,0.20000000000000001,0.29999999999999999,0.40000000000000002,0.80000000000000004,2.8999999999999999,-0.20000000000000001,-0.69999999999999996,1.7,1.1000000000000001,0.90000000000000002,1.3999999999999999,-1.6000000000000001,2.1000000000000001,1.2,1.8999999999999999,-0.40000000000000002,-2.2999999999999998,-0.20000000000000001,-0.90000000000000002,3.7999999999999998,-0.10000000000000001,0.20000000000000001,2.1000000000000001,1.3999999999999999,1.5,4.5,0.69999999999999996,3.3999999999999999,0.90000000000000002,-1.7,-2.7999999999999998,1.5,-1,0.59999999999999998,3.2000000000000002,1,0.10000000000000001,-2.3999999999999999,-0.69999999999999996,-0.40000000000000002,1.5,1.2,0.5,0.80000000000000004,0.10000000000000001,0.5,0.90000000000000002,1.2,3.2000000000000002,-1.2,2.7000000000000002,1.5,-1.8,0.10000000000000001,-0.40000000000000002,-0.90000000000000002,-1.8,-0.20000000000000001,-0.20000000000000001,0,-2.6000000000000001,1.2,1.6000000000000001,1.7,1.7,0.80000000000000004,2.7000000000000002,-0.80000000000000004,-1.3,1,1.2,-0.59999999999999998,0.59999999999999998,1,1.1000000000000001,1.8,1.8999999999999999,-3.1000000000000001,3.1000000000000001,1.2,-0.40000000000000002,-1.2,1.8999999999999999,1,2.1000000000000001,0.40000000000000002,0.10000000000000001,3.8999999999999999,-2.6000000000000001,1.1000000000000001,1.1000000000000001,1.2,1.3,0.10000000000000001,2.2000000000000002,-3.2000000000000002,-0.69999999999999996,0.29999999999999999,0.69999999999999996,1.1000000000000001,1.5,-1.8,0.5,1.3,2.5,0.29999999999999999,2.8999999999999999,0.10000000000000001,0.40000000000000002,0.69999999999999996,-0.29999999999999999,1.6000000000000001,-1.5,0.5,-0.29999999999999999,-0.29999999999999999,2.2000000000000002,2.1000000000000001,2.8999999999999999,0.10000000000000001,0.5,-1.8,-0.10000000000000001,3.1000000000000001,-0.10000000000000001,-1.2,0.59999999999999998,2.3999999999999999,-1.8999999999999999,0.10000000000000001,1.2,3.5,-0.40000000000000002,2.7999999999999998,-0.10000000000000001,-1,-1.2,0.20000000000000001,0.5,0,2.1000000000000001,0.80000000000000004,0.29999999999999999,-0.40000000000000002,-1.3999999999999999,-2.3999999999999999,0.80000000000000004,0.5,2.5,0.90000000000000002,1.7,0.59999999999999998,-0.69999999999999996,0.90000000000000002,1,-0.69999999999999996,0.5,3.5,-1.2,2.7000000000000002,0.20000000000000001,2.7000000000000002,-0.80000000000000004,0.40000000000000002,1,0.29999999999999999,1.5,0.20000000000000001,2.2999999999999998,0.80000000000000004,1.5,-1.3,-0.5,2.1000000000000001,1.3,0.29999999999999999,0.29999999999999999,1.6000000000000001,0.20000000000000001,0.59999999999999998,-2,3.2000000000000002,1.6000000000000001,1.7,-2.3999999999999999,0.5,-0.10000000000000001,-1.6000000000000001,1.6000000000000001,2.3999999999999999,-0.29999999999999999,0.20000000000000001,3.1000000000000001,-2,1.6000000000000001,0,0.29999999999999999,-0.40000000000000002,2.1000000000000001,-1.2,1.8999999999999999,2.6000000000000001,-2,-1.2,1.3999999999999999,-0.90000000000000002,-0.5,-0.20000000000000001,-0,1.6000000000000001,-0.40000000000000002,0.59999999999999998,1.6000000000000001,-1.8,-0.5,1.8,-0.10000000000000001,-3.2999999999999998,-0.80000000000000004,1.7,-0.10000000000000001,-0.10000000000000001,0.29999999999999999,1.6000000000000001,-0.20000000000000001,1.2,1.3999999999999999,-1,0.40000000000000002,-0.29999999999999999,1.1000000000000001,-1.8,2.7999999999999998,2.5,-0.80000000000000004,-0.5,-0.90000000000000002,0.29999999999999999,-0.29999999999999999,0.69999999999999996,-2.2999999999999998,0.69999999999999996,0.5,-1.8999999999999999,0.90000000000000002,0.59999999999999998,0.20000000000000001,0.5,1.1000000000000001,1,-0.10000000000000001,2.2000000000000002,0.40000000000000002,0.29999999999999999,1.8999999999999999,2,-0.59999999999999998,-1,-0.59999999999999998,-1.3,-2.2000000000000002,1,0.29999999999999999,1.5,0.5,1.1000000000000001,-0.20000000000000001,-0.90000000000000002,1.7,1.6000000000000001,-2.1000000000000001,1.8,-2.2000000000000002,0.40000000000000002,-0.10000000000000001,0.29999999999999999,2.1000000000000001,-1.3999999999999999,0.10000000000000001,4.2999999999999998,-1.7,-0.40000000000000002,0.40000000000000002,0.80000000000000004,-0.29999999999999999,0.10000000000000001,2.1000000000000001,0.20000000000000001,0.90000000000000002,1.1000000000000001,1.1000000000000001,1.2,0.59999999999999998,-0.59999999999999998,0.40000000000000002,-0.90000000000000002,0.59999999999999998,-0,0.29999999999999999,-1.1000000000000001,0.10000000000000001,-1.1000000000000001,-0.10000000000000001,1.3,0.90000000000000002,1.8,1.2,0.69999999999999996,2,2.2999999999999998,-1.6000000000000001,1.8,1.7,1.8999999999999999,-0.90000000000000002,4.0999999999999996,-3.3999999999999999,0.5,0.69999999999999996,0.29999999999999999,1.6000000000000001,0.69999999999999996,-0.69999999999999996,2.6000000000000001,0.10000000000000001,1.3999999999999999,-0.5,-1.1000000000000001,-0.40000000000000002,-1.1000000000000001,1.3,-1.8,-1,0.5,-2.1000000000000001,-0.29999999999999999,0,2.5,0.10000000000000001,-0.29999999999999999,-0.5,1.2,0,-0.29999999999999999,0.10000000000000001,2.1000000000000001,2.8999999999999999,-0.5,0.5,0,3.2999999999999998,1.3999999999999999,-2.2000000000000002,-0.20000000000000001,-2.8999999999999999,0.40000000000000002,1.6000000000000001,-0.80000000000000004,-1.3999999999999999,2.3999999999999999,-0.90000000000000002,1.8999999999999999,0.80000000000000004,1.8,2,2.2000000000000002,2.3999999999999999,0.90000000000000002,0.80000000000000004,-0.90000000000000002,-1.3]}},"xaxis":"x","yaxis":"y","frame":null},{"x":[-179.85418438911438,179.45670037530363],"y":[-69.966554478742182,69.517375091090798],"type":"scatter","mode":"markers","opacity":0,"hoverinfo":"none","showlegend":false,"marker":{"colorbar":{"title":"anomaly","ticklen":2,"len":0.5,"lenmode":"fraction","y":1,"yanchor":"top"},"cmin":-3.8999999999999999,"cmax":4.5,"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666667","rgba(70,19,97,1)"],["0.0833333333333334","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":true,"color":[-3.8999999999999999,4.5],"line":{"color":"rgba(44,160,44,1)"}},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="global-temperature-trends" class="level3">
+<h3 class="anchored" data-anchor-id="global-temperature-trends">Global Temperature Trends</h3>
+<p>The time series below shows the global mean sea surface temperature over the past 5 years, revealing both seasonal patterns and long-term warming:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create time series plot</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(global_mean_temp, <span class="at">type =</span> <span class="st">"scatter"</span>, <span class="at">mode =</span> <span class="st">"lines+markers"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_trace</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="sc">~</span>date,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="sc">~</span>temperature,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Global Mean SST"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"rgb(22, 96, 167)"</span>, <span class="at">width =</span> <span class="dv">2</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">marker =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">4</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_trace</span>(</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="sc">~</span>date,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="sc">~</span><span class="fu">predict</span>(<span class="fu">loess</span>(temperature <span class="sc">~</span> <span class="fu">as.numeric</span>(date), <span class="at">data =</span> global_mean_temp)),</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Trend"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"rgb(205, 12, 24)"</span>, <span class="at">width =</span> <span class="dv">3</span>, <span class="at">dash =</span> <span class="st">"dash"</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Global Mean Sea Surface Temperature (2020-2025)"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Date"</span>),</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Temperature (°C)"</span>),</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">hovermode =</span> <span class="st">"x unified"</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-07007b0139bc4ca8d716" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-07007b0139bc4ca8d716">{"x":{"visdat":{"e48c3d36fa3e":["function () ","plotlyVisDat"]},"cur_data":"e48c3d36fa3e","attrs":{"e48c3d36fa3e":{"mode":"lines+markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"e48c3d36fa3e.1":{"mode":"lines+markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":{},"y":{},"name":"Global Mean SST","line":{"color":"rgb(22, 96, 167)","width":2},"marker":{"size":4},"inherit":true},"e48c3d36fa3e.2":{"mode":"lines+markers","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","x":{},"y":{},"name":"Trend","line":{"color":"rgb(205, 12, 24)","width":3,"dash":"dash"},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Global Mean Sea Surface Temperature (2020-2025)","xaxis":{"domain":[0,1],"automargin":true,"title":"Date"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Temperature (°C)"},"hovermode":"x unified","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"mode":"lines+markers","type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"lines+markers","type":"scatter","x":["2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01","2020-07-01","2020-08-01","2020-09-01","2020-10-01","2020-11-01","2020-12-01","2021-01-01","2021-02-01","2021-03-01","2021-04-01","2021-05-01","2021-06-01","2021-07-01","2021-08-01","2021-09-01","2021-10-01","2021-11-01","2021-12-01","2022-01-01","2022-02-01","2022-03-01","2022-04-01","2022-05-01","2022-06-01","2022-07-01","2022-08-01","2022-09-01","2022-10-01","2022-11-01","2022-12-01","2023-01-01","2023-02-01","2023-03-01","2023-04-01","2023-05-01","2023-06-01","2023-07-01","2023-08-01","2023-09-01","2023-10-01","2023-11-01","2023-12-01","2024-01-01","2024-02-01","2024-03-01","2024-04-01","2024-05-01","2024-06-01","2024-07-01","2024-08-01","2024-09-01","2024-10-01","2024-11-01","2024-12-01","2025-01-01"],"y":[14.69930850108171,16.471438096599705,17.109322149033819,18.455934726517704,17.270922531253557,16.740624413011908,15.541035900839523,12.998527390372818,13.002994698406182,11.065810492669762,12.671922777355586,14.421195411963614,15.489359063042839,17.201019556054668,17.486260229354318,18.349160263963576,18.381642059287369,16.065817314587786,15.766668055109077,13.044955956117304,12.402157198198068,13.591406207035654,12.972374241520187,13.779918419077129,15.86102290807294,16.781675826985822,18.233863021100891,18.187674609285409,16.810840016540556,17.126585923680814,15.170080893272615,13.622806793117951,12.813446312403002,13.111303245555336,13.02477221428563,14.406233487989446,15.846172217577736,17.114379355161514,18.418518978824583,18.45081403192771,17.523796162885102,17.224209729111671,14.44691416108027,13.576503302399194,12.941777038762597,12.519648035554367,12.826860698335771,14.639635524351046,15.156833172913185,15.916758421922427,18.659261679686534,18.702302512741248,18.22851513803429,16.969872632957259,14.850679257169647,13.70879393270994,13.360337110797758,12.77010254356369,12.51442687195793,14.64955111199542,16.296454645739846],"name":"Global Mean SST","line":{"color":"rgb(22, 96, 167)","width":2},"marker":{"color":"rgba(255,127,14,1)","size":4,"line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"mode":"lines+markers","type":"scatter","x":["2020-01-01","2020-02-01","2020-03-01","2020-04-01","2020-05-01","2020-06-01","2020-07-01","2020-08-01","2020-09-01","2020-10-01","2020-11-01","2020-12-01","2021-01-01","2021-02-01","2021-03-01","2021-04-01","2021-05-01","2021-06-01","2021-07-01","2021-08-01","2021-09-01","2021-10-01","2021-11-01","2021-12-01","2022-01-01","2022-02-01","2022-03-01","2022-04-01","2022-05-01","2022-06-01","2022-07-01","2022-08-01","2022-09-01","2022-10-01","2022-11-01","2022-12-01","2023-01-01","2023-02-01","2023-03-01","2023-04-01","2023-05-01","2023-06-01","2023-07-01","2023-08-01","2023-09-01","2023-10-01","2023-11-01","2023-12-01","2024-01-01","2024-02-01","2024-03-01","2024-04-01","2024-05-01","2024-06-01","2024-07-01","2024-08-01","2024-09-01","2024-10-01","2024-11-01","2024-12-01","2025-01-01"],"y":[16.116914682456187,16.010728384433968,15.917120342471881,15.823371476720181,15.739047009390926,15.65872303901544,15.587771028634949,15.521658573910701,15.462763003743094,15.412176914958197,15.366162975471152,15.327340510819401,15.292756430526948,15.263424604359193,15.241133893171678,15.220762427695448,15.21455353406663,15.228540942174535,15.25660627393774,15.295171492427496,15.337919491745659,15.377997804868269,15.412629260290549,15.434363605910795,15.446787171636156,15.455154704563334,15.459834690272476,15.462503635812997,15.463239177604768,15.462802317955834,15.461902751771603,15.456595370544022,15.444251402364634,15.428005971574002,15.409256166095711,15.391585675496106,15.3762965837115,15.366547376718673,15.364622848514431,15.377755767672724,15.405970128247111,15.442909207438058,15.47830454190812,15.506278140450799,15.517136424960464,15.503376435048493,15.471957263466537,15.437278824830459,15.396844023703014,15.35154515582097,15.304596763304449,15.249343022373729,15.190710537121934,15.124605275670778,15.054883534038893,14.97666315194704,14.892282421549933,14.80486810830253,14.708706185878532,14.610109384595683,14.502618178925305],"name":"Trend","line":{"color":"rgb(205, 12, 24)","width":3,"dash":"dash"},"marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="key-findings" class="level3">
+<h3 class="anchored" data-anchor-id="key-findings">Key Findings</h3>
+<p>Based on this analysis:</p>
+<ol type="1">
+<li><strong>Spatial Patterns</strong>: Temperature decreases from equator to poles, with the warmest waters in tropical regions</li>
+<li><strong>Anomalies</strong>: Most regions show positive temperature anomalies, indicating warming above historical averages</li>
+<li><strong>Trends</strong>: The 5-year time series reveals a warming trend of approximately 0.8°C, superimposed on natural seasonal cycles</li>
+</ol>
+</section>
+<section id="marine-heatwave-detection" class="level3">
+<h3 class="anchored" data-anchor-id="marine-heatwave-detection">Marine Heatwave Detection</h3>
+<p>We can identify potential marine heatwave conditions where temperatures exceed the 90th percentile:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate temperature percentiles</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>temp_90th <span class="ot">&lt;-</span> <span class="fu">quantile</span>(sst_data<span class="sc">$</span>temperature, <span class="fl">0.9</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># identify potential heatwave areas</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>heatwave_regions <span class="ot">&lt;-</span> sst_data <span class="sc">|&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(temperature <span class="sc">&gt;</span> temp_90th) <span class="sc">|&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">intensity =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    temperature <span class="sc">&gt;</span> <span class="fu">quantile</span>(sst_data<span class="sc">$</span>temperature, <span class="fl">0.95</span>) <span class="sc">~</span> <span class="st">"Extreme"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    temperature <span class="sc">&gt;</span> <span class="fu">quantile</span>(sst_data<span class="sc">$</span>temperature, <span class="fl">0.92</span>) <span class="sc">~</span> <span class="st">"Severe"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Moderate"</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># summary statistics</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Marine Heatwave Statistics:</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Marine Heatwave Statistics:</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"- Threshold temperature (90th percentile):"</span>, <span class="fu">round</span>(temp_90th, <span class="dv">1</span>), <span class="st">"°C</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>- Threshold temperature (90th percentile): 23.3 °C</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"- Number of affected regions:"</span>, <span class="fu">nrow</span>(heatwave_regions), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>- Number of affected regions: 50 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"- Intensity breakdown:</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>- Intensity breakdown:</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(heatwave_regions<span class="sc">$</span>intensity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ Extreme Moderate   Severe 
+      24       10       16 </code></pre>
+</div>
+</div>
+</section>
+<section id="data-export" class="level3">
+<h3 class="anchored" data-anchor-id="data-export">Data Export</h3>
+<p>You can download this data for further analysis:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># export to csv</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(sst_data, <span class="st">"ocean_temperature_data.csv"</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># export time series</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(global_mean_temp, <span class="st">"global_sst_timeseries.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="next-steps" class="level3">
+<h3 class="anchored" data-anchor-id="next-steps">Next Steps</h3>
+<p>This example demonstrates basic temperature monitoring capabilities. The full Ocean Metrics platform offers:</p>
+<ul>
+<li>Real-time data updates from satellite and in-situ sensors</li>
+<li>Advanced statistical analysis and forecasting</li>
+<li>Integration with other ocean health indicators</li>
+<li>Customizable alerts for extreme events</li>
+<li>API access for automated workflows</li>
+</ul>
+<p><a href="../applications.html" class="btn btn-primary">Return to Applications</a></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Measuring ocean health through data</p>
+</div>   
+    <div class="nav-footer-center">
+<p>Ocean Metrics © 2025</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
