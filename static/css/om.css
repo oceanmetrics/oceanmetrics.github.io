@@ -36,8 +36,8 @@
 .theme-toggle:focus-visible{ outline:none; box-shadow:var(--shadow-focus); }
 
 /* ---- Project portfolio grid ------------------------------------------- */
-.projects-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:var(--space-6); }
-@media (max-width:860px){ .projects-grid{ grid-template-columns:1fr; } }
+/* auto-fit so 3 current projects fill one clean row (no orphan cell) and reflow below */
+.projects-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:var(--space-6); }
 
 /* client / funder badge sitting on a project card's media */
 .card__client{
@@ -61,16 +61,13 @@
 .card__meta-row{ display:flex; align-items:center; gap:var(--space-3); flex-wrap:wrap;
   font-family:var(--font-mono); font-size:var(--text-xs); color:var(--text-body); letter-spacing:var(--ls-wide); }
 
-/* ---- Services strip (folded into the home page) ----------------------- */
-.services{ display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-6); }
+/* ---- Services — editorial columns, a teal rule per verb (no icon tiles) - */
+.services{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(var(--space-5), 4vw, var(--space-7)); }
 @media (max-width:860px){ .services{ grid-template-columns:1fr; } }
-.service{ display:flex; flex-direction:column; gap:var(--space-3); padding:var(--space-6);
-  background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-lg); }
-.service__icon{ width:2.6rem; height:2.6rem; display:inline-flex; align-items:center; justify-content:center;
-  border-radius:var(--radius-md); background:color-mix(in srgb, var(--accent) 16%, transparent);
-  color:var(--accent-hover); font-size:1.15rem; }
-.service h3{ margin:0; font:var(--type-h3); font-size:var(--text-lg); }
-.service p{ margin:0; font:var(--type-small); color:var(--text-body); }
+.service{ display:flex; flex-direction:column; gap:var(--space-3);
+  padding-top:var(--space-4); border-top:2px solid var(--accent); }
+.service h3{ margin:0; font:var(--type-h3); font-size:var(--text-xl); color:var(--text-heading); }
+.service p{ margin:0; font:var(--type-small); color:var(--text-body); max-width:38ch; }
 
 /* ---- About / bio block ------------------------------------------------ */
 .bio{ display:grid; grid-template-columns:220px 1fr; gap:var(--space-8); align-items:start; }
