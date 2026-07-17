@@ -1,0 +1,136 @@
+/* ============================================================================
+   OCEAN METRICS · COLOR TOKENS  (light + dark, one source of truth)
+   A sunlit, welcoming ocean palette: living-reef TEAL leads the cool, a warm
+   YELLOW sun is the single warm accent — balanced, light, and warm. Crisp ink,
+   generous space. Theme-aware values use CSS light-dark(); the active theme is
+   set by `color-scheme`, switched via :root[data-theme]. Legacy primitive names
+   (cobalt/coral/abyss/foam…) are kept as aliases so existing components resolve.
+   ========================================================================== */
+
+:root { color-scheme: light dark; }              /* follow the OS by default   */
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"]  { color-scheme: dark; }
+
+:root {
+  /* ---- Teal: the lead cool (fixed hues; higher number = deeper) --------- */
+  --teal-800: #063d49;
+  --teal-700: #0a5c6e;   /* deep teal — strong / hover                       */
+  --teal-600: #0c7288;   /* brand — button fill + links (white text 5.6:1)   */
+  --teal-500: #1aa0bd;   /* accent surfaces, edges, stats                    */
+  --teal-400: #43b9d2;   /* bright accent (accent text on dark)              */
+  --teal-300: #86d6e5;   /* light sky-teal — on-dark accents, hover edges     */
+  --teal-200: #bfeaf2;
+  --teal-100: #e4f6fa;
+
+  /* ---- Deep teal-navy: anchors + dark-mode surfaces -------------------- */
+  --navy-900: #04141a;   /* darkest anchor                                  */
+  --navy-800: #0a2831;   /* dark-mode page ground                           */
+  --navy-700: #0c4553;   /* soft deep-teal — light-mode inverse (footer/CTA)*/
+  --navy-600: #14657a;
+  --navy-500: #1a89a3;
+
+  /* ---- Sun: the warm yellow accent (fixed; reads on light + dark) ------- */
+  --sun-600: #e0951a;    /* deeper gold — warm hover / text spark on light   */
+  --sun-500: #f5b528;    /* the warm accent — waterline, highlights, warm CTA*/
+  --sun-400: #ffce4d;    /* bright sunlight                                  */
+  --sun-300: #ffe3a3;
+
+  /* ---- Ink: teal-slate text (fixed light-mode hues) ------------------- */
+  --ink-900: #082129;
+  --ink-700: #123a45;
+  --ink-500: #3c5b64;
+  --ink-400: #547079;
+  --ink-300: #5c7880;
+
+  /* ---- Surfaces & lines (THEME-AWARE) ---------------------------------- */
+  --foam-50:  light-dark(#f4fafb, #0a2831);   /* page ground                 */
+  --foam-100: light-dark(#e6f5f8, #12414d);   /* tinted surface / hover      */
+  --line-300: light-dark(#c2e0e7, #2c5764);   /* strong borders              */
+  --line-200: light-dark(#d6ebef, #234853);   /* default borders             */
+  --line-100: light-dark(#e7f4f6, #173540);   /* hairlines / dividers        */
+  --white:    #ffffff;
+  --aqua-200: #bfeaf2;
+  --aqua-100: #e4f6fa;
+
+  /* ============ LEGACY PRIMITIVE ALIASES (kept for components) =========== */
+  --abyss-900: var(--navy-900);
+  --abyss-800: var(--navy-800);
+  --cobalt-600: var(--teal-700);
+  --cobalt-500: var(--teal-600);
+  --cobalt-400: var(--teal-500);
+  --cobalt-300: var(--teal-300);
+  --coral-600: var(--sun-600);
+  --coral-500: var(--sun-500);
+  --coral-300: var(--sun-300);
+
+  /* ---- Facet colors (unused on this brochure; satisfy tag CSS) --------- */
+  --facet-place:   var(--teal-700);
+  --facet-method:  var(--navy-500);
+  --facet-org:     #1a7a4e;
+  --facet-type:    var(--sun-600);
+  --facet-topic:   var(--ink-500);
+  --facet-portal:  #6d4aa7;
+  --facet-content: #a83b6f;
+  --facet-year:    var(--ink-500);
+  --facet-region:  var(--facet-place);
+  --facet-tool:    var(--facet-type);
+  --facet-place-deep:  #002843;
+  --facet-method-deep: #0d5a6b;
+  --facet-org-deep:    #015f37;
+  --facet-type-deep:   #884501;
+  --facet-topic-deep:  #2c4550;
+  --facet-portal-deep: #4f3380;
+
+  /* ---- Semantic status ------------------------------------------------- */
+  --ok:   #1a7a4e;
+  --warn: #e0951a;
+  --err:  #c23b34;
+  --info: var(--teal-600);
+
+  /* ============ SEMANTIC ALIASES — prefer these in components ============ */
+  --bg-page:        var(--foam-50);
+  --bg-surface:     light-dark(#ffffff, #103a45);
+  --bg-tint:        var(--foam-100);
+  --bg-inverse:     light-dark(#0c4553, #07222a);   /* CTA / footer anchor    */
+  --bg-abyss:       light-dark(#0a3a47, #04141a);
+
+  --text-strong:    light-dark(#082129, #f1f9fb);
+  --text-heading:   light-dark(#123a45, #e6f4f7);
+  --text-body:      light-dark(#3c5b64, #b7d0d6);
+  --text-muted:     light-dark(#5c7880, #83a0a7);
+  --text-on-dark:   #eaf7fa;
+  --text-on-dark-muted: #a2c6cf;
+
+  --brand:          var(--teal-600);                     /* button fill        */
+  --brand-text:     light-dark(#0c7288, #86d6e5);        /* brand as text      */
+  --brand-hover:    light-dark(#0a5c6e, #43b9d2);
+  --accent:         light-dark(#1aa0bd, #43b9d2);        /* surfaces / edges   */
+  --accent-hover:   light-dark(#0c7288, #86d6e5);        /* accent as text     */
+  --action:         var(--sun-500);                      /* warm accent        */
+  --action-ink:     var(--ink-900);                      /* text on a yellow fill */
+  --action-hover:   var(--sun-600);
+  --link:           light-dark(#0c7288, #86d6e5);
+
+  --border:         var(--line-200);
+  --border-strong:  var(--line-300);
+  --divider:        var(--line-100);
+
+  --focus-ring:     var(--teal-500);
+
+  /* client-logo treatment flips by theme (white-silhouette source logos) */
+  --logo-filter:  light-dark(brightness(0) saturate(0), brightness(0) invert(1));
+  --logo-opacity: light-dark(.72, .85);
+}
+
+/* Fallback: browsers without light-dark() get the light palette (static). */
+@supports not (color: light-dark(#000, #fff)) {
+  :root {
+    --foam-50: #f4fafb;  --foam-100: #e6f5f8;
+    --line-300: #c2e0e7; --line-200: #d6ebef; --line-100: #e7f4f6;
+    --bg-surface: #ffffff; --bg-inverse: #0c4553; --bg-abyss: #0a3a47;
+    --text-strong: #082129; --text-heading: #123a45; --text-body: #3c5b64; --text-muted: #5c7880;
+    --brand-text: #0c7288; --brand-hover: #0a5c6e; --accent: #1aa0bd; --accent-hover: #0c7288;
+    --link: #0c7288;
+    --logo-filter: brightness(0) saturate(0); --logo-opacity: .72;
+  }
+}

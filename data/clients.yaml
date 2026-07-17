@@ -1,0 +1,12 @@
+# Client / funder logos for the "Trusted by" strips (home + about).
+# Logos are white-on-transparent; .client-strip--onlight tints them dark for light sections.
+- name: BOEM
+  logo: img/logos/boem.png
+- name: NOAA
+  logo: img/logos/noaa.png
+- name: NASA
+  logo: img/logos/nasa.png
+- name: NREL
+  logo: img/logos/nrel.png
+- name: NCEAS
+  logo: img/logos/nceas.png

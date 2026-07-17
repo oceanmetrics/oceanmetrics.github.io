@@ -1,0 +1,45 @@
+{{ define "main" }}
+<main>
+  <section class="page-header">
+    <div class="page-header__inner">
+      <span class="eyebrow eyebrow--rule eyebrow--ondark">Portfolio</span>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.summary }}<p class="page-header__lead">{{ . }}</p>{{ end }}
+    </div>
+  </section>
+
+  {{/* ===== CURRENT PROJECTS ===== */}}
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow eyebrow--rule">Current work</span>
+      <h2 style="margin:var(--space-2) 0 var(--space-6);">Platforms in production</h2>
+      <div class="projects-grid">
+        {{ range sort (where .Pages "Params.status" "current") "Params.weight" }}
+          {{ partial "card-project.html" . }}
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  {{/* ===== PAST PROJECTS (EcoQuants archive) ===== */}}
+  <section class="section section--tint">
+    <div class="container" style="max-width:820px;">
+      <span class="eyebrow eyebrow--rule">Selected past work</span>
+      <h2 style="margin:var(--space-2) 0 var(--space-3);">The EcoQuants archive</h2>
+      <p style="color:var(--text-body); max-width:64ch;">
+        A decade of marine spatial ecology and reproducible science under the EcoQuants name — for
+        federal agencies, research institutes, and conservation programs.
+      </p>
+      <ul class="past-list">
+        {{ range hugo.Data.past_projects }}
+          <li class="past-row">
+            <span class="past-row__title">{{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}</span>
+            <span class="past-row__client">{{ .client }}{{ with .years }} · {{ . }}{{ end }}</span>
+            <p class="past-row__desc">{{ .desc }}</p>
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  </section>
+</main>
+{{ end }}

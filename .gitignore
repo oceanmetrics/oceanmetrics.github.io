@@ -1,8 +1,23 @@
+# Hugo
+/public/
+/resources/_gen/
+.hugo_build.lock
+
+# macOS / editor
+.DS_Store
+
+# local Claude guidance (kept out of git, as before)
+CLAUDE.md
+
+# local dev tooling (impeccable skill, Claude settings, working files) — not site content
+.claude/
+.impeccable/
+.github/skills/
+.github/hooks/
+skills-lock.json
+
+# R (legacy)
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
-CLAUDE.md
-/.quarto/
-.DS_Store
-_site

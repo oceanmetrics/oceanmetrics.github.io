@@ -1,0 +1,17 @@
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-header__logo" href="{{ "" | relURL }}" aria-label="Ocean Metrics home">
+      <span class="om-wordmark">{{ readFile "static/img/logos/ocean-metrics-mark.svg" | safeHTML }}<span class="om-wordmark__ocean">Ocean</span><span class="om-wordmark__metrics">Metrics</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" onclick="const o=this.nextElementSibling.classList.toggle('open');this.setAttribute('aria-expanded',o);this.textContent=o?'✕':'☰';">&#9776;</button>
+    <nav class="site-nav">
+      {{ range site.Menus.main }}
+        <a href="{{ .URL }}"{{ if or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }} class="is-active"{{ end }}>{{ .Name }}</a>
+      {{ end }}
+      <span class="site-nav__sep"></span>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><i class="fas fa-moon" aria-hidden="true"></i></button>
+      <a class="site-nav__icon" href="{{ site.Params.github }}" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i></a>
+      <a class="btn btn--sm" href="{{ "contact" | relURL }}">Work with me <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+    </nav>
+  </div>
+</header>

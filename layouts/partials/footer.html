@@ -1,0 +1,32 @@
+<footer class="site-footer">
+  <div class="footer-main">
+    <div>
+      <a class="om-wordmark" href="{{ "" | relURL }}">{{ readFile "static/img/logos/ocean-metrics-mark.svg" | safeHTML }}<span class="om-wordmark__ocean">Ocean</span><span class="om-wordmark__metrics">Metrics</span></a>
+      <p>{{ site.Params.description }}</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="{{ "projects" | relURL }}">Projects</a>
+      <a href="{{ "about" | relURL }}">About</a>
+      <a href="{{ "contact" | relURL }}">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Current work</h4>
+      <a href="https://marinesensitivity.org" target="_blank" rel="noopener">MarineSensitivity.org</a>
+      <a href="https://calcofi.io" target="_blank" rel="noopener">CalCOFI.io</a>
+      <a href="https://marinebon.org" target="_blank" rel="noopener">MarineBON.org</a>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <a href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a>
+      <a href="{{ site.Params.github }}" target="_blank" rel="noopener">GitHub</a>
+      <a href="{{ site.Params.cv }}" target="_blank" rel="noopener">CV</a>
+    </div>
+  </div>
+  <div class="footer-colophon">
+    <div class="footer-colophon__inner">
+      <span>OCEAN METRICS LLC · ST. PETERSBURG, FL · &copy; {{ now.Year }}</span>
+      <span style="opacity:.7;">Measuring the ocean, embracing uncertainty · formerly EcoQuants</span>
+    </div>
+  </div>
+</footer>

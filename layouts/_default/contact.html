@@ -1,0 +1,35 @@
+{{ define "main" }}
+<main>
+  <section class="page-header">
+    <div class="page-header__inner">
+      <span class="eyebrow eyebrow--rule eyebrow--ondark">Get in touch</span>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.summary }}<p class="page-header__lead">{{ . }}</p>{{ end }}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:760px;">
+      <div class="article" style="max-width:none; margin:0; padding:0;">{{ .Content }}</div>
+
+      <div class="services" style="margin-top:var(--space-7);">
+        <a class="service" href="mailto:{{ site.Params.email }}" style="text-decoration:none;">
+          <span class="service__icon"><i class="fas fa-envelope" aria-hidden="true"></i></span>
+          <h3>Email</h3>
+          <p>{{ site.Params.email }}</p>
+        </a>
+        <a class="service" href="{{ site.Params.github }}" target="_blank" rel="noopener" style="text-decoration:none;">
+          <span class="service__icon"><i class="fab fa-github" aria-hidden="true"></i></span>
+          <h3>GitHub</h3>
+          <p>Code, projects, and collaboration</p>
+        </a>
+        <a class="service" href="{{ site.Params.cv }}" target="_blank" rel="noopener" style="text-decoration:none;">
+          <span class="service__icon"><i class="fas fa-address-card" aria-hidden="true"></i></span>
+          <h3>CV</h3>
+          <p>Background &amp; publications</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+{{ end }}

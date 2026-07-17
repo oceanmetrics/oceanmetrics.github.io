@@ -1,0 +1,53 @@
+{{ define "main" }}
+<main>
+  <section class="page-header">
+    <div class="page-header__inner">
+      <span class="eyebrow eyebrow--rule eyebrow--ondark">About</span>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.summary }}<p class="page-header__lead">{{ . }}</p>{{ end }}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:900px;">
+      <div class="bio">
+        <div>
+          <img class="bio__portrait" src="{{ .Params.portrait | relURL }}" alt="{{ .Params.person }}">
+          <div class="bio__links">
+            {{ range .Params.links }}
+              <a class="btn btn--outline btn--sm" href="{{ .url }}" target="_blank" rel="noopener">{{ .label }}</a>
+            {{ end }}
+          </div>
+        </div>
+        <div>
+          <h2 class="bio__name">{{ .Params.person }}</h2>
+          <p class="bio__role">{{ .Params.role }}</p>
+          <div class="article" style="max-width:none; margin:0; padding:0;">{{ .Content }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{/* client strip */}}
+  <section class="section section--tint">
+    <div class="container" style="max-width:820px; text-align:center;">
+      <span class="eyebrow eyebrow--rule" style="justify-content:center;">Clients &amp; sponsors</span>
+      <h2 style="margin:var(--space-3) 0 var(--space-2);">Work delivered for</h2>
+      <div class="client-strip client-strip--onlight">
+        {{ range hugo.Data.clients }}
+          <img src="{{ .logo | relURL }}" alt="{{ .name }}" title="{{ .name }}">
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="cta-band__inner">
+      <span class="eyebrow eyebrow--rule eyebrow--ondark" style="justify-content:center;">Get in touch</span>
+      <h2>Let's measure something.</h2>
+      <p>Open to consulting, collaboration, and research partnerships across ocean science and data.</p>
+      <a class="btn btn--action btn--lg" href="{{ "contact" | relURL }}">Contact Ocean Metrics <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+    </div>
+  </section>
+</main>
+{{ end }}

@@ -1,0 +1,9 @@
+# Headline figures shown in the home stat band. Drawn from current projects.
+- value: "16,000+"
+  label: "Marine species modeled"
+- value: "75 yrs"
+  label: "Ocean data online"
+- value: "20"
+  label: "US planning areas mapped"
+- value: "Open"
+  label: "Data, code & methods"

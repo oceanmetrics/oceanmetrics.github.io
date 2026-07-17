@@ -1,0 +1,44 @@
+baseURL: https://oceanmetrics.io/
+locale: en-us
+title: Ocean Metrics
+enableEmoji: false
+summaryLength: 30
+
+params:
+  tagline: Ocean data science studio
+  description: Ocean Metrics is the practice of Ben Best, PhD — building the analyses, maps, and open-data platforms behind federal and research ocean programs. Formerly EcoQuants.
+  # home hero
+  heroHeadline: Measuring the ocean, from raw observations to decisions
+  heroLead: I build the species models, interactive maps, and open-data platforms that ocean science relies on — rigorous, reproducible work for agencies and research programs.
+  # a generated illustration can be dropped in here later (see PLAN.md §8); until then the hero uses a gradient
+  heroImage: ""
+  # contact / identity
+  email: ben@oceanmetrics.io
+  github: https://github.com/oceanmetrics
+  cv: https://bbest.github.io/cv/
+  orcid: https://orcid.org/0000-0002-2686-0784
+
+menu:
+  main:
+    - name: Projects
+      pageRef: /projects
+      weight: 1
+    - name: About
+      pageRef: /about
+      weight: 2
+    - name: Contact
+      pageRef: /contact
+      weight: 3
+
+# no tags/categories on this brochure site
+disableKinds:
+  - taxonomy
+  - term
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+build:
+  writeStats: false

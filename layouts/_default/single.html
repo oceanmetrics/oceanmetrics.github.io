@@ -1,0 +1,14 @@
+{{ define "main" }}
+<main>
+  <section class="page-header">
+    <div class="page-header__inner">
+      {{ with .Params.eyebrow }}<span class="eyebrow eyebrow--rule eyebrow--ondark">{{ . }}</span>{{ end }}
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.summary }}<p class="page-header__lead">{{ . }}</p>{{ end }}
+    </div>
+  </section>
+  <section class="section">
+    <div class="article" style="padding-top:0;">{{ .Content }}</div>
+  </section>
+</main>
+{{ end }}

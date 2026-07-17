@@ -1,0 +1,31 @@
+# Selected EcoQuants-era projects, shown as a compact archive on /projects/.
+- title: eDNA Explorer
+  client: MBON · NOAA · NASA
+  years: "2017–2021"
+  url: https://github.com/marinebon/edna-vis
+  desc: Interactive Shiny app to explore environmental DNA (eDNA) detections across space, time, and taxa — turning genetic sampling into a browsable picture of marine life.
+- title: Ocean Health Index visualization
+  client: Conservation International · NCEAS
+  years: "2013–2017"
+  desc: Visualization of the global Ocean Health Index — index scores flowing to ten goals and their underlying data layers, rendered as flower plots, maps, and tables.
+- title: Route ships to avoid whale strikes
+  client: Duke University
+  years: "2016"
+  desc: Least-cost vessel routing that weighs travel cost against whale-hotspot avoidance off British Columbia — part of doctoral work in marine geospatial ecology.
+- title: Siting offshore wind energy
+  client: Research · PLOS ONE (2019)
+  years: "2016–2019"
+  url: https://doi.org/10.1371/journal.pone.0197850
+  desc: Spatial tradeoffs between offshore wind-energy value and bird sensitivity across the US Mid-Atlantic, including seasonal whale timing — Best &amp; Halpin (2019).
+- title: Coral reef interactive infographic
+  client: MBON
+  years: "2017"
+  desc: A clickable coral-reef scene where species icons open status time-series — an accessible entry point into reef biodiversity monitoring.
+- title: Submarine cable conflict analysis
+  client: NREL
+  years: "2019–2021"
+  desc: Spatial analysis of siting conflicts between marine renewable-energy development and existing submarine cable infrastructure.
+- title: Check Water Quality
+  client: Independent
+  years: "2017"
+  desc: Rain-forecast notifications prompting California water-quality sampling to stay compliant during storm events.

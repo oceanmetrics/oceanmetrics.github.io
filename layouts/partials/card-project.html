@@ -1,0 +1,21 @@
+{{/* Project portfolio card. Call with a Page (.) from content/projects/. */}}
+<a class="card" href="{{ .RelPermalink }}">
+  <div class="card__media{{ if not .Params.image }} card__media--placeholder{{ end }}">
+    {{ with .Params.image }}<img src="{{ . | relURL }}" alt="{{ $.Title }} screenshot" loading="lazy">{{ end }}
+    {{ with .Params.client }}<span class="card__client">{{ . }}</span>{{ end }}
+  </div>
+  <div class="card__body">
+    <div class="card__meta-row">
+      {{ with .Params.role }}<span>{{ . }}</span>{{ end }}
+      {{ with .Params.years }}<span class="card__status">{{ . }}</span>{{ end }}
+    </div>
+    <h3 class="card__title">{{ .Title }}</h3>
+    <p class="card__summary">{{ .Params.summary | default .Summary }}</p>
+    {{ with .Params.stack }}
+      <div class="card__stack">
+        {{ range first 5 . }}<span class="card__chip">{{ . }}</span>{{ end }}
+      </div>
+    {{ end }}
+    <span class="card__foot">View project <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+  </div>
+</a>

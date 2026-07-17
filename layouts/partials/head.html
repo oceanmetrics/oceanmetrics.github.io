@@ -1,0 +1,36 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{/* set the saved theme before first paint to avoid a flash */}}
+<script>try{var t=localStorage.getItem('om-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<meta name="theme-color" content="#f4fafb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a2831" media="(prefers-color-scheme: dark)">
+<title>{{ if .IsHome }}{{ site.Title }} · {{ site.Params.tagline }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+{{ $desc := or .Description .Summary site.Params.description }}
+<meta name="description" content="{{ $desc }}">
+
+{{/* ---- Open Graph / social cards ---- */}}
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+{{ with (.Params.image | default site.Params.heroImage) }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+
+{{- /* Bundle every @import listed in styles.css into one fingerprinted file, so
+       the browser cache busts automatically whenever any CSS changes.
+       styles.css stays the single source of cascade order. */ -}}
+{{- $manifest := readFile "static/css/styles.css" -}}
+{{- $css := "" -}}
+{{- range findRE `@import "[^"]+"` $manifest -}}
+  {{- $rel := replaceRE `@import "([^"]+)"` "$1" . -}}
+  {{- $css = printf "%s\n%s" $css (readFile (printf "static/css/%s" $rel)) -}}
+{{- end -}}
+{{- $styles := resources.FromString "css/styles.css" $css | fingerprint -}}
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="{{ "js/theme.js" | relURL }}" defer></script>

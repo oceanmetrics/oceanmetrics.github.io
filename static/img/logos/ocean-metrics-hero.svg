@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="om-title om-desc">
+  <title id="om-title">Ocean Metrics</title>
+  <desc id="om-desc">The Ocean Metrics mark drawn as a sunrise: a circle collapses to a point, spreads
+    into the horizon line, then the ring rises out of the horizon, its top mirrored by its
+    reflection below.</desc>
+
+  <style>
+    .om-static { display: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .om-anim   { display: none; }
+      .om-static { display: inline; }
+    }
+  </style>
+
+  <defs>
+    <!-- sunrise in brand colors: warm sun high in the sky, living-reef teal in
+         the currents, descending to deep teal-navy at the waterline -->
+    <linearGradient id="om-grad-ring" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"    stop-color="#ffce4d"/>
+      <stop offset="0.24" stop-color="#f5b528"/>
+      <stop offset="0.46" stop-color="#43b9d2"/>
+      <stop offset="0.54" stop-color="#1aa0bd"/>
+      <stop offset="0.76" stop-color="#0c7288"/>
+      <stop offset="1"    stop-color="#0c4553"/>
+    </linearGradient>
+
+    <!-- horizon line: deep teal at the edges, a warm sun glint at center
+         (userSpaceOnUse: gradients don't render on zero-area <line> bboxes,
+         and this keeps the glint fixed at center while the line spreads) -->
+    <linearGradient id="om-grad-line" gradientUnits="userSpaceOnUse"
+                    x1="60" y1="256" x2="452" y2="256">
+      <stop offset="0"    stop-color="#0c4553"/>
+      <stop offset="0.36" stop-color="#0c7288"/>
+      <stop offset="0.5"  stop-color="#f5b528"/>
+      <stop offset="0.64" stop-color="#0c7288"/>
+      <stop offset="1"    stop-color="#0c4553"/>
+    </linearGradient>
+
+    <radialGradient id="om-grad-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0"    stop-color="#f5b528" stop-opacity="0.38"/>
+      <stop offset="0.45" stop-color="#f5b528" stop-opacity="0.13"/>
+      <stop offset="1"    stop-color="#f5b528" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- hides a horizontal band across the ring, cutting the enso gaps
+         where the horizon line passes through (flat cuts, like the logo) -->
+    <mask id="om-horizon-gap">
+      <rect x="0" y="0"   width="512" height="512" fill="white"/>
+      <rect x="0" y="247" width="512" height="18"  fill="black"/>
+    </mask>
+  </defs>
+
+  <!-- static final frame for prefers-reduced-motion -->
+  <g class="om-static">
+    <circle cx="256" cy="256" r="120" fill="none" stroke="url(#om-grad-ring)"
+            stroke-width="45" mask="url(#om-horizon-gap)"/>
+    <line x1="60" y1="256" x2="452" y2="256" stroke="url(#om-grad-line)"
+          stroke-width="5.5" stroke-linecap="round"/>
+  </g>
+
+  <g class="om-anim">
+    <!-- dawn glow swelling behind the rising ring, then breathing gently -->
+    <circle cx="256" cy="256" r="190" fill="url(#om-grad-glow)" opacity="0">
+      <animate attributeName="opacity" begin="rise.begin+0.4s" dur="1.6s"
+               values="0;1" calcMode="spline" keySplines="0.42 0 0.3 1" fill="freeze"/>
+      <animate attributeName="opacity" begin="rise.end+0.6s" dur="7s"
+               values="1;0.72;1" calcMode="spline"
+               keySplines="0.37 0 0.63 1;0.37 0 0.63 1" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- act 1: the full circle contracts to a point at its center
+         (r=2 + stroke 7 ends as an 11px dot, exactly matching the line's
+         round-cap dot below for a seamless handoff) -->
+    <circle cx="256" cy="256" r="120" fill="none" stroke="url(#om-grad-ring)" stroke-width="45">
+      <animate id="contract" attributeName="r" begin="0.6s" dur="0.75s"
+               values="120;2" calcMode="spline" keySplines="0.55 0 1 0.45" fill="freeze"/>
+      <animate attributeName="stroke-width" begin="0.6s" dur="0.75s"
+               values="45;7" calcMode="spline" keySplines="0.55 0 1 0.45" fill="freeze"/>
+      <set attributeName="opacity" to="0" begin="contract.end" fill="freeze"/>
+    </circle>
+
+    <!-- act 2: the point spreads outward into the horizon, thinning as it stretches -->
+    <line x1="256" y1="256" x2="256" y2="256" stroke="url(#om-grad-line)"
+          stroke-width="11" stroke-linecap="round" opacity="0">
+      <set attributeName="opacity" to="1" begin="contract.end" fill="freeze"/>
+      <animate id="spread" attributeName="x1" begin="contract.end" dur="0.7s"
+               values="256;60" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/>
+      <animate attributeName="x2" begin="contract.end" dur="0.7s"
+               values="256;452" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/>
+      <animate attributeName="stroke-width" begin="contract.end" dur="0.7s"
+               values="11;5.5" calcMode="spline" keySplines="0.3 0 0.4 1" fill="freeze"/>
+    </line>
+
+    <!-- act 3: sunrise — a squashed ellipse rises out of the horizon band,
+         top mirrored by bottom, overshooting slightly before settling as the ring -->
+    <ellipse cx="256" cy="256" rx="120" ry="1" fill="none" stroke="url(#om-grad-ring)"
+             stroke-width="5.5" mask="url(#om-horizon-gap)">
+      <animate id="rise" attributeName="ry" begin="spread.end+0.35s" dur="1.8s"
+               values="1;127;120" keyTimes="0;0.82;1" calcMode="spline"
+               keySplines="0.4 0 0.16 1;0.3 0 0.6 1" fill="freeze"/>
+      <animate attributeName="stroke-width" begin="spread.end+0.35s" dur="1.5s"
+               values="5.5;45" calcMode="spline" keySplines="0.42 0 0.25 1" fill="freeze"/>
+    </ellipse>
+  </g>
+</svg>

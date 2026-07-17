@@ -1,0 +1,50 @@
+{{ define "main" }}
+<main class="err404">
+  <div class="err404__ocean" aria-hidden="true">
+    <div class="err404__rays"></div>
+    <div class="err404__particles" id="err404-particles"></div>
+    <svg class="err404__wave" viewBox="0 0 1440 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,44 C240,80 480,10 720,44 C900,68 1080,14 1260,36 C1340,46 1400,30 1440,22 L1440,88 L0,88 Z" fill="var(--bg-page)"/>
+    </svg>
+  </div>
+
+  <div class="err404__hero">
+    <span class="eyebrow eyebrow--rule eyebrow--ondark">Signal lost · depth unknown</span>
+    <div class="err404__numeral" aria-hidden="true">404</div>
+    <h1 class="err404__title">Lost in the deep</h1>
+    <p class="err404__lead">This page has drifted out of range. Let's get you back to the surface.</p>
+  </div>
+
+  <section class="err404__surface">
+    <div class="container" style="max-width:720px;">
+      <div class="err404__actions">
+        <a href="{{ "" | relURL }}" class="btn btn--outline">↑ Return home</a>
+        <a href="{{ "projects" | relURL }}" class="btn btn--ghost">Browse projects</a>
+      </div>
+    </div>
+  </section>
+</main>
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+(function () {
+  var c = document.getElementById('err404-particles');
+  if (!c) return;
+  for (var i = 0; i < 32; i++) {
+    var p = document.createElement('div');
+    p.className = 'err404__particle';
+    var size = 2 + Math.random() * 9;
+    p.style.cssText = [
+      'left:' + (Math.random() * 100) + '%',
+      'width:' + size + 'px',
+      'height:' + size + 'px',
+      'animation-duration:' + (6 + Math.random() * 11) + 's',
+      'animation-delay:' + (-Math.random() * 15) + 's',
+      'opacity:' + (0.10 + Math.random() * 0.38)
+    ].join(';');
+    c.appendChild(p);
+  }
+})();
+</script>
+{{ end }}

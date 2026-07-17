@@ -1,0 +1,45 @@
+{{ define "main" }}
+<main>
+  {{/* ===== PROJECT BANNER ===== */}}
+  <section class="article-banner">
+    {{ with .Params.image }}<img src="{{ . | relURL }}" alt="{{ $.Title }}">{{ end }}
+    <div class="article-banner__scrim"></div>
+    <div class="article-banner__inner">
+      <span class="eyebrow eyebrow--rule eyebrow--ondark">
+        {{ .Params.client }}{{ with .Params.years }} · {{ . }}{{ end }}
+      </span>
+      <h1>{{ .Title }}</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:760px;">
+      {{ with .Params.summary }}<p style="font:var(--type-lead); color:var(--text-heading); margin-bottom:var(--space-5);">{{ . }}</p>{{ end }}
+
+      <div style="display:flex; gap:var(--space-3); flex-wrap:wrap; margin-bottom:var(--space-6);">
+        {{ with .Params.site_url }}<a class="btn btn--action" href="{{ . }}" target="_blank" rel="noopener">Visit {{ $.Params.site_label | default "the site" }} <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>{{ end }}
+        {{ with .Params.repo }}<a class="btn btn--outline" href="{{ . }}" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> Code</a>{{ end }}
+      </div>
+
+      {{ with .Params.stack }}
+        <div class="card__stack" style="margin-bottom:var(--space-7);">
+          {{ range . }}<span class="card__chip">{{ . }}</span>{{ end }}
+        </div>
+      {{ end }}
+
+      <div class="article" style="max-width:none; margin:0; padding:0;">{{ .Content }}</div>
+
+      {{ with .Params.links }}
+        <h2 style="font:var(--type-h3); margin-top:var(--space-7);">Explore</h2>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:var(--space-2);">
+          {{ range . }}
+            <li><a href="{{ .url }}" target="_blank" rel="noopener"><i class="fas fa-arrow-right" aria-hidden="true" style="font-size:.8em; color:var(--accent);"></i> {{ .label }}</a></li>
+          {{ end }}
+        </ul>
+      {{ end }}
+
+      <p style="margin-top:var(--space-8);"><a href="{{ "projects" | relURL }}">← All projects</a></p>
+    </div>
+  </section>
+</main>
+{{ end }}

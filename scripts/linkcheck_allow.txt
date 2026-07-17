@@ -1,0 +1,1 @@
+# glob patterns for tolerated broken internal links (fnmatch). one per line.
