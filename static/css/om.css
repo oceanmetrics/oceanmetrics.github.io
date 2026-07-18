@@ -61,12 +61,15 @@
 .card__meta-row{ display:flex; align-items:center; gap:var(--space-3); flex-wrap:wrap;
   font-family:var(--font-mono); font-size:var(--text-xs); color:var(--text-body); letter-spacing:var(--ls-wide); }
 
-/* ---- Services — editorial columns, a teal rule per verb (no icon tiles) - */
+/* ---- Services — a line-icon beside each verb, description below --------- */
 .services{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(var(--space-5), 4vw, var(--space-7)); }
 @media (max-width:860px){ .services{ grid-template-columns:1fr; } }
-.service{ display:flex; flex-direction:column; gap:var(--space-3);
-  padding-top:var(--space-4); border-top:2px solid var(--accent); }
-.service h3{ margin:0; font:var(--type-h3); font-size:var(--text-xl); color:var(--text-heading); }
+.service{ display:flex; flex-direction:column; gap:var(--space-3); }
+.service h3{ display:flex; align-items:center; gap:var(--space-3); margin:0;
+  font:var(--type-h3); font-size:var(--text-xl); color:var(--text-heading); }
+.service__icon{ display:inline-flex; align-items:center; justify-content:center; width:2.3rem; height:2.3rem; flex:none;
+  border:1px solid var(--border-strong); border-radius:var(--radius-md); color:var(--accent); }
+.service__icon svg{ width:1.2rem; height:1.2rem; }
 .service p{ margin:0; font:var(--type-small); color:var(--text-body); max-width:38ch; }
 
 /* ---- About / bio block ------------------------------------------------ */
@@ -80,14 +83,31 @@
 .bio__links{ display:flex; flex-wrap:wrap; gap:var(--space-3); margin-top:var(--space-4); }
 
 /* ---- Client-logo strip — promoted proof, theme-aware ------------------ */
-/* source logos are white silhouettes; --logo-filter darkens them on light,
-   keeps them light on dark (see colors.css). Bigger + more present than before. */
 .client-strip{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
   gap:clamp(var(--space-6), 5vw, var(--space-8)); margin-top:var(--space-6); }
 .client-strip img{ height:42px; width:auto; object-fit:contain;
-  opacity:var(--logo-opacity); filter:var(--logo-filter);
-  transition:opacity var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
-.client-strip img:hover{ opacity:1; transform:translateY(-2px); }
+  transition:filter var(--dur-base) var(--ease-out), opacity var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+.client-strip img:hover{ transform:translateY(-2px); }
+
+/* full-color/detailed logos (BOEM, NOAA): desaturated at rest, true color on hover.
+   On dark, invert the grayscale so the dark seals stay legible (detail preserved). */
+.client-logo--color{ filter:grayscale(1); opacity:.78; }
+.client-logo--color:hover{ filter:grayscale(0); opacity:1; }
+:root[data-theme="dark"] .client-logo--color{ filter:grayscale(1) invert(1); opacity:.85; }
+:root[data-theme="dark"] .client-logo--color:hover{ filter:none; opacity:1; }
+
+/* white-silhouette logos (NASA, NREL, NCEAS): ink on light, white on dark. */
+.client-logo--mono{ filter:brightness(0); opacity:.66; }
+.client-logo--mono:hover{ opacity:.92; }
+:root[data-theme="dark"] .client-logo--mono{ filter:brightness(0) invert(1); opacity:.82; }
+:root[data-theme="dark"] .client-logo--mono:hover{ opacity:1; }
+
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .client-logo--color{ filter:grayscale(1) invert(1); opacity:.85; }
+  :root:not([data-theme="light"]) .client-logo--color:hover{ filter:none; opacity:1; }
+  :root:not([data-theme="light"]) .client-logo--mono{ filter:brightness(0) invert(1); opacity:.82; }
+  :root:not([data-theme="light"]) .client-logo--mono:hover{ opacity:1; }
+}
 
 /* ---- Past-projects compact list --------------------------------------- */
 .past-list{ list-style:none; margin:var(--space-6) 0 0; padding:0; display:flex; flex-direction:column; }

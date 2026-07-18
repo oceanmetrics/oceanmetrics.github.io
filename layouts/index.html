@@ -50,15 +50,15 @@
       </div>
       <div class="services">
         <div class="service">
-          <h3>Analyze</h3>
+          <h3><span class="service__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><circle cx="9" cy="9" r="1" fill="currentColor" stroke="none"/><circle cx="14" cy="6.5" r="1" fill="currentColor" stroke="none"/><circle cx="12.5" cy="13" r="1" fill="currentColor" stroke="none"/><circle cx="18" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="8" cy="15.5" r="1" fill="currentColor" stroke="none"/></svg></span>Analyze</h3>
           <p>Reproducible science in R and Python — species distribution models, spatial statistics, and data pipelines that others can rerun and trust.</p>
         </div>
         <div class="service">
-          <h3>Develop</h3>
+          <h3><span class="service__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Develop</h3>
           <p>Interactive maps, dashboards, and open-data platforms — Shiny, Quarto, and web apps backed by APIs, spatial databases, and cloud tiling.</p>
         </div>
         <div class="service">
-          <h3>Train</h3>
+          <h3><span class="service__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 10v6"/></svg></span>Train</h3>
           <p>Certified Software &amp; Data Carpentry instruction — reproducible research, spatial analysis, and the tooling to make a team self-sufficient.</p>
         </div>
       </div>
@@ -75,10 +75,10 @@
         the ocean with the same principle: rigorous work that embraces uncertainty.
       </p>
       <a class="btn btn--outline" href="{{ "about" | relURL }}">More about Ocean Metrics <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <p class="eyebrow" style="justify-content:center; margin-top:var(--space-8);">Work delivered for</p>
+      <p class="eyebrow" style="display:flex; justify-content:center; margin-top:var(--space-8);">Work delivered for</p>
       <div class="client-strip">
         {{ range hugo.Data.clients }}
-          <img src="{{ .logo | relURL }}" alt="{{ .name }}" title="{{ .name }}">
+          <img class="client-logo client-logo--{{ .tone | default "mono" }}" src="{{ .logo | relURL }}" alt="{{ .name }}" title="{{ .name }}">
         {{ end }}
       </div>
     </div>

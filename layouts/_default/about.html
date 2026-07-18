@@ -33,9 +33,9 @@
     <div class="container" style="max-width:820px; text-align:center;">
       <span class="eyebrow eyebrow--rule" style="justify-content:center;">Clients &amp; sponsors</span>
       <h2 style="margin:var(--space-3) 0 var(--space-2);">Work delivered for</h2>
-      <div class="client-strip client-strip--onlight">
+      <div class="client-strip">
         {{ range hugo.Data.clients }}
-          <img src="{{ .logo | relURL }}" alt="{{ .name }}" title="{{ .name }}">
+          <img class="client-logo client-logo--{{ .tone | default "mono" }}" src="{{ .logo | relURL }}" alt="{{ .name }}" title="{{ .name }}">
         {{ end }}
       </div>
     </div>

@@ -116,10 +116,6 @@
   --divider:        var(--line-100);
 
   --focus-ring:     var(--teal-500);
-
-  /* client-logo treatment flips by theme (white-silhouette source logos) */
-  --logo-filter:  light-dark(brightness(0) saturate(0), brightness(0) invert(1));
-  --logo-opacity: light-dark(.72, .85);
 }
 
 /* Fallback: browsers without light-dark() get the light palette (static). */
@@ -131,6 +127,5 @@
     --text-strong: #082129; --text-heading: #123a45; --text-body: #3c5b64; --text-muted: #5c7880;
     --brand-text: #0c7288; --brand-hover: #0a5c6e; --accent: #1aa0bd; --accent-hover: #0c7288;
     --link: #0c7288;
-    --logo-filter: brightness(0) saturate(0); --logo-opacity: .72;
   }
 }

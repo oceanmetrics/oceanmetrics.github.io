@@ -1,12 +1,18 @@
-# Client / funder logos for the "Trusted by" strips (home + about).
-# Logos are white-on-transparent; .client-strip--onlight tints them dark for light sections.
+# Client / funder logos for the "Work delivered for" strips (home + about).
+# tone: "color" = full-color/detailed logo (grayscale at rest, real color on hover);
+#       "mono"  = white-silhouette logo (darkened on light, kept white on dark).
 - name: BOEM
   logo: img/logos/boem.png
+  tone: color
 - name: NOAA
   logo: img/logos/noaa.png
+  tone: color
 - name: NASA
   logo: img/logos/nasa.png
+  tone: mono
 - name: NREL
   logo: img/logos/nrel.png
+  tone: mono
 - name: NCEAS
   logo: img/logos/nceas.png
+  tone: mono
