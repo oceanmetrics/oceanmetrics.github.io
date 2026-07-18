@@ -15,8 +15,12 @@
 .om-mark{ width:1.6em; height:1.6em; flex:none; display:block; color:var(--brand-text);
   transition:transform var(--dur-base) var(--ease-out); }
 .site-header__logo:hover .om-mark{ transform:rotate(-8deg); }
-.om-wordmark__ocean{ color:var(--brand-text); }
-.om-wordmark__metrics{ color:var(--text-heading); }
+/* logotype: fluid serif "Ocean" (water) + monospace "Metrics" (measurement) —
+   a deliberate, scoped exception to the one-display-voice rule */
+.om-wordmark__ocean{ font-family:'Fraunces', Georgia, var(--font-display); font-weight:600;
+  letter-spacing:-0.005em; color:var(--brand-text); }
+.om-wordmark__metrics{ font-family:var(--font-mono); font-weight:500;
+  font-size:.9em; letter-spacing:0.005em; color:var(--text-heading); }
 .site-header__logo:hover .om-wordmark{ text-decoration:none; }
 .site-nav__icon{ font-size:1.15rem; color:var(--text-heading) !important; display:inline-flex; align-items:center; }
 .site-nav__icon:hover{ color:var(--brand-text) !important; background:transparent !important; }

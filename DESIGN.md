@@ -164,6 +164,7 @@ A teal-and-yellow ocean, tuned so the warm and cool stay balanced: teal never ti
 **Display Font:** Space Grotesk (with Segoe UI, system-ui fallback)
 **Body Font:** IBM Plex Sans (with system-ui, -apple-system fallback)
 **Label/Mono Font:** IBM Plex Mono (with SFMono-Regular, ui-monospace fallback)
+**Wordmark Accent:** Fraunces (fluid display serif, calm cut — opsz 60, wght 600, soft/wonk off) — the word "Ocean" in the logotype only, loaded subset to O-c-e-a-n. Also a full document family, so it doubles for brand-consistent proposals.
 
 **Character:** A geometric-scientific display face over a humanist, highly legible body — technical without going cold. The monospace carries actual data (coordinates, station codes, stats, stack tags, labels), which is what earns a third family. A 1.20 minor-third scale from 12px to 84px.
 
@@ -178,7 +179,7 @@ A teal-and-yellow ocean, tuned so the warm and cool stay balanced: teal never ti
 ### Named Rules
 **The Mono-Means-Data Rule.** IBM Plex Mono is reserved for things literally measured or coded: stats, coordinates, counts, stack chips, dates, short labels. Prose is never mono; mono is never decorative.
 
-**The One-Display-Voice Rule.** All headings, the wordmark, and card titles use Space Grotesk. Never add a second display or serif face for "editorial" flavor.
+**The One-Display-Voice Rule.** All headings and card titles use Space Grotesk. The one deliberate exception is the wordmark logotype: a fluid serif ("Ocean", Fraunces) paired with mono ("Metrics", IBM Plex Mono) — fluid water beside measured data. Never add a second display or serif face anywhere else, or for "editorial" flavor.
 
 **The One-Kicker Rule.** The mono uppercase eyebrow is a brand element, not section grammar. Use it sparingly (a hero kicker, the occasional section) — never above every section, which reads as AI scaffolding.
 
@@ -226,6 +227,7 @@ Components are precise, calm, and warm: crisp geometry, restrained radii, state 
 
 ### Wordmark + ensō (signature)
 - The mark (an ensō ring in `currentColor` + a fixed-yellow horizon waterline) precedes the "Ocean Metrics" logotype. Ring color = `brand-text` (deep teal on light, sky-teal on dark); the yellow waterline is the constant warm spark. On the footer the ring flips to sky-teal.
+- The logotype pairs two textures: **"Ocean" in Fraunces** (fluid display serif) and **"Metrics" in IBM Plex Mono** (measured data) — the brand thesis in the logo, fluid water beside measurement. This is the sole exception to the One-Display-Voice Rule.
 
 ### Animated hero (signature)
 - The ensō drawn as a sunrise: a circle contracts to a point, spreads into the horizon line, then rises as the ring — SMIL, self-contained, teal-and-yellow gradient, with a `prefers-reduced-motion` static final frame. It *is* the hero; it needs no photo.

@@ -5,6 +5,13 @@
 
    NOTE: The original marinebon.org Hugo theme shipped no brand typeface
    (Bootstrap defaults). This trio is a deliberate MBON choice. Loaded from
-   Google Fonts here; self-host the .woff2 files for production. */
+   Google Fonts here; self-host the .woff2 files for production.
+
+   Wordmark-only: Fraunces (a fluid display serif — calm cut: opsz 60, wght 600,
+   soft/wonk off) styles just the word "Ocean" in the logotype — subset via
+   &text=Ocean to ship only the 5 glyphs (~2KB). A deliberate, scoped exception
+   to the one-display-voice rule. (Fraunces is also a full document family,
+   handy for brand-consistent proposals.) */
 
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@60,600,0,0&text=Ocean&display=swap');

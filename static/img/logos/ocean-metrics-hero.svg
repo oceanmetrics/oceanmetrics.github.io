@@ -25,8 +25,7 @@
     </linearGradient>
 
     <!-- horizon line: deep teal at the edges, a warm sun glint at center
-         (userSpaceOnUse: gradients don't render on zero-area <line> bboxes,
-         and this keeps the glint fixed at center while the line spreads) -->
+         (userSpaceOnUse: keeps the glint fixed at center while the line spreads) -->
     <linearGradient id="om-grad-line" gradientUnits="userSpaceOnUse"
                     x1="60" y1="256" x2="452" y2="256">
       <stop offset="0"    stop-color="#0c4553"/>
@@ -50,12 +49,13 @@
     </mask>
   </defs>
 
-  <!-- static final frame for prefers-reduced-motion -->
+  <!-- static final frame for prefers-reduced-motion.
+       horizon is a shallow lens: a subtle bulge at center tapering to thin
+       endpoints, echoing the waterline in the real logo mark. -->
   <g class="om-static">
     <circle cx="256" cy="256" r="120" fill="none" stroke="url(#om-grad-ring)"
             stroke-width="45" mask="url(#om-horizon-gap)"/>
-    <line x1="60" y1="256" x2="452" y2="256" stroke="url(#om-grad-line)"
-          stroke-width="5.5" stroke-linecap="round"/>
+    <path fill="url(#om-grad-line)" d="M 60 256 Q 256 249 452 256 Q 256 263 60 256 z"/>
   </g>
 
   <g class="om-anim">
@@ -68,9 +68,7 @@
                keySplines="0.37 0 0.63 1;0.37 0 0.63 1" repeatCount="indefinite"/>
     </circle>
 
-    <!-- act 1: the full circle contracts to a point at its center
-         (r=2 + stroke 7 ends as an 11px dot, exactly matching the line's
-         round-cap dot below for a seamless handoff) -->
+    <!-- act 1: the full circle contracts to a point at its center -->
     <circle cx="256" cy="256" r="120" fill="none" stroke="url(#om-grad-ring)" stroke-width="45">
       <animate id="contract" attributeName="r" begin="0.6s" dur="0.75s"
                values="120;2" calcMode="spline" keySplines="0.55 0 1 0.45" fill="freeze"/>
@@ -79,17 +77,15 @@
       <set attributeName="opacity" to="0" begin="contract.end" fill="freeze"/>
     </circle>
 
-    <!-- act 2: the point spreads outward into the horizon, thinning as it stretches -->
-    <line x1="256" y1="256" x2="256" y2="256" stroke="url(#om-grad-line)"
-          stroke-width="11" stroke-linecap="round" opacity="0">
+    <!-- act 2: the seed spreads outward into the horizon — a shallow lens that
+         widens from a center bead to a full waterline, keeping the subtle
+         mid bulge and tapering to thin endpoints (morph the path 'd') -->
+    <path fill="url(#om-grad-line)" d="M 250 256 Q 256 252.5 262 256 Q 256 259.5 250 256 z" opacity="0">
       <set attributeName="opacity" to="1" begin="contract.end" fill="freeze"/>
-      <animate id="spread" attributeName="x1" begin="contract.end" dur="0.7s"
-               values="256;60" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/>
-      <animate attributeName="x2" begin="contract.end" dur="0.7s"
-               values="256;452" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/>
-      <animate attributeName="stroke-width" begin="contract.end" dur="0.7s"
-               values="11;5.5" calcMode="spline" keySplines="0.3 0 0.4 1" fill="freeze"/>
-    </line>
+      <animate id="spread" attributeName="d" begin="contract.end" dur="0.7s"
+               values="M 250 256 Q 256 252.5 262 256 Q 256 259.5 250 256 z;M 60 256 Q 256 249 452 256 Q 256 263 60 256 z"
+               calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/>
+    </path>
 
     <!-- act 3: sunrise — a squashed ellipse rises out of the horizon band,
          top mirrored by bottom, overshooting slightly before settling as the ring -->
