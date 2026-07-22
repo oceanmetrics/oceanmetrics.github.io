@@ -6,9 +6,9 @@ client: US MBON
 years: "2024 – present"
 role: Site architect & developer
 image: img/projects/marinebon.png
-site_url: https://marinebon.org
+site_url: https://marinebon.org/hugo2
 site_label: MarineBON.org
-repo: https://github.com/marinebon
+repo: https://github.com/marinebon/hugo2
 summary: A network hub for the U.S. Marine Biodiversity Observation Network — connecting regional observing nodes, tools, datasets, and methods.
 stack:
   - Hugo
@@ -29,7 +29,7 @@ into a connected, open record of marine life. Its web presence needs to do the s
 nodes, a tool and dataset catalog, methods, news, and partner organizations into one coherent,
 maintainable place.
 
-I designed and built that site: a custom **Hugo** architecture with its own design-token system, an
+I designed and built a prototype of the https://marinebon.org site: a custom **Hugo** architecture with its own design-token system, an
 interactive rotating **d3 globe** of network nodes, a faceted tag-and-search system, and a no-Git
 contribution pipeline that lets scientists add content through GitHub issue forms. Python harvesters
 pull datasets and papers automatically from OBIS, GBIF, EDI, and ERDDAP.
