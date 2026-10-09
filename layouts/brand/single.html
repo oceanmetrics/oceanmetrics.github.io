@@ -1,0 +1,128 @@
+{{ define "main" }}
+{{/* the brand one-pager: everything resolves through the site tokens, so the page itself
+     answers to the theme toggle — the fastest proof of the Both-Themes-Or-Neither rule. */}}
+<main class="brand-page">
+  <section class="page-header">
+    <div class="page-header__inner">
+      <span class="eyebrow eyebrow--rule eyebrow--ondark">{{ .Params.eyebrow }}</span>
+      <h1>{{ .Title }}</h1>
+      <p class="page-header__lead">{{ .Params.summary }}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="brand-inner">
+
+      <!-- 1 · the mark and wordmark -->
+      <h2><span class="brand-no">01</span> Mark &amp; wordmark</h2>
+      <div class="brand-grid brand-grid--mark">
+        <div class="brand-card brand-card--center">
+          {{ readFile "static/img/logos/ocean-metrics-mark.svg" | safeHTML }}
+          <p class="brand-cap">The ensō — a brush-drawn ring rising like a sun over a horizon waterline. The ring inherits the surrounding text color (deep teal on light, sky-teal on dark); the waterline is always Sun yellow.</p>
+        </div>
+        <div class="brand-card brand-card--center">
+          <span class="om-wordmark" style="font-size:2rem;">{{ readFile "static/img/logos/ocean-metrics-mark.svg" | safeHTML }}<span class="om-wordmark__ocean">Ocean</span><span class="om-wordmark__metrics">Metrics</span></span>
+          <p class="brand-cap">The logotype pairs two textures: <strong>“Ocean” in Fraunces</strong> (a fluid display serif — water) and <strong>“Metrics” in IBM Plex Mono</strong> (measured data). The brand thesis in one word pair, and the sole exception to the one-display-voice rule.</p>
+        </div>
+      </div>
+      <p class="brand-note">A product of the studio names itself after the wordmark: <em>mark · Ocean Metrics · product</em> (e.g. <a href="https://oceanmetrics.io/places/">Places</a>). Never recolor the waterline, put the ring on a busy photo, or set “Ocean Metrics” in a single face.</p>
+
+      <!-- 2 · color -->
+      <h2><span class="brand-no">02</span> Color</h2>
+      <p>A teal-and-yellow ocean: living-reef <strong>teal</strong> carries brand, links and interaction; a warm <strong>sun</strong> yellow is the single warm accent; deep teal-navy anchors. Every value resolves in light <em>and</em> dark via CSS <code>light-dark()</code> — the pairs below are light / dark.</p>
+      {{ $swatches := slice
+        (dict "name" "Teal — brand" "hex" "#0c7288" "dark" "#86d6e5 as text" "fg" "#fff")
+        (dict "name" "Teal Deep — hover" "hex" "#0a5c6e" "dark" "" "fg" "#fff")
+        (dict "name" "Teal Bright — accent" "hex" "#1aa0bd" "dark" "#43b9d2" "fg" "#fff")
+        (dict "name" "Sky Teal — on-dark" "hex" "#86d6e5" "dark" "" "fg" "#082129")
+        (dict "name" "Sun — the one warm" "hex" "#f5b528" "dark" "" "fg" "#082129")
+        (dict "name" "Sun Deep" "hex" "#e0951a" "dark" "" "fg" "#082129")
+        (dict "name" "Deep Navy — anchor" "hex" "#0c4553" "dark" "" "fg" "#fff")
+        (dict "name" "Night — dark ground" "hex" "#0a2831" "dark" "" "fg" "#fff")
+        (dict "name" "Ink Heading" "hex" "#123a45" "dark" "#e6f4f7" "fg" "#fff")
+        (dict "name" "Ink Body" "hex" "#3c5b64" "dark" "#b7d0d6" "fg" "#fff")
+        (dict "name" "Line" "hex" "#d6ebef" "dark" "#234853" "fg" "#082129")
+        (dict "name" "Foam — paper" "hex" "#f4fafb" "dark" "#0a2831" "fg" "#082129")
+      }}
+      <div class="brand-swatches">
+        {{ range $swatches }}
+        <div class="brand-swatch">
+          <div class="brand-swatch__chip" style="background:{{ .hex }};color:{{ .fg }};">{{ .hex }}</div>
+          <div class="brand-swatch__name">{{ .name }}</div>
+          {{ with .dark }}<div class="brand-swatch__dark">dark: {{ . }}</div>{{ end }}
+        </div>
+        {{ end }}
+      </div>
+      <div class="brand-rules">
+        <div class="brand-rule"><strong>The Rationed Sun Rule.</strong> Yellow is a sunrise, not a coat of paint: at most one warm element per view. Two yellows in one viewport means one is wrong.</div>
+        <div class="brand-rule"><strong>Teal carries the rest.</strong> Brand, links, buttons, focus — all teal. Yellow never takes a job teal should do, and never carries white text (dark ink only).</div>
+        <div class="brand-rule"><strong>Both themes or neither.</strong> Every color ships a light and a dark value through <code>light-dark()</code>. A hex that only works in one theme breaks the toggle.</div>
+      </div>
+
+      <!-- 3 · typography -->
+      <h2><span class="brand-no">03</span> Typography</h2>
+      <div class="brand-type">
+        <div class="brand-type__row"><span class="brand-type__label">Display — Space Grotesk 700</span><span class="brand-type__sample" style="font-family:var(--font-display);font-weight:700;font-size:2rem;letter-spacing:-0.02em;">Measuring the ocean</span></div>
+        <div class="brand-type__row"><span class="brand-type__label">Body — IBM Plex Sans 400</span><span class="brand-type__sample" style="font-family:var(--font-sans);font-size:1.05rem;">Rigorous, reproducible analyses, maps, and open-data platforms for ocean programs.</span></div>
+        <div class="brand-type__row"><span class="brand-type__label">Data — IBM Plex Mono 500</span><span class="brand-type__sample" style="font-family:var(--font-mono);font-size:.95rem;letter-spacing:.02em;">35.4164°N 121.3568°W · NMS:PMNM · n=14,734</span></div>
+        <div class="brand-type__row"><span class="brand-type__label">Wordmark only — Fraunces 600</span><span class="brand-type__sample" style="font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:1.8rem;color:var(--brand-text);">Ocean</span></div>
+      </div>
+      <div class="brand-rules">
+        <div class="brand-rule"><strong>Mono means data.</strong> IBM Plex Mono is for things literally measured or coded — coordinates, ids, counts, dates, labels. Prose is never mono; mono is never decorative.</div>
+        <div class="brand-rule"><strong>One display voice.</strong> All headings are Space Grotesk. Fraunces appears in the wordmark’s “Ocean” and nowhere else.</div>
+      </div>
+
+      <!-- 4 · theming -->
+      <h2><span class="brand-no">04</span> Light &amp; dark</h2>
+      <p>Both themes are first-class: light is sunlit shallows, dark is the same ocean after dusk. The OS preference is the default; an explicit choice persists as <code>localStorage['om-theme']</code>, lands on <code>&lt;html data-theme&gt;</code> before first paint (an inline head script — no flash), and a 2.15&nbsp;rem hairline toggle in the header flips it. Surfaces are flat at rest and lift on interaction. Try the toggle above — this page obeys it.</p>
+
+      <!-- 5 · assets and use -->
+      <h2><span class="brand-no">05</span> Assets &amp; use</h2>
+      <table class="brand-assets">
+        <tr><td><a href="{{ "img/logos/ocean-metrics-mark.svg" | relURL }}">ocean-metrics-mark.svg</a></td><td>the ensō mark — ring in <code>currentColor</code>, waterline fixed <code>#f5b528</code></td></tr>
+        <tr><td><a href="{{ "img/logos/ocean-metrics.svg" | relURL }}">ocean-metrics.svg</a></td><td>mark + logotype lockup</td></tr>
+        <tr><td><a href="{{ "img/logos/ocean-metrics-hero.svg" | relURL }}">ocean-metrics-hero.svg</a></td><td>the animated ensō-sunrise (SMIL, reduced-motion static frame)</td></tr>
+        <tr><td><a href="{{ "css/tokens/colors.css" | relURL }}">tokens/colors.css</a></td><td>the full palette as CSS custom properties, light + dark via <code>light-dark()</code></td></tr>
+        <tr><td><a href="https://github.com/oceanmetrics/oceanmetrics.github.io/blob/main/DESIGN.md">DESIGN.md</a></td><td>the complete design system — components, elevation, do’s and don’ts</td></tr>
+      </table>
+      <p class="brand-note">Webfonts: <a href="https://fonts.google.com/specimen/Space+Grotesk">Space Grotesk</a>, <a href="https://fonts.google.com/specimen/IBM+Plex+Sans">IBM Plex Sans</a>, <a href="https://fonts.google.com/specimen/IBM+Plex+Mono">IBM Plex Mono</a>, and <a href="https://fonts.google.com/specimen/Fraunces">Fraunces</a> subset to <code>&amp;text=Ocean</code> (~2&nbsp;KB). In use: <a href="https://oceanmetrics.io/">oceanmetrics.io</a> · <a href="https://oceanmetrics.io/places/">Places</a> · <a href="https://oceanmetrics.io/erddap-places/">erddap-places</a>.</p>
+
+    </div>
+  </section>
+</main>
+
+<style>
+  .brand-inner{ max-width:var(--container); margin:0 auto; padding:0 var(--space-6); }
+  .brand-page h2{ display:flex; align-items:baseline; gap:var(--space-3); font:var(--type-h2); color:var(--text-heading); margin:var(--space-8) 0 var(--space-4); }
+  .brand-no{ font-family:var(--font-mono); font-size:var(--text-sm); color:var(--accent-hover); letter-spacing:var(--ls-wide); }
+  .brand-grid--mark{ display:grid; grid-template-columns:1fr 1fr; gap:var(--space-5); }
+  @media (max-width:760px){ .brand-grid--mark{ grid-template-columns:1fr; } }
+  .brand-card{ background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:var(--space-6); }
+  .brand-card--center{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:var(--space-4); }
+  .brand-card--center > svg.om-mark{ width:7rem; height:7rem; color:var(--brand-text); }
+  .brand-cap{ font-size:var(--text-sm); color:var(--text-body); max-width:44ch; margin:0; }
+  .brand-note{ font-size:var(--text-sm); color:var(--text-body); }
+  .brand-swatches{ display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:var(--space-4); margin:var(--space-5) 0; }
+  .brand-swatch__chip{ height:64px; border-radius:var(--radius-md); border:1px solid var(--border);
+    display:flex; align-items:flex-end; padding:var(--space-2) var(--space-3);
+    font-family:var(--font-mono); font-size:var(--text-xs); letter-spacing:.04em; }
+  .brand-swatch__name{ font-size:var(--text-sm); color:var(--text-heading); font-weight:var(--fw-semibold); margin-top:var(--space-2); }
+  .brand-swatch__dark{ font-family:var(--font-mono); font-size:var(--text-xs); color:var(--text-muted); }
+  .brand-rules{ display:grid; gap:var(--space-3); margin:var(--space-5) 0; }
+  .brand-rule{ border:1px solid var(--border); border-radius:var(--radius-md); padding:var(--space-4) var(--space-5);
+    background:var(--bg-tint); color:var(--text-body); font-size:var(--text-sm); }
+  .brand-rule strong{ color:var(--text-heading); }
+  .brand-type{ border:1px solid var(--border); border-radius:var(--radius-lg); background:var(--bg-surface); }
+  .brand-type__row{ display:grid; grid-template-columns:220px 1fr; gap:var(--space-5); align-items:center;
+    padding:var(--space-4) var(--space-5); border-bottom:1px solid var(--divider); }
+  .brand-type__row:last-child{ border-bottom:none; }
+  @media (max-width:760px){ .brand-type__row{ grid-template-columns:1fr; gap:var(--space-2); } }
+  .brand-type__label{ font-family:var(--font-mono); font-size:var(--text-xs); text-transform:uppercase;
+    letter-spacing:var(--ls-wide); color:var(--text-muted); }
+  .brand-type__sample{ color:var(--text-heading); }
+  .brand-assets{ width:100%; border-collapse:collapse; font-size:var(--text-sm); }
+  .brand-assets td{ padding:var(--space-3) var(--space-4) var(--space-3) 0; border-bottom:1px solid var(--divider);
+    color:var(--text-body); vertical-align:top; }
+  .brand-assets td:first-child{ white-space:nowrap; font-family:var(--font-mono); font-size:var(--text-xs); }
+</style>
+{{ end }}
