@@ -1,0 +1,50 @@
+# Facet registry for the Tools gallery (/tools/). Presentation only: labels, colors and
+# icons for the values used in content/tools/*.md front matter. The filter derives its
+# pills from the tags actually present on the page, so an unregistered value still works
+# (it is humanized). Order here = order of the pill rows.
+#
+#   project  which program the tool was built for (a tool may list several)
+#   kind     what kind of thing it is; front matter field is `tool_type` (`type` and `kind` are reserved by Hugo)
+#   status   production | beta | archived | superseded (one per tool)
+#   tech     languages, frameworks and formats (free list; labels only)
+- key: project
+  label: Project
+  values:
+    calcofi:           { name: CalCOFI,           url: /projects/calcofi/,           color: "#0c7288" }
+    marinesensitivity: { name: Marine Sensitivity, url: /projects/marinesensitivity/, color: "#1a7a4e" }
+    marinebon:         { name: MarineBON,         url: /projects/marinebon/,         color: "#6d4aa7" }
+    oceanmetrics:      { name: Ocean Metrics,     url: /about/,                      color: "#e0951a" }
+- key: kind
+  label: Type
+  values:
+    app:      { name: App,            icon: fa-window-maximize }
+    package:  { name: Package,        icon: fa-cube }
+    api:      { name: API / service,  icon: fa-plug }
+    catalog:  { name: Data catalog,   icon: fa-layer-group }
+    docs:     { name: Documentation,  icon: fa-book-open }
+    notebook: { name: Workflows,      icon: fa-diagram-project }
+    site:     { name: Website,        icon: fa-globe }
+- key: status
+  label: Status
+  values:
+    production: { name: Production, color: "#1a7a4e" }
+    beta:       { name: Beta,       color: "#e0951a" }
+    archived:   { name: Archived,   color: "#5c7880" }
+    superseded: { name: Superseded, color: "#5c7880" }
+- key: tech
+  label: Technology
+  values:
+    duckdb-wasm: { name: DuckDB-WASM }
+    mapbox-gl:   { name: Mapbox GL }
+    deck-gl:     { name: deck.gl }
+    h3:          { name: H3 }
+    stac:        { name: STAC }
+    cog:         { name: COG }
+    erddap:      { name: ERDDAP }
+    fastapi:     { name: FastAPI }
+    postgis:     { name: PostGIS }
+    pmtiles:     { name: PMTiles }
+    titiler:     { name: TiTiler }
+    sql:         { name: SQL }
+    gee:         { name: Google Earth Engine }
+    d3:          { name: d3 }

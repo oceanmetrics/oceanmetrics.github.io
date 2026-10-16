@@ -21,3 +21,7 @@ skills-lock.json
 .Rhistory
 .RData
 .Ruserdata
+
+# local python env for scripts/tools_*.py
+.venv/
+__pycache__/

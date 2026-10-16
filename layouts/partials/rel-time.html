@@ -1,0 +1,11 @@
+{{/* "3 days ago" style string for an RFC3339 timestamp (.) */}}
+{{ $t := time.AsTime . }}
+{{ $days := int (div (now.Sub $t).Hours 24) }}
+{{ $out := "" }}
+{{ if lt $days 1 }}{{ $out = "today" }}
+{{ else if eq $days 1 }}{{ $out = "yesterday" }}
+{{ else if lt $days 14 }}{{ $out = printf "%d days ago" $days }}
+{{ else if lt $days 60 }}{{ $out = printf "%d weeks ago" (div $days 7) }}
+{{ else if lt $days 730 }}{{ $out = printf "%d months ago" (div $days 30) }}
+{{ else }}{{ $out = printf "%d years ago" (div $days 365) }}{{ end }}
+{{ return $out }}

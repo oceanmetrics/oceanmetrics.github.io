@@ -1,0 +1,218 @@
+{
+ "calcofi-docs": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "calcofi-erddap": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "calcofi-io": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "calcofi-stac": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": true,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "calcofi-workflows": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "calcofi4db": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "calcofi4py": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "calcofi4r": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "ctd-transects": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "ctd-viz": {
+  "checked": "2026-10-16T09:43:39Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:43:39Z"
+ },
+ "db-query": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "db-schema": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "erddap-places": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": true,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "explore": {
+  "checked": "2026-10-16T09:43:39Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:43:39Z"
+ },
+ "extractr": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "marine-sdms": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "marinebon-org": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "marinebon-ui": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": true,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "marinesensitivity-org": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "msens": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "msens-atlas": {
+  "checked": "2026-10-16T09:43:39Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:43:39Z"
+ },
+ "msens-docs": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "msens-query": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "msens-stac": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": true,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "msens-stac-api": {
+  "checked": "2026-10-16T09:43:39Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:43:39Z"
+ },
+ "msens-workflows": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "obis-hex": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "obisindicators": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "om-atlas": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "om-erddap": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "om-workflows": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "places": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": true,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "pollutants": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "seascaper": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "stac-sdm": {
+  "checked": "2026-10-16T09:27:00Z",
+  "dark": true,
+  "light": true,
+  "taken": "2026-10-16T09:27:00Z"
+ },
+ "station-explorer": {
+  "checked": "2026-10-16T09:43:39Z",
+  "dark": false,
+  "light": true,
+  "taken": "2026-10-16T09:43:39Z"
+ }
+}

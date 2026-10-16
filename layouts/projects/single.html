@@ -38,6 +38,19 @@
         </ul>
       {{ end }}
 
+      {{/* ===== TOOLS BUILT FOR THIS PROJECT (from content/tools/) ===== */}}
+      {{ $slug := path.BaseName .File.ContentBaseName }}
+      {{ $tools := where (where site.RegularPages "Section" "tools") "Params.project" "intersect" (slice $slug) }}
+      {{ with $tools }}
+        <div class="section-head" style="margin-top:var(--space-8);">
+          <h2 style="font:var(--type-h3);">Tools</h2>
+          <a class="btn btn--outline btn--sm" href="{{ printf "tools/?project=%s" $slug | relURL }}">All {{ len . }} tools <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+        <div class="tools-grid tools-grid--compact">
+          {{ range first 6 (sort . "Params.weight") }}{{ partial "card-tool.html" . }}{{ end }}
+        </div>
+      {{ end }}
+
       <p style="margin-top:var(--space-8);"><a href="{{ "projects" | relURL }}">← All projects</a></p>
     </div>
   </section>

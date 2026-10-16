@@ -1,0 +1,21 @@
+{{/* Theme-aware screenshot for a tool page. Args: page (the tool Page), size ("card"|"banner").
+     Reads assets/img/tools/<slug>-light.png and -dark.png (written by scripts/tools_shots.py);
+     when both exist the CSS shows the one matching the viewer's theme. */}}
+{{ $p := .page }}
+{{ $slug := path.BaseName $p.File.ContentBaseName }}
+{{ $w := cond (eq .size "banner") 1600 900 }}
+{{ $light := resources.Get (printf "img/tools/%s-light.png" $slug) }}
+{{ $dark  := resources.Get (printf "img/tools/%s-dark.png" $slug) }}
+{{ if $light }}
+  {{ $l := $light.Resize (printf "%dx webp q82" $w) }}
+  <div class="shot-pair{{ if $dark }} shot-pair--dual{{ end }}">
+    <img class="shot shot--light" src="{{ $l.RelPermalink }}" width="{{ $l.Width }}" height="{{ $l.Height }}" alt="Screenshot of {{ $p.Title }}" loading="lazy" decoding="async">
+    {{ with $dark }}{{ $d := .Resize (printf "%dx webp q82" $w) }}
+    <img class="shot shot--dark" src="{{ $d.RelPermalink }}" width="{{ $d.Width }}" height="{{ $d.Height }}" alt="Screenshot of {{ $p.Title }} (dark theme)" loading="lazy" decoding="async">
+    {{ end }}
+  </div>
+{{ else }}
+  {{ $reg := partialCached "tools-registry.html" . }}
+  {{ $ty := index (index $reg "kind") $p.Params.tool_type | default dict }}
+  <div class="shot-placeholder" aria-hidden="true"><i class="fas {{ $ty.icon | default "fa-cube" }}"></i></div>
+{{ end }}

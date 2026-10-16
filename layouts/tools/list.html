@@ -1,0 +1,86 @@
+{{ define "main" }}
+{{ $reg := partialCached "tools-registry.html" . }}
+{{ $pages := .Pages }}
+{{/* count pages per facet value, so each pill can show how many tools it selects */}}
+{{ $counts := dict }}
+{{ range $pages }}
+  {{ range .Params.project }}{{ $k := printf "project.%s" . }}{{ $counts = merge $counts (dict $k (add (index $counts $k | default 0) 1)) }}{{ end }}
+  {{ $k := printf "kind.%s" .Params.tool_type }}{{ $counts = merge $counts (dict $k (add (index $counts $k | default 0) 1)) }}
+  {{ $k = printf "status.%s" (.Params.status | default "production") }}{{ $counts = merge $counts (dict $k (add (index $counts $k | default 0) 1)) }}
+  {{ range .Params.tech }}{{ $k := printf "tech.%s" (urlize .) }}{{ $counts = merge $counts (dict $k (add (index $counts $k | default 0) 1)) }}{{ end }}
+{{ end }}
+{{/* tech labels: registry name if present, else the first spelling seen in content */}}
+{{ $techLabels := dict }}
+{{ range $pages }}{{ range .Params.tech }}{{ $s := urlize . }}{{ if not (isset $techLabels $s) }}{{ $techLabels = merge $techLabels (dict $s .) }}{{ end }}{{ end }}{{ end }}
+{{ $status := site.Data.tools_status | default dict }}
+{{ $checked := "" }}{{ range $status }}{{ with .checked }}{{ if or (not $checked) (gt . $checked) }}{{ $checked = . }}{{ end }}{{ end }}{{ end }}
+<main>
+  <section class="page-header">
+    <div class="page-header__inner">
+      <span class="eyebrow eyebrow--rule eyebrow--ondark">Gallery</span>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.summary }}<p class="page-header__lead">{{ . }}</p>{{ end }}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="tools-filter" data-tools-filter>
+        <div class="tag-filter__bar">
+          <i class="fas fa-magnifying-glass tag-filter__icon" aria-hidden="true"></i>
+          <input type="search" class="tag-filter__text" data-tools-q placeholder="Search tools…" aria-label="Search tools" autocomplete="off">
+          <label class="tools-filter__sort">
+            <span class="visually-hidden">Sort</span>
+            <select data-tools-sort aria-label="Sort tools">
+              <option value="updated">Recently updated</option>
+              <option value="title">Name A–Z</option>
+              <option value="project">By project</option>
+            </select>
+          </label>
+        </div>
+        {{ range site.Data.tools_tags }}
+          {{ $facet := .key }}
+          {{ $isTech := eq $facet "tech" }}
+          {{ $vals := .values | default dict }}
+          <div class="tools-filter__row{{ if $isTech }} tools-filter__row--tech{{ end }}" data-facet-row="{{ $facet }}">
+            <span class="tools-filter__label">{{ .label }}</span>
+            <div class="tools-filter__pills" role="group" aria-label="Filter by {{ .label | lower }}">
+              {{ if $isTech }}
+                {{ range $s, $label := $techLabels }}
+                  {{ $n := index $counts (printf "tech.%s" $s) | default 0 }}
+                  <button type="button" class="tag tag--tech" data-facet-pill data-facet="tech" data-value="{{ $s }}" aria-pressed="false">{{ partial "tool-label.html" (dict "facet" "tech" "value" $label) }}<span class="tag__count">{{ $n }}</span></button>
+                {{ end }}
+              {{ else }}
+                {{ range $k, $v := $vals }}
+                  {{ $n := index $counts (printf "%s.%s" $facet $k) | default 0 }}
+                  {{ if gt $n 0 }}
+                  <button type="button" class="tag tag--{{ $facet }}" data-facet-pill data-facet="{{ $facet }}" data-value="{{ $k }}" aria-pressed="false"{{ with $v.color }} style="--_c:{{ . }}"{{ end }}>{{ with $v.icon }}<i class="fas {{ . }}" aria-hidden="true"></i> {{ end }}{{ $v.name | default (humanize $k) }}<span class="tag__count">{{ $n }}</span></button>
+                  {{ end }}
+                {{ end }}
+              {{ end }}
+            </div>
+          </div>
+        {{ end }}
+        <div class="tag-filter__foot">
+          <span class="tag-filter__count" data-tools-count aria-live="polite"></span>
+          <button type="button" class="btn btn--ghost btn--sm" data-tools-clear hidden><i class="fas fa-xmark" aria-hidden="true"></i> Clear filters</button>
+        </div>
+      </div>
+
+      <div class="tools-grid" data-tools-grid>
+        {{ range sort $pages "Params.weight" }}
+          {{ partial "card-tool.html" . }}
+        {{ end }}
+      </div>
+      <p class="tools-empty" data-tools-empty hidden>No tools match those filters. <button type="button" class="btn btn--ghost btn--sm" data-tools-clear>Clear filters</button></p>
+
+      <p class="tools-colophon">
+        {{ len $pages }} tools.
+        {{ with $checked }}Status and screenshots refreshed {{ partial "rel-time.html" . }} by a <a href="https://github.com/oceanmetrics/oceanmetrics.github.io/blob/main/.github/workflows/refresh-tools.yml">scheduled job</a>.{{ end }}
+        Status is the date of the last commit to each tool's repository; screenshots are taken in light and dark themes.
+      </p>
+    </div>
+  </section>
+</main>
+{{ end }}
+{{ define "scripts" }}<script src="{{ "js/tools-filter.js" | relURL }}" defer></script>{{ end }}

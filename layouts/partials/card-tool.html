@@ -1,0 +1,48 @@
+{{/* Tool gallery card. Call with a Page from content/tools/. */}}
+{{ $reg := partialCached "tools-registry.html" . }}
+{{ $slug := path.BaseName .File.ContentBaseName }}
+{{ $status := .Params.status | default "production" }}
+{{ $st := index (site.Data.tools_status | default dict) $slug | default dict }}
+{{ $types := index $reg "kind" }}{{ $ty := index $types .Params.tool_type | default dict }}
+{{ $projects := index $reg "project" }}
+{{ $statuses := index $reg "status" }}{{ $sv := index $statuses $status | default dict }}
+{{ $techSlugs := slice }}{{ $techText := slice }}
+{{ range .Params.tech }}{{ $techSlugs = $techSlugs | append (urlize .) }}{{ $techText = $techText | append . }}{{ end }}
+{{ $updated := "" }}{{ with $st.last_commit }}{{ $updated = (time.AsTime .).Unix }}{{ end }}
+{{ $offline := and (isset $st "http") (ne (int $st.http) 200) }}
+<article class="tool-card{{ if in (slice "archived" "superseded") $status }} tool-card--muted{{ end }}"
+  data-tool
+  data-project="{{ delimit .Params.project " " }}"
+  data-kind="{{ .Params.tool_type }}"
+  data-status="{{ $status }}"
+  data-tech="{{ delimit $techSlugs " " }}"
+  data-title="{{ .Title }}"
+  data-updated="{{ $updated }}"
+  data-featured="{{ if .Params.featured }}1{{ else }}0{{ end }}"
+  data-text="{{ lower (printf "%s %s %s %s" .Title .Params.summary (delimit $techText " ") (delimit .Params.project " ")) }}">
+  <div class="tool-card__media">
+    {{ partial "tool-shot.html" (dict "page" . "size" "card") }}
+    {{ if $offline }}<span class="tool-card__offline" title="Last check returned HTTP {{ $st.http }}"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i> Offline</span>{{ end }}
+  </div>
+  <div class="tool-card__body">
+    <div class="tool-card__meta-row">
+      <span class="card__type"><i class="fas {{ $ty.icon | default "fa-cube" }}" aria-hidden="true"></i> {{ $ty.name | default (humanize .Params.tool_type) }}</span>
+      {{ range .Params.project }}{{ $pv := index $projects . | default dict }}
+        <span class="tool-chip tool-chip--project" style="--_c:{{ $pv.color | default "#5c7880" }}">{{ $pv.name | default (humanize .) }}</span>
+      {{ end }}
+    </div>
+    <h3 class="tool-card__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    <p class="card__summary">{{ .Params.summary }}</p>
+    {{ with .Params.tech }}
+      <div class="card__stack">
+        {{ range first 4 . }}<span class="card__chip">{{ . }}</span>{{ end }}
+        {{ if gt (len .) 4 }}<span class="card__chip card__chip--more">+{{ sub (len .) 4 }}</span>{{ end }}
+      </div>
+    {{ end }}
+    <div class="tool-card__foot">
+      <span class="tool-status tool-status--{{ $status }}" style="--_c:{{ $sv.color | default "#5c7880" }}"><span class="tool-status__dot"></span>{{ $sv.name | default (humanize $status) }}</span>
+      {{ with $st.last_commit }}<span class="tool-card__updated" title="Last commit {{ dateFormat "2 Jan 2006" . }}">{{ partial "rel-time.html" . }}</span>{{ end }}
+      <a class="tool-card__open" href="{{ $.Params.link }}" target="_blank" rel="noopener" aria-label="Open {{ $.Title }} in a new tab">Open <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,5 @@
+{{/* Returns the facet registry (data/tools_tags.yaml) as a map keyed by facet:
+     { project: {values…}, type: {values…}, status: {values…}, tech: {values…} } */}}
+{{ $reg := dict }}
+{{ range site.Data.tools_tags }}{{ $reg = merge $reg (dict .key (.values | default dict)) }}{{ end }}
+{{ return $reg }}

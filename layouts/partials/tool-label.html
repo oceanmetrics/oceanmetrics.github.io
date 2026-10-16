@@ -1,0 +1,7 @@
+{{/* Friendly label for a facet value: registry name, else the raw value. Args: facet, value */}}
+{{ $reg := partialCached "tools-registry.html" . }}
+{{ $vals := index $reg .facet | default dict }}
+{{ $hit := index $vals (lower .value) }}
+{{ $label := .value }}
+{{ with $hit }}{{ with .name }}{{ $label = . }}{{ end }}{{ end }}
+{{ return $label }}

@@ -1,0 +1,69 @@
+{{ define "main" }}
+{{ $reg := partialCached "tools-registry.html" . }}
+{{ $slug := path.BaseName .File.ContentBaseName }}
+{{ $status := .Params.status | default "production" }}
+{{ $st := index (site.Data.tools_status | default dict) $slug | default dict }}
+{{ $shots := index (site.Data.tools_shots | default dict) $slug | default dict }}
+{{ $types := index $reg "kind" }}{{ $ty := index $types .Params.tool_type | default dict }}
+{{ $projects := index $reg "project" }}
+{{ $statuses := index $reg "status" }}{{ $sv := index $statuses $status | default dict }}
+{{ $offline := and (isset $st "http") (ne (int $st.http) 200) }}
+<main>
+  <section class="tool-banner">
+    <div class="container tool-banner__inner">
+      <div class="tool-banner__copy">
+        <span class="eyebrow eyebrow--rule">
+          <i class="fas {{ $ty.icon | default "fa-cube" }}" aria-hidden="true"></i> {{ $ty.name | default (humanize .Params.tool_type) }}
+          {{ range .Params.project }}{{ $pv := index $projects . | default dict }} · <a href="{{ $pv.url | default "/projects/" | relURL }}">{{ $pv.name | default (humanize .) }}</a>{{ end }}
+        </span>
+        <h1>{{ .Title }}</h1>
+        <p class="tool-banner__lead">{{ .Params.summary }}</p>
+        <div class="tool-banner__actions">
+          <a class="btn btn--action" href="{{ .Params.link }}" target="_blank" rel="noopener">Open {{ $ty.name | default "tool" | lower | replaceRE " / .*" "" }} <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          {{ with .Params.repo }}<a class="btn btn--outline" href="https://github.com/{{ . }}{{ with $.Params.repo_path }}/tree/HEAD/{{ . }}{{ end }}" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> Code</a>{{ end }}
+          {{ with .Params.docs }}<a class="btn btn--outline" href="{{ . }}" target="_blank" rel="noopener"><i class="fas fa-book-open" aria-hidden="true"></i> Docs</a>{{ end }}
+        </div>
+      </div>
+      <div class="tool-banner__shot">
+        {{ partial "tool-shot.html" (dict "page" . "size" "banner") }}
+        {{ with $shots.taken }}<span class="tool-banner__shot-date">Screenshot {{ dateFormat "2 Jan 2006" . }}{{ if $shots.dark }} · light &amp; dark{{ end }}</span>{{ end }}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container tool-layout">
+      <aside class="tool-meta" aria-label="Tool status">
+        <dl>
+          <div><dt>Status</dt><dd><span class="tool-status tool-status--{{ $status }}" style="--_c:{{ $sv.color | default "#5c7880" }}"><span class="tool-status__dot"></span>{{ $sv.name | default (humanize $status) }}</span>
+            {{ with .Params.superseded_by }}{{ with site.GetPage (printf "/tools/%s" .) }}<br><small>by <a href="{{ .RelPermalink }}">{{ .Title }}</a></small>{{ end }}{{ end }}
+            {{ if $offline }}<br><small class="tool-meta__warn"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i> Last check returned HTTP {{ $st.http }}</small>{{ end }}</dd></div>
+          {{ with $st.last_commit }}<div><dt>Last updated</dt><dd><a href="{{ $st.last_commit_url }}" target="_blank" rel="noopener" title="{{ . }}">{{ dateFormat "2 Jan 2006" . }}</a><br><small>{{ partial "rel-time.html" . }}</small></dd></div>{{ end }}
+          {{ with $st.version }}<div><dt>Version</dt><dd><code>{{ . }}</code></dd></div>{{ end }}
+          {{ with $st.stars }}{{ if gt . 0 }}<div><dt>GitHub stars</dt><dd>{{ . }}</dd></div>{{ end }}{{ end }}
+          <div><dt>Project</dt><dd>{{ range $i, $p := .Params.project }}{{ $pv := index $projects $p | default dict }}{{ if $i }}, {{ end }}<a href="{{ $pv.url | default "/projects/" | relURL }}">{{ $pv.name | default (humanize $p) }}</a>{{ end }}</dd></div>
+          {{ with .Params.credit }}<div><dt>Built by</dt><dd>{{ . }}</dd></div>{{ end }}
+          <div><dt>Technology</dt><dd class="card__stack">{{ range .Params.tech }}<a class="card__chip" href="{{ printf "tools/?tech=%s" (urlize .) | relURL }}">{{ . }}</a>{{ end }}</dd></div>
+          <div><dt>Links</dt><dd class="tool-meta__links">
+            <a href="{{ .Params.link }}" target="_blank" rel="noopener">{{ .Params.link | replaceRE "^https?://" "" | replaceRE "/$" "" }}</a>
+            {{ with .Params.repo }}<a href="https://github.com/{{ . }}" target="_blank" rel="noopener">github.com/{{ . }}</a>{{ end }}
+          </dd></div>
+        </dl>
+      </aside>
+      <div class="article tool-article">
+        {{ .Content }}
+        {{ $related := slice }}
+        {{ range .Params.project }}{{ $p := . }}{{ range where (where site.RegularPages "Section" "tools") "Params.project" "intersect" (slice $p) }}{{ if ne .RelPermalink $.RelPermalink }}{{ $related = $related | append . }}{{ end }}{{ end }}{{ end }}
+        {{ $related = $related | uniq }}
+        {{ with $related }}
+          <h2>Related tools</h2>
+          <ul class="tool-related">
+            {{ range first 8 (sort . "Params.weight") }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a> <span>{{ .Params.summary | truncate 90 }}</span></li>{{ end }}
+          </ul>
+        {{ end }}
+        <p style="margin-top:var(--space-7);"><a href="{{ "tools" | relURL }}">← All tools</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+{{ end }}
