@@ -1,7 +1,7 @@
 {
  "calcofi-docs": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-14T00:40:05Z",
@@ -10,7 +10,7 @@
  },
  "calcofi-erddap": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-09-11T21:30:25Z",
@@ -19,7 +19,7 @@
  },
  "calcofi-io": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-15T20:53:52Z",
@@ -28,7 +28,7 @@
  },
  "calcofi-stac": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-09-05T17:14:40Z",
@@ -37,7 +37,7 @@
  },
  "calcofi-workflows": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-14T14:33:16Z",
@@ -46,7 +46,7 @@
  },
  "calcofi4db": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-14T09:34:11Z",
@@ -56,7 +56,7 @@
  },
  "calcofi4py": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-07T06:03:07Z",
@@ -66,7 +66,7 @@
  },
  "calcofi4r": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-14T00:14:35Z",
@@ -76,7 +76,7 @@
  },
  "ctd-transects": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-14T14:46:47Z",
@@ -85,7 +85,7 @@
  },
  "ctd-viz": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-08-25T14:39:05Z",
@@ -94,7 +94,7 @@
  },
  "db-query": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-14T14:26:09Z",
@@ -103,7 +103,7 @@
  },
  "db-schema": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-09-11T08:47:39Z",
@@ -112,7 +112,7 @@
  },
  "erddap-places": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-16T08:58:30Z",
@@ -121,7 +121,7 @@
  },
  "explore": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-14T14:34:21Z",
@@ -130,7 +130,7 @@
  },
  "extractr": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-06-29T19:30:53Z",
@@ -140,7 +140,7 @@
  },
  "marine-sdms": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-06-23T11:18:23Z",
@@ -149,7 +149,7 @@
  },
  "marinebon-org": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-15T17:08:55Z",
@@ -158,7 +158,7 @@
  },
  "marinebon-ui": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-12T08:40:00Z",
@@ -168,7 +168,7 @@
  },
  "marinesensitivity-org": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-14T11:01:49Z",
@@ -177,7 +177,7 @@
  },
  "msens": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-14T11:12:35Z",
@@ -187,7 +187,7 @@
  },
  "msens-atlas": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-15T22:48:47Z",
@@ -197,7 +197,7 @@
  },
  "msens-docs": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-14T10:16:52Z",
@@ -206,7 +206,7 @@
  },
  "msens-query": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-14T14:44:44Z",
@@ -215,7 +215,7 @@
  },
  "msens-stac": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-14T10:55:34Z",
@@ -224,7 +224,7 @@
  },
  "msens-stac-api": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-07-31T16:46:44Z",
@@ -233,7 +233,7 @@
  },
  "msens-workflows": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-14T14:44:44Z",
@@ -242,7 +242,7 @@
  },
  "obis-hex": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-15T16:44:36Z",
@@ -251,7 +251,7 @@
  },
  "obisindicators": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-14T19:03:19Z",
@@ -261,17 +261,17 @@
  },
  "om-atlas": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-14T22:24:44Z",
-  "last_commit_url": "https://github.com/oceanmetrics/atlas/commit/8028fcc896368438d38177d0471fa917824e7cdf",
+  "last_commit": "2026-10-16T10:09:11Z",
+  "last_commit_url": "https://github.com/oceanmetrics/atlas/commit/d3574015b52088b338d674fe27c6c15b3e64e2e6",
   "stars": 0,
-  "version": "0.1.0"
+  "version": "0.2.0"
  },
  "om-erddap": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-07T17:18:43Z",
@@ -280,16 +280,16 @@
  },
  "om-workflows": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-08T12:56:36Z",
-  "last_commit_url": "https://github.com/oceanmetrics/workflows/commit/98e6740969b48173cabe9bb6f0504748668e8488",
+  "last_commit": "2026-10-16T10:07:39Z",
+  "last_commit_url": "https://github.com/oceanmetrics/workflows/commit/5d3b7281642a7ca4766d4af802579b7e0b72c36a",
   "stars": 0
  },
  "places": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-16T07:43:59Z",
@@ -298,7 +298,7 @@
  },
  "pollutants": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-07T05:37:24Z",
@@ -307,7 +307,7 @@
  },
  "seascaper": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2024-11-11T19:28:52Z",
@@ -317,7 +317,7 @@
  },
  "stac-sdm": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-06-23T23:06:56Z",
@@ -327,7 +327,7 @@
  },
  "station-explorer": {
   "archived": false,
-  "checked": "2026-10-16T10:06:13Z",
+  "checked": "2026-10-16T10:11:11Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-14T14:47:28Z",
