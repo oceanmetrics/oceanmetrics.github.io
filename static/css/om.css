@@ -279,3 +279,72 @@ a.card__chip:hover{ border-color:var(--teal-500); color:var(--teal-700); }
   .schema-row__what{ grid-column:1 / -1; order:3; }
   .catalog-row dl div{ grid-template-columns:1fr; gap:0; }
 }
+
+/* =========================================================================
+   FRONT PAGE: THE PLATFORM (decision D4) — hero search, three doors, what changed
+   ========================================================================= */
+.hero--platform .hero__inner{ padding-block:clamp(var(--space-6), 5vw, var(--space-8)) var(--space-6); }
+.hero--platform h1{ max-width:18ch; }
+.hero__mark--small{ max-width:min(320px, 70%); }
+@media (max-width:860px){ .hero__mark--small{ max-width:min(160px, 45%); } }
+
+/* the place search: same hand-off as the bar's (/places/?q=) */
+.place-search{ position:relative; display:flex; gap:var(--space-2); max-width:36rem; }
+.place-search__icon{ position:absolute; left:var(--space-4); top:50%; transform:translateY(-50%); font-size:1.25rem;
+  color:var(--text-muted); pointer-events:none; }
+.place-search input{ flex:1; min-width:0; height:3.25rem; padding:0 var(--space-4) 0 calc(var(--space-4) + 1.75rem);
+  font:var(--type-body); color:var(--text-strong); background:var(--bg-surface);
+  border:1px solid var(--border-strong); border-radius:var(--radius-md); box-shadow:var(--shadow-sm); }
+.place-search input::placeholder{ color:var(--text-muted); }
+.place-search input:focus-visible{ outline:none; border-color:var(--accent); box-shadow:var(--shadow-focus); }
+.place-search .btn{ height:3.25rem; flex:none; }
+.place-search__try{ margin:var(--space-3) 0 0; font:var(--type-small); color:var(--text-muted); }
+.place-search__try a{ color:var(--link); }
+@media (max-width:860px){
+  .place-search{ margin-inline:auto; }
+}
+@media (max-width:520px){
+  .place-search{ flex-direction:column; }
+  .place-search input{ flex:none; width:100%; }
+  .place-search__icon{ top:1.625rem; }
+  .place-search .btn{ width:100%; justify-content:center; }
+}
+
+/* the three doors: Places, Indicators, Atlas, each with its live counts */
+.doors{ list-style:none; margin:0; padding:0 0 var(--space-4); display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--space-5); }
+@media (max-width:860px){ .doors{ grid-template-columns:1fr; gap:var(--space-4); } }
+.door{ height:100%; display:flex; flex-direction:column; gap:var(--space-3); padding:var(--space-5);
+  background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-lg); box-shadow:var(--shadow-sm);
+  color:var(--text-body); text-decoration:none;
+  transition:border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+.door:hover{ border-color:var(--accent); box-shadow:var(--shadow-md); transform:translateY(-2px); }
+.door:focus-visible{ outline:none; box-shadow:var(--shadow-focus); border-color:var(--accent); }
+.door__head{ display:flex; align-items:center; gap:var(--space-3); }
+.door__icon{ font-size:1.5rem; color:var(--accent); }
+.door__name{ font:var(--type-card); color:var(--text-heading); }
+.door__counts{ display:flex; gap:var(--space-6); }
+.door__what{ font:var(--type-small); color:var(--text-body); }
+.door__go{ margin-top:auto; font-family:var(--font-mono); font-size:var(--text-xs); text-transform:uppercase;
+  letter-spacing:var(--ls-wide); color:var(--brand-text); display:inline-flex; align-items:center; gap:.5em; }
+.door:hover .door__go{ color:var(--brand-hover); }
+.doors__asof{ margin:0 0 var(--space-6); font:var(--type-small); font-size:var(--text-xs); color:var(--text-muted); }
+@media (prefers-reduced-motion:reduce){ .door, .door:hover{ transition:none; transform:none; } }
+
+/* what changed: the newest entries of the all-changes feed (scroll-margin clears the sticky bar on /#what-changed) */
+.changes{ scroll-margin-top:64px; }
+.changes-list{ list-style:none; margin:0; padding:0; border-top:1px solid var(--border); }
+.change{ display:flex; flex-direction:column; gap:var(--space-2); padding:var(--space-4) 0; border-bottom:1px solid var(--border); }
+.change__title{ font-size:var(--text-md); color:var(--text-heading); text-decoration:none; max-width:80ch; }
+.change__title:hover{ color:var(--link); text-decoration:underline; }
+.change__meta{ display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-2) var(--space-4);
+  font-family:var(--font-mono); font-size:var(--text-xs); letter-spacing:var(--ls-wide); color:var(--text-muted); }
+.change__place{ color:var(--link); }
+.change__kind{ text-transform:uppercase; color:var(--accent-hover); border:1px solid var(--border-strong);
+  border-radius:var(--radius-pill); padding:.15em .7em; }
+.change__kind--status{ color:var(--text-strong); border-color:var(--sun-500); }
+.changes__foot{ margin:var(--space-5) 0 0; font:var(--type-small); color:var(--text-body); }
+
+/* the studio's intro, below the platform */
+.studio-intro{ background:var(--bg-tint); border-top:1px solid var(--border); padding-bottom:var(--space-7); }
+.studio-intro__title{ font:var(--type-h2); color:var(--text-strong); margin:var(--space-3) 0 var(--space-4); max-width:24ch; text-wrap:balance; }
+.studio-intro__lead{ font:var(--type-lead); color:var(--text-body); max-width:60ch; margin:0 0 var(--space-6); }

@@ -1,0 +1,14 @@
+{{/* the brand icons a page uses, as an inline <style>: each name's --om-icon-<name> mask and its .om-i-<name> class,
+     cut at build from the published static/brand/v1/icons/icons.css (generated from the sprite; never typed here),
+     so a page carries the few glyphs it draws instead of all 108. usage: partial "om-icons-css.html" (slice "ui-search") */}}
+{{ $src := readFile "static/brand/v1/icons/icons.css" }}
+{{ $vars := slice }}
+{{ $classes := slice }}
+{{ range . }}
+  {{ $v := index (findRE (printf `--om-icon-%s: url\("[^"]*"\);` .) $src 1) 0 }}
+  {{ if not $v }}{{ errorf "om-icons-css: no glyph %q in static/brand/v1/icons/icons.css" . }}{{ end }}
+  {{ $vars = $vars | append $v }}
+  {{ $classes = $classes | append (printf ".om-i-%s{--om-i:var(--om-icon-%s)}" . .) }}
+{{ end }}
+{{ $base := index (findRE `\.om-i \{[^}]*\}` $src 1) 0 }}
+<style>:root{ {{- delimit $vars "" | safeCSS -}} }{{ $base | safeCSS }}{{ delimit $classes "" | safeCSS }}</style>

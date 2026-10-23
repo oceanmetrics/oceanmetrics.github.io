@@ -10,6 +10,8 @@ web
 
 ## Users
 
+**Front-page order (decision D4, 2026-10-23):** the front page leads with the platform (a place search, the three doors Places, Indicators and Atlas with their counts, "What changed"), with the studio's projects, services and contact below it and in the nav; this overrides the studio-first order the rest of this file implies, and adds a third audience, sanctuary staff and the MBON and OBIS community, who arrive to look up a place.
+
 Two first-tier audiences, weighted equally. **Federal and agency contacts** — program managers and contracting officers' representatives at BOEM, NOAA, NASA, and NREL — arrive evaluating Ocean Metrics as a contractor or subcontractor for a specific program need. **Research program leads and principal investigators** — at institutions running programs like CalCOFI and the Marine Biodiversity Observation Network — arrive looking for a technical lead or collaborator who can build and sustain the analytical infrastructure their science depends on.
 
 Both come with a real project in mind and limited patience for marketing. They are technically literate, skeptical of vague claims, and want to know quickly whether the person behind the studio has done work at their scale and standard. The site has to read as credible to a federal COR and to an academic PI without pandering to either.
