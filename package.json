@@ -14,7 +14,7 @@
   "scripts": {
     "schemas": "node scripts/sync-schemas.mjs",
     "check:schemas": "node scripts/check-schemas.mjs",
-    "test": "node --test scripts/alerts.test.mjs scripts/counts.test.mjs scripts/ga.test.mjs",
+    "test": "node --test scripts/alerts.test.mjs scripts/counts.test.mjs scripts/ga.test.mjs scripts/examples.test.mjs",
     "check:addresses": "node scripts/check-no-addresses.mjs",
     "counts": "node scripts/counts.mjs"
   }
