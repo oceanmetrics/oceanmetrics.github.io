@@ -26,6 +26,10 @@ params:
   # the public Turnstile site key for the subscribe form; empty = no widget is rendered (the Worker skips the check
   # until its TURNSTILE_SECRET is set)
   turnstile_site_key: ""
+  # the GA4 measurement id: empty here, always. deploy.yml sets HUGOxPARAMSxGA_ID (Hugo's x-delimited
+  # form, since the key has an underscore) from the repository variable GA_ID;
+  # empty or malformed = no analytics (layouts/partials/header.html, the bar's data-ga)
+  ga_id: ""
 
 menu:
   main:

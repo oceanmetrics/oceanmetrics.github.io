@@ -8,13 +8,13 @@
   },
   "dependencies": {
     "@oceanmetrics/catalog": "0.5.1",
-    "@oceanmetrics/nav": "0.1.0",
+    "@oceanmetrics/nav": "0.2.0",
     "hyparquet": "1.31.5"
   },
   "scripts": {
     "schemas": "node scripts/sync-schemas.mjs",
     "check:schemas": "node scripts/check-schemas.mjs",
-    "test": "node --test scripts/alerts.test.mjs scripts/counts.test.mjs",
+    "test": "node --test scripts/alerts.test.mjs scripts/counts.test.mjs scripts/ga.test.mjs",
     "check:addresses": "node scripts/check-no-addresses.mjs",
     "counts": "node scripts/counts.mjs"
   }

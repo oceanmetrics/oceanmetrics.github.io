@@ -160,6 +160,23 @@ changed" and Docs, then `menu.main` from `hugo.yaml` and GitHub (`params.github`
 `scripts/check_links.py` reads the bar's `items`; the doors (`/places/`, `/indicators/`, `/atlas/`) are other apps and
 are listed in `scripts/linkcheck_allow.txt`.
 
+## Analytics
+
+Off unless the repository variable **`GA_ID`** (Settings -> Secrets and variables -> Actions -> Variables) holds a GA4
+measurement id. `deploy.yml` passes it to `hugo` as `HUGOxPARAMSxGA_ID` (Hugo's x-delimited form of `params.ga_id`:
+`HUGO_PARAMS_GA_ID` would set `params.ga.id`); `hugo.yaml` keeps `ga_id: ""`. `layouts/partials/header.html` writes
+`data-ga` on the bar only for an id matching `^G-[A-Z0-9]{4,16}$`. The bar (`@oceanmetrics/nav` 0.2.0, its README
+"Analytics") loads gtag.js once, with `anonymize_ip`, no Google signals and no ad personalization, and a rebuilt
+`page_location` (origin + path: no query, no fragment). No id is written in the repo.
+
+- `npm test`: `scripts/ga.test.mjs` runs `scripts/check-ga.mjs` on small dists, then builds the site with `hugo` (skipped
+  without it) unset, malformed and `G-TEST000000`: no `data-ga` and no id, then `data-ga="G-TEST000000"` and the
+  bundled bar carrying the loader.
+- `deploy.yml` runs `node scripts/check-ga.mjs public --id "$GA_ID"` after the build: no page carries a gtag.js script
+  tag, and the id is in the build exactly when the variable is set.
+
+The GA4 stream's enhanced measurement "Page changes based on browser history events" must be off (the nav README says why).
+
 ## Deploy
 
 Push to `main`; GitHub Actions builds and publishes to Pages. Set the custom domain to

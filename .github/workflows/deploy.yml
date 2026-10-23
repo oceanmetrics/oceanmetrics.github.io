@@ -59,8 +59,16 @@ jobs:
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
+          # analytics only when the repository variable GA_ID is set (a GA4 id; the bar's data-ga, README "Analytics").
+          # the x delimiter is Hugo's own form for a key with an underscore: HUGO_PARAMS_GA_ID would set params.ga.id
+          HUGOxPARAMSxGA_ID: ${{ vars.GA_ID }}
         # a custom domain (CNAME) serves at the root, so keep the site's own baseURL
         run: hugo --gc --minify
+      - name: Check analytics
+        # no gtag.js script tag in any page, and the id in the build exactly when the variable is set
+        env:
+          GA_ID: ${{ vars.GA_ID }}
+        run: node scripts/check-ga.mjs public --id "$GA_ID"
       - name: Check internal links
         # fails the deploy if any internal link 404s. allow known issues in scripts/linkcheck_allow.txt
         run: python3 scripts/check_links.py public
