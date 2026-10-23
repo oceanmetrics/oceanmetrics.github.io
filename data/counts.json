@@ -1,0 +1,66 @@
+{
+  "generated": "2026-10-23T13:31:44.175Z",
+  "host": "https://s3.us-east-1.amazonaws.com/oceanmetrics.io-public",
+  "places": {
+    "layers": 52,
+    "places": 49454,
+    "updated": "2026-10-22T20:04:04Z"
+  },
+  "indicators": {
+    "indicators": 120,
+    "updated": "2026-10-23T13:22:57Z",
+    "version": "2026.10.23",
+    "places": 319
+  },
+  "atlas": {
+    "collections": 14,
+    "updated": "2026-10-23T13:27:59Z"
+  },
+  "changes": {
+    "checked": "2026-10-23T13:23:39Z",
+    "date": "2026-10-23",
+    "feed": "https://s3.us-east-1.amazonaws.com/oceanmetrics.io-public/indicators/feeds/all.xml",
+    "entries": [
+      {
+        "title": "OBIS Berger-Parker dominance, all taxa in Cordell Bank National Marine Sanctuary has its first value: 0.096 for 2025.",
+        "place_id": "NMS:CBNMS",
+        "place_name": "Cordell Bank National Marine Sanctuary",
+        "date": "2026-10-23",
+        "kind": "new",
+        "href": "https://oceanmetrics.io/indicators/#view=place&place=NMS:CBNMS&coll=places&ind=obis:bp"
+      },
+      {
+        "title": "OBIS Berger-Parker dominance, all taxa in Chumash Heritage National Marine Sanctuary has its first value: 0.056 for 2025.",
+        "place_id": "NMS:CHNMS",
+        "place_name": "Chumash Heritage National Marine Sanctuary",
+        "date": "2026-10-23",
+        "kind": "new",
+        "href": "https://oceanmetrics.io/indicators/#view=place&place=NMS:CHNMS&coll=places&ind=obis:bp"
+      },
+      {
+        "title": "OBIS Berger-Parker dominance, all taxa in Channel Islands National Marine Sanctuary has its first value: 0.115 for 2025.",
+        "place_id": "NMS:CINMS",
+        "place_name": "Channel Islands National Marine Sanctuary",
+        "date": "2026-10-23",
+        "kind": "new",
+        "href": "https://oceanmetrics.io/indicators/#view=place&place=NMS:CINMS&coll=places&ind=obis:bp"
+      },
+      {
+        "title": "OBIS Berger-Parker dominance, all taxa in Flower Garden Banks National Marine Sanctuary has its first value: 0.500 for 2025.",
+        "place_id": "NMS:FGBNMS",
+        "place_name": "Flower Garden Banks National Marine Sanctuary",
+        "date": "2026-10-23",
+        "kind": "new",
+        "href": "https://oceanmetrics.io/indicators/#view=place&place=NMS:FGBNMS&coll=places&ind=obis:bp"
+      },
+      {
+        "title": "OBIS Berger-Parker dominance, all taxa in Florida Keys National Marine Sanctuary has its first value: 0.032 for 2025.",
+        "place_id": "NMS:FKNMS",
+        "place_name": "Florida Keys National Marine Sanctuary",
+        "date": "2026-10-23",
+        "kind": "new",
+        "href": "https://oceanmetrics.io/indicators/#view=place&place=NMS:FKNMS&coll=places&ind=obis:bp"
+      }
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+{"type":"Catalog","id":"oceanmetrics-atlas","updated":"2026-10-16T13:51:30Z","links":[
+ {"rel":"root","href":"./catalog.json"},{"rel":"self","href":"./catalog.json"},
+ {"rel":"child","href":"./aquamaps_eov/collection.json","title":"AquaMaps EOV share"},
+ {"rel":"child","href":"./biotrack_indicators/collection.json","title":"MBON BioTrack"},
+ {"rel":"describedby","href":"./README.md"}
+]}

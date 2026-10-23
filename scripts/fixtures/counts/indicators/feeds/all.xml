@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>tag:oceanmetrics.io,2026:feeds/all</id>
+  <title>Ocean Metrics indicators: all changes</title>
+  <updated>2026-10-23T00:00:00Z</updated>
+  <link rel="self" type="application/atom+xml" href="https://storage.oceanmetrics.io/indicators/feeds/all.xml"/>
+  <entry>
+    <id>tag:oceanmetrics.io,2026:changes/2026-10-22/NMS:MBNMS/places/obis:es50/status</id>
+    <title>OBIS ES50 in Monterey Bay National Marine Sanctuary moved from fair to good for 2025.</title>
+    <updated>2026-10-22T00:00:00Z</updated>
+    <link rel="alternate" type="text/html" href="https://oceanmetrics.io/indicators/#view=place&amp;place=NMS:MBNMS&amp;coll=places&amp;ind=obis:es50"/>
+    <category term="status"/>
+  </entry>
+  <entry>
+    <id>tag:oceanmetrics.io,2026:changes/2026-10-23/NMS:CBNMS/places/obis:bp/new</id>
+    <title>OBIS Berger-Parker dominance in Cordell Bank National Marine Sanctuary has its first value: 0.096 for 2025.</title>
+    <updated>2026-10-23T00:00:00Z</updated>
+    <link rel="alternate" type="text/html" href="https://oceanmetrics.io/indicators/#view=place&amp;place=NMS:CBNMS&amp;coll=places&amp;ind=obis:bp"/>
+    <category term="new"/>
+  </entry>
+  <entry>
+    <id>tag:oceanmetrics.io,2026:changes/2026-10-23/NMS:CINMS/places/obis:bp/new</id>
+    <title>OBIS Berger-Parker dominance in Channel Islands &amp; Santa Barbara &#8211; a test has its first value: 0.115 for 2025.</title>
+    <updated>2026-10-23T00:00:00Z</updated>
+    <link rel="alternate" type="text/html" href="https://oceanmetrics.io/indicators/#view=place&amp;place=NMS:CINMS&amp;coll=places&amp;ind=obis:bp"/>
+    <category term="new"/>
+  </entry>
+  <entry>
+    <id>tag:oceanmetrics.io,2026:changes/2026-10-23/mr_eez:8456/mr_eez/obis:bp/new</id>
+    <title>OBIS Berger-Parker dominance in the United States EEZ has its first value: 0.020 for 2025.</title>
+    <updated>2026-10-23T00:00:00Z</updated>
+    <link href="https://oceanmetrics.io/indicators/"/>
+    <category term="new"/>
+  </entry>
+  <entry>
+    <id>tag:oceanmetrics.io,2026:changes/2026-10-21/NMS:OCNMS/places/obis:bp/new</id>
+    <title>An older change.</title>
+    <updated>2026-10-21T00:00:00Z</updated>
+    <link rel="alternate" type="text/html" href="https://oceanmetrics.io/indicators/#view=place&amp;place=NMS:OCNMS&amp;coll=places&amp;ind=obis:bp"/>
+    <category term="new"/>
+  </entry>
+  <entry>
+    <id>tag:oceanmetrics.io,2026:changes/2026-10-20/NMS:GFNMS/places/obis:bp/new</id>
+    <title>The oldest change, left out at five.</title>
+    <updated>2026-10-20T00:00:00Z</updated>
+    <link rel="alternate" type="text/html" href="https://oceanmetrics.io/indicators/#view=place&amp;place=NMS:GFNMS&amp;coll=places&amp;ind=obis:bp"/>
+    <category term="new"/>
+  </entry>
+</feed>
