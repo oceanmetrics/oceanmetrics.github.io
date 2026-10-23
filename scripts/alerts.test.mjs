@@ -1,4 +1,4 @@
-// node --test scripts/   (npm test): the pure functions of static/js/alerts.js, with the Worker's contract
+// node --test scripts/alerts.test.mjs   (npm test): the pure functions of static/js/alerts.js, with the Worker's contract
 // (platform/workers/alerts/README.md) as the spec. every rule has a small fixture with the exact expected output.
 import test from 'node:test'
 import assert from 'node:assert/strict'
