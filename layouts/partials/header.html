@@ -1,11 +1,12 @@
 {{/* the one Ocean Metrics bar (@oceanmetrics/nav, pinned in package.json, mounted by hugo.yaml as assets/om-nav):
-     the three doors, "What changed" and Docs, then the studio menu and GitHub as links; the theme toggle
+     the three doors, "What changed", Alerts and Docs, then the studio menu and GitHub as links; the theme toggle
      and the CTA ride in the slot. No door is current on the studio site. */}}
 {{ $items := slice
   (dict "id" "places" "label" "Places" "href" ("places/" | absURL) "door" true)
   (dict "id" "indicators" "label" "Indicators" "href" ("indicators/" | absURL) "door" true)
   (dict "id" "atlas" "label" "Atlas" "href" ("atlas/" | absURL) "door" true)
   (dict "id" "changes" "label" "What changed" "href" ("docs/" | relURL))
+  (dict "id" "alerts" "label" "Alerts" "href" ("alerts/" | relURL))
   (dict "id" "docs" "label" "Docs" "href" ("docs/" | relURL)) }}
 {{ $current := "" }}
 {{ range site.Menus.main }}
@@ -14,8 +15,9 @@
 {{ end }}
 {{ with site.Params.github }}{{ $items = $items | append (dict "id" "github" "label" "GitHub" "href" .) }}{{ end }}
 {{ if eq .RelPermalink "/docs/" }}{{ $current = "docs" }}{{ end }}
-{{/* ten items and two controls need about 1,100 px: collapse below that */}}
-<om-nav items="{{ $items | jsonify }}"{{ with $current }} current="{{ . }}"{{ end }} home-href="{{ "" | relURL }}" collapse-at="1100">
+{{ if eq .Section "alerts" }}{{ $current = "alerts" }}{{ end }}
+{{/* eleven items and two controls need about 1,240 px: collapse below that */}}
+<om-nav items="{{ $items | jsonify }}"{{ with $current }} current="{{ . }}"{{ end }} home-href="{{ "" | relURL }}" collapse-at="1240">
   <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><i class="fas fa-moon" aria-hidden="true"></i></button>
   <a class="btn btn--sm" href="{{ "contact" | relURL }}">Work with me <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </om-nav>

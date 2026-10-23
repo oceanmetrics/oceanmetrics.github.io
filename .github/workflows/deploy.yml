@@ -39,6 +39,11 @@ jobs:
         run: |
           npm ci --ignore-scripts
           node scripts/sync-schemas.mjs
+      - name: Unit tests and the no-addresses check
+        # the pure functions of static/js/alerts.js (request bodies, hash parsing) and: no email address in the repo
+        run: |
+          npm test
+          node scripts/check-no-addresses.mjs
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v6
@@ -84,3 +89,16 @@ jobs:
         run: npm ci --ignore-scripts
       - name: Live $id check
         run: node scripts/check-schemas.mjs --live https://oceanmetrics.io --retries 12
+      - name: Live alerts pages
+        # the four reader pages and the script answer 200 from oceanmetrics.io (Pages needs a moment to publish)
+        run: |
+          for p in alerts/ alerts/confirm/ alerts/manage/ alerts/privacy/ js/alerts.js; do
+            ok=0
+            for i in $(seq 1 12); do
+              code=$(curl -s -o /dev/null -w '%{http_code}' "https://oceanmetrics.io/$p")
+              if [ "$code" = 200 ]; then ok=1; break; fi
+              sleep 10
+            done
+            echo "$code  https://oceanmetrics.io/$p"
+            [ "$ok" = 1 ] || exit 1
+          done

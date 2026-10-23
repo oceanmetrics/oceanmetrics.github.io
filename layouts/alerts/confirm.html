@@ -1,0 +1,34 @@
+{{ define "main" }}
+{{/* /alerts/confirm/#t=<token>: the page the confirmation mail links to. Opening it confirms nothing: only the button
+     POSTs (a mail link scanner opens links, it does not press buttons). The token rides in the fragment, so it never
+     reaches a server log. */}}
+<main data-alerts="confirm">
+  <section class="page-header">
+    <div class="page-header__inner">
+      <span class="eyebrow eyebrow--rule eyebrow--ondark">{{ .Params.eyebrow }}</span>
+      <h1>{{ .Title }}</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container alerts-wrap">
+      <section id="ask" class="alerts-panel">
+        <p>Press the button to confirm that this address may receive Ocean Metrics alerts. Nothing is sent until you do.</p>
+        <p><button id="go" class="btn" type="button">Confirm my alert</button></p>
+        <p class="alerts-panel__note">If you did not ask for alerts, close this page: the request is deleted in 48 hours.</p>
+      </section>
+      <section id="done" class="alerts-panel" hidden>
+        <h3><i class="fas fa-circle-check" aria-hidden="true"></i> Confirmed</h3>
+        <p>You will get at most one mail a day (or a week, as you chose) when something changes in what you watch. Every mail has an Unsubscribe link and a Manage link.</p>
+        <p><a id="manage" class="btn btn--outline btn--sm" href="{{ "alerts/manage/" | relURL }}">Manage your alerts <i class="fas fa-arrow-right" aria-hidden="true"></i></a></p>
+      </section>
+      <p id="msg" class="alerts-status" role="status" aria-live="polite"></p>
+      <noscript><p class="alerts-status alerts-status--error">Confirming needs JavaScript.</p></noscript>
+      <p class="alerts-panel__note"><a href="{{ "alerts/privacy/" | relURL }}">What is kept, and for how long</a></p>
+    </div>
+  </section>
+</main>
+{{ end }}
+
+{{ define "scripts" }}
+<script type="module" src="{{ "js/alerts.js" | relURL }}"></script>
+{{ end }}

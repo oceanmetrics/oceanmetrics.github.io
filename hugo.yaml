@@ -17,6 +17,11 @@ params:
   github: https://github.com/oceanmetrics
   cv: https://bbest.github.io/cv/
   orcid: https://orcid.org/0000-0002-2686-0784
+  # email alerts (/alerts/): the om-alerts Worker. workers.dev until the zone is active, then https://alerts.oceanmetrics.io
+  alerts_api: https://om-alerts.ben-f07.workers.dev
+  # the public Turnstile site key for the subscribe form; empty = no widget is rendered (the Worker skips the check
+  # until its TURNSTILE_SECRET is set)
+  turnstile_site_key: ""
 
 menu:
   main:

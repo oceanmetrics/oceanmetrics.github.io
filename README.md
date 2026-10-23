@@ -34,15 +34,28 @@ data/                  stats.yaml, clients.yaml, past_projects.yaml (EcoQuants a
 assets/img/tools/      AUTO: <slug>-light.png / -dark.png screenshots (scripts/tools_shots.py); Hugo resizes to webp
 layouts/               baseof, index (home), projects/{list,single}, tools/{list,single}, _default/{about,contact,single,list}, 404, partials/
 static/css/            styles.css (manifest) → tokens/* + components.css + layout.css + om.css
-static/js/             theme.js (light/dark toggle), tools-filter.js (gallery filter/search/sort, URL-synced)
+static/js/             theme.js (light/dark toggle), tools-filter.js (gallery filter/search/sort, URL-synced),
+                       alerts.js (the /alerts/ pages: subscribe, confirm, manage; pure functions are tested)
 static/img/            project screenshots, client logos, portrait
 static/CNAME           oceanmetrics.io
 scripts/check_links.py internal-link checker (fails CI on broken links)
+scripts/alerts.test.mjs node --test of the pure functions of static/js/alerts.js (`npm test`)
+scripts/check-no-addresses.mjs  fails the build on any email address but the studio's own and RFC 2606 examples
 scripts/*-schemas.mjs  sync-schemas (copy schemas to their $id) and check-schemas (assert they are served)
 scripts/tools_*.py     gallery refresh: status from the GitHub API + Playwright screenshots
 .github/workflows/     deploy.yml — build with Hugo, link-check, publish to Pages
                        refresh-tools.yml — weekly (Mon 06:17 UTC) status + screenshot refresh, commits, redeploys
 ```
+
+## Alerts (`/alerts/`)
+
+Email alerts and Atom feeds for the indicators' changes. The pages are static; `static/js/alerts.js` posts to the
+om-alerts Worker (platform `workers/alerts`). Site params in `hugo.yaml`: `alerts_api` (the Worker URL; workers.dev
+now, `https://alerts.oceanmetrics.io` once the zone is active) and `turnstile_site_key` (the public key; the widget
+renders only when it is set). Pages: `/alerts/` (form + feeds), `/alerts/confirm/#t=` (a button POSTs the token),
+`/alerts/manage/#t=` (list, update, delete, unsubscribe; `&u=all` asks to end every alert), `/alerts/privacy/`. The
+form reads `?place=<id>` or the report keys `?pi=&px=&ii=&ix=&title=`. Until the Worker has its secrets every POST
+answers 503 and the pages say alerts are being set up and point at the feeds.
 
 ## Adding a project
 

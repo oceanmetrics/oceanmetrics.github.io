@@ -1,0 +1,45 @@
+{{ define "main" }}
+{{/* /alerts/manage/#t=<manage token>[&u=all]: lists, updates and deletes the alerts of one address. The list is read on
+     load (it changes nothing); every change is a button press. u=all (from a mail's Unsubscribe link, via the Worker's
+     GET redirect) shows the unsubscribe-from-all button first. */}}
+<main data-alerts="manage">
+  <section class="page-header">
+    <div class="page-header__inner">
+      <span class="eyebrow eyebrow--rule eyebrow--ondark">{{ .Params.eyebrow }}</span>
+      <h1>{{ .Title }}</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container alerts-wrap">
+      <section id="unsub" class="alerts-panel" hidden>
+        <p>Stop every Ocean Metrics alert to this address?</p>
+        <p><button id="all" class="btn" type="button">Unsubscribe from all alerts</button></p>
+      </section>
+      <section id="list" hidden>
+        <div id="subs"></div>
+        <p id="end" hidden><button id="all2" class="btn btn--outline btn--sm" type="button">Unsubscribe from all alerts</button></p>
+      </section>
+      <section id="gone" class="alerts-panel" hidden>
+        <h3><i class="fas fa-circle-check" aria-hidden="true"></i> Unsubscribed</h3>
+        <p>No more alerts will be sent to this address. Only a one-way fingerprint of it is kept, so it is never mailed again unless you subscribe anew. <a href="{{ "alerts/" | relURL }}">Subscribe again</a></p>
+      </section>
+      <p id="msg" class="alerts-status" role="status" aria-live="polite"></p>
+      <noscript><p class="alerts-status alerts-status--error">Managing alerts needs JavaScript. To stop every alert, use the Unsubscribe link of any alert mail, or ask your mail program's Unsubscribe button.</p></noscript>
+
+      <div id="how" class="alerts-how" hidden>
+        <h2 class="docs-h">How unsubscribing works</h2>
+        <ul class="docs-lines">
+          <li>Every alert mail carries the standard one-click unsubscribe: your mail program's Unsubscribe button ends every alert to this address at once, with no page in between.</li>
+          <li>The Unsubscribe link in a mail's footer opens this page with a button to press. A link never changes anything by itself, so a mail scanner that opens it unsubscribes no one.</li>
+          <li>Delete removes one alert. Unsubscribe from all ends every alert and keeps only a one-way fingerprint of the address, so it is not mailed again unless you subscribe anew.</li>
+        </ul>
+      </div>
+      <p class="alerts-panel__note">Statuses are relative to each place's own record, not better or worse. <a href="{{ "alerts/privacy/" | relURL }}">What is kept, and for how long</a></p>
+    </div>
+  </section>
+</main>
+{{ end }}
+
+{{ define "scripts" }}
+<script type="module" src="{{ "js/alerts.js" | relURL }}"></script>
+{{ end }}

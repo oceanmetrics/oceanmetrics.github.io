@@ -1,0 +1,100 @@
+{{ define "main" }}
+{{/* /alerts/: the subscribe form (static/js/alerts.js posts to the om-alerts Worker, site param alerts_api) and the feeds.
+     The turnstile widget container is output only when the site param turnstile_site_key is set. */}}
+{{ $feeds := "https://s3.us-east-1.amazonaws.com/oceanmetrics.io-public/indicators/feeds/" }}
+{{ $target := "https://storage.oceanmetrics.io/indicators/feeds/" }}
+<main data-alerts="form">
+  <section class="page-header">
+    <div class="page-header__inner">
+      <span class="eyebrow eyebrow--rule eyebrow--ondark">{{ .Params.eyebrow }}</span>
+      <h1>{{ .Title }}</h1>
+      <p class="page-header__lead">{{ .Params.summary }}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container alerts-wrap">
+      <h2 class="docs-h">Get an email when something changes</h2>
+      <p class="docs-lede">Pick what to watch. You get one mail a day, or a week, when an indicator there gets its first value or moves to a different status. Statuses are relative to each place's own record, not better or worse. Nothing is sent until you confirm from the mail we send first.</p>
+
+      <form id="alerts-form" class="alerts-form" data-turnstile-key="{{ site.Params.turnstile_site_key }}" novalidate>
+        <label class="alerts-field" for="email">Your email address
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" required>
+        </label>
+
+        <fieldset class="alerts-choice" id="scope-choose">
+          <legend>What to watch</legend>
+          <label class="alerts-opt"><input type="radio" name="scope" value="all" checked> <span>All sanctuaries <small>every place in the places collection, including ones added later</small></span></label>
+          <label class="alerts-opt"><input type="radio" name="scope" value="place"> <span>One place <small>a place id from the gazetteer, such as <code>NMS:CINMS</code></small></span></label>
+          <label class="alerts-field alerts-field--indent" for="place">Place id
+            <input id="place" name="place" type="text" list="place-list" placeholder="NMS:CINMS" autocomplete="off" autocapitalize="none" spellcheck="false" disabled>
+            <datalist id="place-list"></datalist>
+          </label>
+        </fieldset>
+        <div class="alerts-fixed" id="scope-fixed" hidden>
+          <strong>Watching</strong>
+          <span id="scope-fixed-title"></span>
+          <small>the selection you opened this page from</small>
+        </div>
+
+        <fieldset class="alerts-choice">
+          <legend>Tell me about</legend>
+          <label class="alerts-opt"><input type="checkbox" name="kinds" value="status" checked> <span>Status changes <small>an indicator moves to a different status</small></span></label>
+          <label class="alerts-opt"><input type="checkbox" name="kinds" value="new"> <span>First values <small>an indicator gets its first value for a place</small></span></label>
+        </fieldset>
+
+        <fieldset class="alerts-choice">
+          <legend>How often</legend>
+          <label class="alerts-opt"><input type="radio" name="cadence" value="daily" checked> <span>At most daily</span></label>
+          <label class="alerts-opt"><input type="radio" name="cadence" value="weekly"> <span>Weekly, on Mondays</span></label>
+        </fieldset>
+
+        {{ with site.Params.turnstile_site_key }}
+        <div class="alerts-check" id="turnstile" hidden><div id="turnstile-box"></div></div>
+        {{ end }}
+
+        <p class="alerts-privacy">We keep your address encrypted, only to send these alerts, and nothing else is stored about you. Every mail has a one-click unsubscribe. <a href="{{ "alerts/privacy/" | relURL }}">What is kept, and for how long</a>.</p>
+
+        <button id="go" class="btn" type="submit">Subscribe <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+        <noscript><p class="alerts-status alerts-status--error">The form needs JavaScript. The feeds below work without it.</p></noscript>
+      </form>
+
+      <p id="msg" class="alerts-status" role="status" aria-live="polite"></p>
+
+      <section id="pending" class="alerts-panel" tabindex="-1" hidden>
+        <h3><i class="fas fa-envelope-circle-check" aria-hidden="true"></i> Check your mail</h3>
+        <p>If that address can receive alerts, a confirmation link is on its way. Press the Confirm button on the page it opens and the alert starts. The link works for 48 hours; if you did not ask for alerts, ignore the mail and the request is deleted.</p>
+        <p class="alerts-panel__note">Nothing arriving after a few minutes? Check the spam folder, or <a href="{{ "alerts/" | relURL }}">try again</a>.</p>
+      </section>
+
+      <section id="setup" class="alerts-panel" tabindex="-1" hidden>
+        <h3><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i> Alerts are being set up</h3>
+        <p>Email alerts are not switched on yet, and nothing was stored. The Atom feeds work today: open <a id="setup-feed" href="{{ $feeds }}index.json">the list of feeds</a> in a feed reader.</p>
+      </section>
+
+      <h2 class="docs-h" id="feeds">Feeds</h2>
+      <p class="docs-lede">The same changes are published as Atom feeds, for a feed reader or a script. No account, no address.</p>
+      <ul class="alerts-feeds">
+        <li>
+          <strong>The list of feeds</strong>, one entry per feed with its title and address:
+          <br><a href="{{ $feeds }}index.json"><code>{{ $feeds }}index.json</code></a>
+        </li>
+        <li>
+          <strong>One place</strong>, by its place id:
+          <br><code>{{ $feeds }}place=&lt;place id&gt;.xml</code>
+          <br>The example, the Channel Islands National Marine Sanctuary (<code>NMS:CINMS</code>): <a href="{{ $feeds }}place=NMS:CINMS.xml"><code>place=NMS:CINMS.xml</code></a>
+        </li>
+        <li>
+          <strong>Everything, a collection or a place set</strong>:
+          <code>all.xml</code>, <code>coll=&lt;slug&gt;.xml</code> (for example <a href="{{ $feeds }}coll=places.xml"><code>coll=places.xml</code></a>, the sanctuaries) and <code>set=&lt;id&gt;.xml</code>.
+        </li>
+      </ul>
+      <p class="docs-lede">A character in an id other than a letter, digit or one of <code>: . _ -</code> becomes <code>_</code> in the file name. The addresses above are the path-style S3 address, which works today. The feed list names the feeds on <code>storage.oceanmetrics.io</code> (for example <code>{{ $target }}place=NMS:CINMS.xml</code>); that host serves them after the storage cutover, and until then it redirects or does not answer, so use the S3 address now and switch when it answers.</p>
+    </div>
+  </section>
+</main>
+{{ end }}
+
+{{ define "scripts" }}
+<script type="module" src="{{ "js/alerts.js" | relURL }}"></script>
+{{ end }}

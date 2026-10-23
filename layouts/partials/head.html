@@ -7,6 +7,11 @@
 <title>{{ if .IsHome }}{{ site.Title }} · {{ site.Params.tagline }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
 {{ $desc := or .Description .Summary site.Params.description }}
 <meta name="description" content="{{ $desc }}">
+{{ if eq .Section "alerts" }}
+<meta name="om-alerts-api" content="{{ site.Params.alerts_api }}">
+{{ with .Params.noindex }}<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">{{ end }}
+{{ end }}
 
 {{/* ---- Open Graph / social cards ---- */}}
 <meta property="og:site_name" content="{{ site.Title }}">
