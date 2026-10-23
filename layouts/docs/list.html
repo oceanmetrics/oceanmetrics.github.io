@@ -1,0 +1,73 @@
+{{ define "main" }}
+{{/* /docs/: an index that points at each app's own docs; the content is front matter (content/docs/_index.md). */}}
+<main>
+  <section class="page-header">
+    <div class="page-header__inner">
+      <span class="eyebrow eyebrow--rule eyebrow--ondark">{{ .Params.eyebrow }}</span>
+      <h1>{{ .Title }}</h1>
+      <p class="page-header__lead">{{ .Params.summary }}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container docs-wrap">
+
+      {{ with .Params.place }}
+      <h2 class="docs-h">{{ .title }}</h2>
+      <ol class="docs-lines">
+        {{ range .lines }}<li>{{ . | safeHTML }}</li>{{ end }}
+      </ol>
+      <p><a class="btn btn--outline btn--sm" href="{{ .example }}">{{ .example_label }} <i class="fas fa-arrow-right" aria-hidden="true"></i></a></p>
+      {{ end }}
+
+      <h2 class="docs-h">Apps</h2>
+      <div class="grid-auto docs-apps">
+        {{ range .Params.apps }}
+        <article class="docs-app">
+          <h3><a href="{{ .app }}">{{ .name }}</a></h3>
+          <p class="docs-app__what">{{ .what }}</p>
+          <ul class="docs-links">
+            {{ if .live }}<li><a href="{{ .live }}"><i class="fas fa-book-open" aria-hidden="true"></i> Live docs page</a>{{ with .live_label }}<small>{{ . }}</small>{{ end }}</li>{{ end }}
+            <li><a href="{{ .readme }}" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> README</a></li>
+            {{ if .folder }}<li><a href="{{ .folder }}" target="_blank" rel="noopener"><i class="fas fa-folder-open" aria-hidden="true"></i> Docs folder, <code>{{ .folder_label }}</code></a></li>{{ end }}
+          </ul>
+          {{ with .note }}<p class="docs-app__note">{{ . }}</p>{{ end }}
+        </article>
+        {{ end }}
+      </div>
+      <p class="docs-more"><strong>Also:</strong>
+        {{ range $i, $m := .Params.more }}{{ if $i }} · {{ end }}{{ with $m.app }}<a href="{{ . }}">{{ $m.name }}</a>{{ else }}{{ $m.name }}{{ end }} (<a href="{{ $m.readme }}" target="_blank" rel="noopener">README</a>{{ with $m.folder }}, <a href="{{ . }}" target="_blank" rel="noopener">docs</a>{{ end }}){{ end }}
+      </p>
+
+      <h2 class="docs-h">Schemas and brand</h2>
+      <div class="grid-auto docs-apps">
+        <article class="docs-app">
+          <h3><a href="{{ "schemas/" | relURL }}">Schemas</a></h3>
+          <p class="docs-app__what">The JSON Schemas of the catalogs, each served at its own <code>$id</code>.</p>
+        </article>
+        <article class="docs-app">
+          <h3><a href="{{ "brand/v1/" | relURL }}">Brand kit</a></h3>
+          <p class="docs-app__what">Mark, palette, type and the rules that keep the apps coherent; <a href="{{ "brand/v1/icons/" | relURL }}">the icon set</a>.</p>
+        </article>
+      </div>
+
+      {{ with .Params.catalogs }}
+      <h2 class="docs-h">Catalog entry points</h2>
+      <p class="docs-lede">{{ .intro | safeHTML }}</p>
+      <ul class="catalog-list">
+        {{ range .rows }}
+        <li class="catalog-row">
+          <div class="catalog-row__head"><strong>{{ .name }}</strong> <code>{{ .file }}</code></div>
+          <p class="catalog-row__what">{{ .what | safeHTML }}</p>
+          <dl>
+            <div><dt>Target</dt><dd><a href="{{ .target }}" target="_blank" rel="noopener">{{ .target | replaceRE "^https://" "" }}</a></dd></div>
+            <div><dt>Works today</dt><dd><a href="{{ .fallback }}" target="_blank" rel="noopener">{{ .fallback | replaceRE "^https://" "" }}</a></dd></div>
+          </dl>
+        </li>
+        {{ end }}
+      </ul>
+      {{ end }}
+    </div>
+  </section>
+</main>
+{{ end }}

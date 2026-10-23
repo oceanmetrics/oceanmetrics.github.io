@@ -15,6 +15,9 @@ hugo --gc --minify     # production build → ./public
 python3 scripts/check_links.py public   # verify internal links (same gate as CI)
 ```
 
+The schemas page and files are generated, not committed: run `npm ci && npm run schemas` once
+before `hugo` (see "Schemas" below). Without it `/schemas/` shows a one-line hint.
+
 Requires Hugo **extended** ≥ 0.163 (`brew install hugo`).
 
 ## Structure
@@ -35,6 +38,7 @@ static/js/             theme.js (light/dark toggle), tools-filter.js (gallery fi
 static/img/            project screenshots, client logos, portrait
 static/CNAME           oceanmetrics.io
 scripts/check_links.py internal-link checker (fails CI on broken links)
+scripts/*-schemas.mjs  sync-schemas (copy schemas to their $id) and check-schemas (assert they are served)
 scripts/tools_*.py     gallery refresh: status from the GitHub API + Playwright screenshots
 .github/workflows/     deploy.yml — build with Hugo, link-check, publish to Pages
                        refresh-tools.yml — weekly (Mon 06:17 UTC) status + screenshot refresh, commits, redeploys
@@ -83,6 +87,24 @@ Actions tab, optionally for a few slugs) and:
 Locally: `uv venv .venv && uv pip install -r scripts/requirements-tools.txt && .venv/bin/python -m playwright install chromium`,
 then `.venv/bin/python scripts/tools_refresh.py --only explore` (uses `gh auth token`) and
 `.venv/bin/python scripts/tools_shots.py --only explore --force`.
+
+## Schemas (`/schemas/`) and docs (`/docs/`)
+
+Every JSON Schema `$id` in `oceanmetrics/platform` `packages/catalog/schemas/` is
+`https://oceanmetrics.io/schemas/<name>/v<version>/schema.json`; this site serves them there.
+
+- `package.json` pins `@oceanmetrics/catalog` (exact version). **A bump is a one-line change**: edit that
+  version, `npm install` (refreshes `package-lock.json`), commit, push.
+- `scripts/sync-schemas.mjs` (run by `npm run schemas` and by `deploy.yml` after `npm ci`) copies
+  `node_modules/@oceanmetrics/catalog/schemas/*.schema.json` to `static/schemas/<name>/v<version>/schema.json`,
+  reading each file's `$id` for the path, and writes `static/schemas/index.json` and `data/schemas.json`
+  (all git-ignored). The `/schemas/` page (`content/schemas/_index.md`, `layouts/schemas/list.html`) lists them.
+- `scripts/check-schemas.mjs` is the test: `node scripts/check-schemas.mjs public` asserts each schema is in the
+  built site at its `$id` path with the same `$id` and bytes, listed in `index.json` and linked from `/schemas/`
+  (the deploy gate); `--live [origin] [--retries n]` fetches each `$id` from the live site (the `verify` job
+  after deploy). `scripts/check_links.py` also checks every link on `/schemas/`.
+- `/docs/` is `content/docs/_index.md` (front matter: the Place page lines, the apps, the catalog entry points)
+  rendered by `layouts/docs/list.html`. Edit the front matter when an app gains or loses a docs page.
 
 ## Deploy
 

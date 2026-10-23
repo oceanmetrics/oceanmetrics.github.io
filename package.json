@@ -1,0 +1,14 @@
+{
+  "name": "oceanmetrics-io",
+  "private": true,
+  "description": "build inputs of oceanmetrics.io: the pinned @oceanmetrics/catalog whose JSON Schemas are served at their $id",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@oceanmetrics/catalog": "0.4.0"
+  },
+  "scripts": {
+    "schemas": "node scripts/sync-schemas.mjs",
+    "check:schemas": "node scripts/check-schemas.mjs"
+  }
+}

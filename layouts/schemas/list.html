@@ -1,0 +1,35 @@
+{{ define "main" }}
+{{/* /schemas/: one line per schema, generated from data/schemas.json (scripts/sync-schemas.mjs reads the pinned
+     @oceanmetrics/catalog). Links are site-root relative so scripts/check_links.py checks every one exists. */}}
+{{ $d := hugo.Data.schemas | default dict }}
+<main>
+  <section class="page-header">
+    <div class="page-header__inner">
+      <span class="eyebrow eyebrow--rule eyebrow--ondark">{{ .Params.eyebrow }}</span>
+      <h1>{{ .Title }}</h1>
+      <p class="page-header__lead">{{ .Params.summary }}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container docs-wrap">
+      <p class="docs-lede">Each schema is a file at <code>https://oceanmetrics.io/schemas/&lt;name&gt;/v&lt;version&gt;/schema.json</code>, the same address as the <code>$id</code> inside it, so a validator that follows <code>$id</code> or <code>$ref</code> finds it. A version path never changes once published; a new version gets a new path. The files are copied at each deploy from <a href="https://www.npmjs.com/package/@oceanmetrics/catalog" target="_blank" rel="noopener"><code>@oceanmetrics/catalog</code></a>{{ with $d.version }} <code>{{ . }}</code>{{ end }} (<a href="https://github.com/oceanmetrics/platform/tree/main/packages/catalog/schemas" target="_blank" rel="noopener">source</a>). The list as JSON: <a href="{{ "schemas/index.json" | relURL }}"><code>/schemas/index.json</code></a>.</p>
+
+      {{ with $d.schemas }}
+      <ul class="schema-list" aria-label="Schemas">
+        {{ range . }}
+        <li class="schema-row">
+          <span class="schema-row__name"><code>{{ .name }}</code></span>
+          <span class="schema-row__ver">v{{ .version }}</span>
+          <span class="schema-row__what">{{ .what }}</span>
+          <a class="schema-row__link" href="{{ .path | relURL }}">schema.json <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </li>
+        {{ end }}
+      </ul>
+      {{ else }}
+      <p class="docs-lede">The list is generated at build: run <code>npm ci &amp;&amp; npm run schemas</code> before <code>hugo</code>.</p>
+      {{ end }}
+    </div>
+  </section>
+</main>
+{{ end }}
