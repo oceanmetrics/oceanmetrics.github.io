@@ -50,26 +50,22 @@ more:
   - name: Platform packages (npm)
     readme: https://github.com/oceanmetrics/platform#readme
 catalogs:
-  intro: The catalogs are static files. The target address of each is on <code>storage.oceanmetrics.io</code>. Until the cutover, that host answers some of them with a redirect to the S3 bucket and does not yet answer the atlas and obis-h3 entries, so the path-style S3 address is the one that works today; use it as the fallback and switch when the target answers.
+  intro: The catalogs are static files on <code>storage.oceanmetrics.io</code>, served from Cloudflare R2 since the storage cutover of 2026-10-23, with CORS open and range requests answered, so a browser, DuckDB or a STAC client reads them where they are.
   rows:
     - name: Places gazetteer
       file: layers.json
       what: One row per map layer. Schema <a href="/schemas/">places-layers</a>.
-      target: https://storage.oceanmetrics.io/gazetteer/index/layers.json
-      fallback: https://s3.us-east-1.amazonaws.com/oceanmetrics.io-public/gazetteer/index/layers.json
+      url: https://storage.oceanmetrics.io/gazetteer/index/layers.json
     - name: Indicators
       file: indicators.json
       what: The indicator manifest the Indicators app reads.
-      target: https://storage.oceanmetrics.io/indicators/indicators.json
-      fallback: https://s3.us-east-1.amazonaws.com/oceanmetrics.io-public/indicators/indicators.json
+      url: https://storage.oceanmetrics.io/indicators/indicators.json
     - name: Atlas
       file: catalog.json
       what: The STAC root of the atlas collections.
-      target: https://storage.oceanmetrics.io/atlas/catalog.json
-      fallback: https://s3.us-east-1.amazonaws.com/oceanmetrics.io-public/atlas/catalog.json
+      url: https://storage.oceanmetrics.io/atlas/catalog.json
     - name: OBIS H3
       file: collection.json
       what: The obis-h3 release as one STAC collection on the H3 grid. Schema <a href="/schemas/">h3</a>.
-      target: https://storage.oceanmetrics.io/obis-h3/collection.json
-      fallback: https://s3.us-east-1.amazonaws.com/oceanmetrics.io-public/obis-h3/collection.json
+      url: https://storage.oceanmetrics.io/obis-h3/collection.json
 ---

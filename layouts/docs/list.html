@@ -60,8 +60,7 @@
           <div class="catalog-row__head"><strong>{{ .name }}</strong> <code>{{ .file }}</code></div>
           <p class="catalog-row__what">{{ .what | safeHTML }}</p>
           <dl>
-            <div><dt>Target</dt><dd><a href="{{ .target }}" target="_blank" rel="noopener">{{ .target | replaceRE "^https://" "" }}</a></dd></div>
-            <div><dt>Works today</dt><dd><a href="{{ .fallback }}" target="_blank" rel="noopener">{{ .fallback | replaceRE "^https://" "" }}</a></dd></div>
+            <div><dt>Address</dt><dd><a href="{{ .url }}" target="_blank" rel="noopener">{{ .url | replaceRE "^https://" "" }}</a></dd></div>
           </dl>
         </li>
         {{ end }}
