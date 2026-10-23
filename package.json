@@ -5,7 +5,8 @@
   "type": "module",
   "engines": { "node": ">=20" },
   "dependencies": {
-    "@oceanmetrics/catalog": "0.4.0"
+    "@oceanmetrics/catalog": "0.4.0",
+    "@oceanmetrics/nav": "0.1.0"
   },
   "scripts": {
     "schemas": "node scripts/sync-schemas.mjs",

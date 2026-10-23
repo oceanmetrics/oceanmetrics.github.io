@@ -13,14 +13,9 @@
 @media (max-width:860px){ .grid-3{ grid-template-columns:1fr; } }
 
 /* ---- Header ----------------------------------------------------------- */
-.site-header{ position:sticky; top:0; z-index:var(--z-nav); background:light-dark(rgba(255,255,255,0.82), rgba(10,40,49,0.80)); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
-.site-header__inner{ max-width:var(--container-wide); margin:0 auto; padding:0 var(--space-6); height:72px; display:flex; align-items:center; gap:var(--space-6); }
-.site-header__logo img{ height:34px; display:block; }
-.site-nav{ display:flex; gap:var(--space-2); margin-left:auto; align-items:center; }
-.site-nav a{ font-family:var(--font-sans); font-size:var(--text-sm); font-weight:600; color:var(--text-heading); padding:8px 12px; border-radius:var(--radius-sm); text-decoration:none; }
-.site-nav a:hover{ background:var(--foam-100); text-decoration:none; }
-.site-nav a.is-active{ color:var(--brand-text); background:var(--foam-100); }
-.site-nav__sep{ width:1px; height:24px; background:var(--border); margin:0 6px; }
+/* the bar is <om-nav> (@oceanmetrics/nav): see layouts/partials/header.html */
+om-nav{ display:block; position:sticky; top:0; z-index:var(--z-nav); }
+om-nav:not(:defined){ min-height:48px; border-bottom:1px solid var(--border); background:var(--bg-surface); }
 /* ---- Nav dropdown ----------------------------------------------------- */
 .nav-dropdown{ position:relative; display:inline-flex; align-items:center; }
 .nav-dropdown > a{ display:flex; align-items:center; gap:.35em; }
@@ -50,46 +45,6 @@
 .nav-search input{ height:32px; padding:0 var(--space-3) 0 28px; border:1px solid var(--border); border-radius:var(--radius-pill); font-size:var(--text-sm); background:var(--foam-100); color:var(--text-heading); width:148px; outline:none; transition:width .2s, border-color .2s; }
 .nav-search input:focus{ border-color:var(--accent); width:200px; }
 .nav-search input::placeholder{ color:var(--text-muted); }
-.nav-toggle{ display:none; }
-
-/* ---- Mobile nav ------------------------------------------------------- */
-/* one breakpoint: the header needs ~1260px for the logo + full nav, so below
-   that we collapse to a hamburger. The dropdown panels expand inline (stacked,
-   scrollable) instead of floating. */
-@media (max-width:1024px){
-  .nav-toggle{ display:inline-flex; margin-left:auto; background:none; border:none; font-size:24px; line-height:1; color:var(--text-heading); cursor:pointer; padding:8px; }
-  .site-nav{ display:none; }
-  .site-nav.open{
-    display:flex; position:absolute; top:72px; left:0; right:0;
-    flex-direction:column; align-items:stretch; gap:var(--space-1);
-    background:var(--bg-surface); border-bottom:1px solid var(--border);
-    padding:var(--space-3) var(--space-4) var(--space-4);
-    max-height:calc(100vh - 72px); overflow-y:auto;
-    box-shadow:var(--shadow-lg);
-  }
-  /* top-level links + dropdown triggers become full-width rows */
-  .site-nav > a,
-  .nav-dropdown > a{ padding:10px 8px; border-radius:var(--radius-sm); }
-  /* stack the trigger above its panel instead of floating beside it */
-  .nav-dropdown{ flex-direction:column; align-items:stretch; width:100%; }
-  .nav-dropdown > a{ justify-content:space-between; }
-  .nav-dropdown__caret{ font-size:.8em; }
-  .nav-dropdown__panel{
-    position:static; transform:none; opacity:1; pointer-events:auto;
-    display:block; box-shadow:none; border:none; border-radius:0;
-    background:transparent; padding:0 0 var(--space-2) var(--space-4);
-    min-width:0; margin:0;
-  }
-  .nav-dropdown__panel::before{ display:none; }
-  .nav-dropdown__col{ margin-bottom:var(--space-3); }
-  .nav-dropdown__col:last-child{ margin-bottom:0; }
-  .nav-dropdown__col a{ white-space:normal; padding:7px 0; }
-  .site-nav__sep{ display:none; }
-  .nav-search{ width:100%; margin-top:var(--space-2); }
-  .nav-search input,
-  .nav-search input:focus{ width:100%; height:40px; }
-  .site-nav .btn{ margin-top:var(--space-2); justify-content:center; }
-}
 
 /* ---- Hero (home) — light/dark, built around the animated ensō --------- */
 .hero{ position:relative; overflow:hidden;

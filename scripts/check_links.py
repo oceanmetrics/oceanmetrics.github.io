@@ -30,6 +30,7 @@ non-allowed broken link is found.
 
 import argparse
 import fnmatch
+import json
 import os
 import sys
 from html.parser import HTMLParser
@@ -69,11 +70,33 @@ FILE_EXTS = {
 class LinkExtractor(HTMLParser):
     """collect (attr_value) URL strings from a single HTML document."""
 
-    def __init__(self):
+    def __init__(self, origin=""):
         super().__init__(convert_charrefs=True)
         self.links = []
+        self.origin = origin
+
+    def _nav_links(self, amap):
+        """<om-nav items='[{"href":...}]' home-href=...>: the shared bar draws its
+        links in a shadow root, so they are not <a> elements in the page. check
+        each item href (and home-href); an absolute url on this site's own origin
+        is checked as its path (the doors /places/ /indicators/ /atlas/ are other
+        apps, listed in the allow-file)."""
+        hrefs = [amap.get("home-href")]
+        try:
+            hrefs += [i.get("href") for i in json.loads(amap.get("items") or "[]")]
+        except (ValueError, AttributeError):
+            pass
+        for h in hrefs:
+            if not h:
+                continue
+            if self.origin and h.startswith(self.origin):
+                h = h[len(self.origin):] or "/"
+            self.links.append(h.strip())
 
     def handle_starttag(self, tag, attrs):
+        if tag == "om-nav":
+            self._nav_links(dict(attrs))
+            return
         wanted = URL_ATTRS.get(tag)
         if not wanted:
             return
@@ -122,6 +145,19 @@ def detect_base_path(public_dir):
     return ""
 
 
+def detect_origin(public_dir):
+    """scheme://host of the built site (from sitemap.xml), '' if unknown."""
+    sitemap = os.path.join(public_dir, "sitemap.xml")
+    try:
+        for loc in ET.parse(sitemap).getroot().iter():
+            if loc.tag.endswith("loc") and loc.text:
+                u = urlsplit(loc.text.strip())
+                return "%s://%s" % (u.scheme, u.netloc)
+    except (OSError, ET.ParseError):
+        pass
+    return ""
+
+
 def load_allow(path):
     """read glob patterns (one per line; # comments) of links we tolerate."""
     patterns = []
@@ -161,7 +197,7 @@ def target_exists(public_dir, url_path):
     return any(os.path.isfile(c) for c in candidates)
 
 
-def check(public_dir, base_path, allow_patterns):
+def check(public_dir, base_path, allow_patterns, origin=""):
     """return (broken, allowed, n_files, n_links).
     broken / allowed are dicts: link -> sorted list of source pages."""
     broken, allowed = {}, {}
@@ -170,7 +206,7 @@ def check(public_dir, base_path, allow_patterns):
     for path in html_files(public_dir):
         n_files += 1
         with open(path, encoding="utf-8", errors="replace") as f:
-            parser = LinkExtractor()
+            parser = LinkExtractor(origin)
             parser.feed(f.read())
         src_page = "/" + os.path.relpath(path, public_dir).replace(os.sep, "/")
 
@@ -247,7 +283,8 @@ def main():
     base_path = base_path.rstrip("/")
     allow_patterns = load_allow(args.allow)
 
-    broken, allowed, n_files, n_links = check(args.public_dir, base_path, allow_patterns)
+    origin = detect_origin(args.public_dir)
+    broken, allowed, n_files, n_links = check(args.public_dir, base_path, allow_patterns, origin)
 
     print("link check: %d html files, %d internal links, base path '%s'"
           % (n_files, n_links, base_path or "(root)"))

@@ -1,1 +1,5 @@
 # glob patterns for tolerated broken internal links (fnmatch). one per line.
+# the three doors of the shared nav bar are other apps, deployed apart from this site
+/places/
+/indicators/
+/atlas/

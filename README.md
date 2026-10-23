@@ -106,6 +106,15 @@ Every JSON Schema `$id` in `oceanmetrics/platform` `packages/catalog/schemas/` i
 - `/docs/` is `content/docs/_index.md` (front matter: the Place page lines, the apps, the catalog entry points)
   rendered by `layouts/docs/list.html`. Edit the front matter when an app gains or loses a docs page.
 
+## Navigation bar (`<om-nav>`)
+
+The header is the shared bar of `@oceanmetrics/nav` (pinned in `package.json`; `hugo.yaml` mounts its `dist/` as
+`assets/om-nav` and `layouts/partials/header.html` bundles it with `js.Build`). The items are the three doors, "What
+changed" and Docs, then `menu.main` from `hugo.yaml` and GitHub (`params.github`); the theme toggle
+(`data-theme-toggle`, `static/js/theme.js`) and "Work with me" sit in the bar's slot. It collapses below 1100 px.
+`scripts/check_links.py` reads the bar's `items`; the doors (`/places/`, `/indicators/`, `/atlas/`) are other apps and
+are listed in `scripts/linkcheck_allow.txt`.
+
 ## Deploy
 
 Push to `main`; GitHub Actions builds and publishes to Pages. Set the custom domain to

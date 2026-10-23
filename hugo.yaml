@@ -45,3 +45,12 @@ markup:
 
 build:
   writeStats: false
+
+# the shared nav bar (@oceanmetrics/nav, pinned in package.json) is mounted as assets/om-nav so
+# header.html can bundle it with js.Build. Declaring a mount replaces the default for its component.
+module:
+  mounts:
+    - source: assets
+      target: assets
+    - source: node_modules/@oceanmetrics/nav/dist
+      target: assets/om-nav
