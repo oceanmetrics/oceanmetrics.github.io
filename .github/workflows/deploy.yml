@@ -4,6 +4,10 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+  schedule:
+    # daily, after the indicators' daily check (about 13:20 UTC): the front page's baked counts and "What changed"
+    # are a day old at most
+    - cron: "17 15 * * *"
 
 permissions:
   contents: read
@@ -39,6 +43,11 @@ jobs:
         run: |
           npm ci --ignore-scripts
           node scripts/sync-schemas.mjs
+      - name: Front page counts and "What changed" from the bucket
+        # scripts/counts.mjs -> data/counts.json (layers.json, indicators.json, coverage.parquet, atlas/catalog.json,
+        # changes/latest.json, feeds/all.xml) through @oceanmetrics/catalog/storage's host rule (OM_STORAGE, else the
+        # default). If the bucket does not answer, the committed file (the last good numbers) stays, with a warning.
+        run: node scripts/counts.mjs
       - name: Unit tests and the no-addresses check
         # the pure functions of static/js/alerts.js (request bodies, hash parsing) and: no email address in the repo
         run: |
@@ -89,6 +98,15 @@ jobs:
         run: npm ci --ignore-scripts
       - name: Live $id check
         run: node scripts/check-schemas.mjs --live https://oceanmetrics.io --retries 12
+      - name: Live front page
+        # the doors and "What changed" are on oceanmetrics.io/ (Pages needs a moment to publish)
+        run: |
+          for i in $(seq 1 12); do
+            html=$(curl -s https://oceanmetrics.io/)
+            if echo "$html" | grep -Eq 'class="?door[" ]' && echo "$html" | grep -Eq 'id="?what-changed'; then echo "front page: doors and What changed live"; exit 0; fi
+            sleep 10
+          done
+          echo "front page: doors or What changed missing"; exit 1
       - name: Live alerts pages
         # the four reader pages and the script answer 200 from oceanmetrics.io (Pages needs a moment to publish)
         run: |
