@@ -27,7 +27,7 @@ apps:
     readme: https://github.com/oceanmetrics/indicators#readme
     folder: https://github.com/oceanmetrics/indicators/tree/main/docs
     folder_label: docs
-    note: No docs page of its own. The Help menu in the app explains how to read a cell and lists the keyboard shortcuts; the README holds the rest.
+    note: No docs page of its own. The Help menu in the app explains how to read a cell, lists the keyboard shortcuts and five views to try (the Maps section above); the README holds the rest.
   - name: Atlas
     what: The layer browser, one codebase with a skin per organization.
     app: https://oceanmetrics.io/atlas/

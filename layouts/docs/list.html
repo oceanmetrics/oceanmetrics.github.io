@@ -20,6 +20,19 @@
       <p><a class="btn btn--outline btn--sm" href="{{ .example }}">{{ .example_label }} <i class="fas fa-arrow-right" aria-hidden="true"></i></a></p>
       {{ end }}
 
+      {{/* the map features (Ben 2026-10-23: findable without asking): the five "Try these" of the indicators viewer's Help,
+           from data/examples.json (shared with the front page's doors; scripts/examples.test.mjs) */}}
+      {{ with hugo.Data.examples }}
+      <h2 class="docs-h" id="maps">Maps</h2>
+      <p class="docs-lede">The layer under the map, the period scrubber and Then vs Now are in the indicators viewer's Map tab: choose a
+        "Layer under the map" (sea surface temperature, chlorophyll, …), move the Period, and turn on Compare for Then vs Now. A Place page
+        draws the same layer at one month and opens Then vs Now from its button. Try these:</p>
+      <ul class="docs-maps">
+        {{ range .maps }}<li><a href="{{ .url }}">{{ .label }}</a>. {{ .sentence }}</li>
+        {{ end }}
+      </ul>
+      {{ end }}
+
       <h2 class="docs-h">Apps</h2>
       <div class="grid-auto docs-apps">
         {{ range .Params.apps }}

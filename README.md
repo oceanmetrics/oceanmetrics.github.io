@@ -73,6 +73,11 @@ line (`params.platformHeadline`) and a place search, the three doors with their 
   `npm run counts` and commit when you like; CI does not commit it.
 - **Fresh.** `deploy.yml` also runs daily (15:17 UTC, after the indicators' daily check), so the numbers are a day old at
   most.
+- **Example links** (Ben 2026-10-23: the map features must be findable without asking): one "Try:" line under each door
+  and the `/docs/` "Maps" section come from **`data/examples.json`** (`doors.places|indicators|atlas`, and `maps`, the
+  five views of the indicators viewer's Help -> Try these, `viewer/src/lib/tryThese.ts` there: change both together).
+  `scripts/examples.test.mjs` (in `npm test`) checks the shape and that every link answers 200 (skipped with
+  `OM_OFFLINE=1` or when oceanmetrics.io cannot be reached).
 - **Icons** come from the published `static/brand/v1/icons/icons.css`: `layouts/partials/om-icons-css.html` cuts the few
   glyphs a page uses into an inline `<style>` (no path typed by hand, not the whole 34 kB set).
 - **Tests.** `scripts/counts.test.mjs` (`node --test`, in `npm test`) runs every rule on the bucket-shaped fixtures in
