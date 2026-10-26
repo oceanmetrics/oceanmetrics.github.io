@@ -1,218 +1,218 @@
 {
  "calcofi-docs": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "calcofi-erddap": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "calcofi-io": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
-  "taken": "2026-10-19T13:06:06Z"
+  "taken": "2026-10-26T12:55:22Z"
  },
  "calcofi-stac": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": true,
   "light": true,
-  "taken": "2026-10-19T13:06:06Z"
+  "taken": "2026-10-26T12:55:22Z"
  },
  "calcofi-workflows": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
-  "taken": "2026-10-19T13:06:06Z"
+  "taken": "2026-10-26T12:55:22Z"
  },
  "calcofi4db": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "calcofi4py": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "calcofi4r": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "ctd-transects": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "ctd-viz": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "db-query": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "db-schema": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
-  "taken": "2026-10-19T13:06:06Z"
+  "taken": "2026-10-26T12:55:22Z"
  },
  "erddap-places": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": true,
   "light": true,
-  "taken": "2026-10-19T13:06:06Z"
+  "taken": "2026-10-26T12:55:22Z"
  },
  "explore": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
-  "taken": "2026-10-19T13:06:06Z"
+  "taken": "2026-10-26T12:55:22Z"
  },
  "extractr": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "marine-sdms": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "marinebon-org": {
-  "checked": "2026-10-16T09:27:00Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
-  "taken": "2026-10-16T09:27:00Z"
+  "taken": "2026-10-26T12:55:22Z"
  },
  "marinebon-ui": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": true,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "marinesensitivity-org": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "msens": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "msens-atlas": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
-  "taken": "2026-10-19T13:06:06Z"
+  "taken": "2026-10-26T12:55:22Z"
  },
  "msens-docs": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "msens-query": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "msens-stac": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": true,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "msens-stac-api": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "msens-workflows": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "obis-hex": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
-  "taken": "2026-10-19T13:06:06Z"
+  "taken": "2026-10-26T12:55:22Z"
  },
  "obisindicators": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "om-atlas": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
-  "taken": "2026-10-19T13:06:06Z"
+  "taken": "2026-10-26T12:55:22Z"
  },
  "om-erddap": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "om-workflows": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
-  "taken": "2026-10-19T13:06:06Z"
+  "taken": "2026-10-26T12:55:22Z"
  },
  "places": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": true,
   "light": true,
-  "taken": "2026-10-19T13:06:06Z"
+  "taken": "2026-10-26T12:55:22Z"
  },
  "pollutants": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "seascaper": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": false,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "stac-sdm": {
-  "checked": "2026-10-19T13:06:06Z",
+  "checked": "2026-10-26T12:55:22Z",
   "dark": true,
   "light": true,
   "taken": "2026-10-19T13:06:06Z"
  },
  "station-explorer": {
-  "checked": "2026-10-19T13:06:06Z",
-  "dark": false,
+  "checked": "2026-10-26T12:55:22Z",
+  "dark": true,
   "light": true,
-  "taken": "2026-10-19T13:06:06Z"
+  "taken": "2026-10-26T12:55:22Z"
  }
 }
