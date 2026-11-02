@@ -1,16 +1,16 @@
 {
  "calcofi-docs": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-20T19:04:55Z",
-  "last_commit_url": "https://github.com/CalCOFI/docs/commit/463632c313265898e222ec6b1442a34ff4fd741e",
+  "last_commit": "2026-10-31T01:22:42Z",
+  "last_commit_url": "https://github.com/CalCOFI/docs/commit/fe5f499834a33adb5fe77218e5c84a201e51958c",
   "stars": 1
  },
  "calcofi-erddap": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-09-11T21:30:25Z",
@@ -19,7 +19,7 @@
  },
  "calcofi-io": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-19T19:18:08Z",
@@ -28,7 +28,7 @@
  },
  "calcofi-stac": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-09-05T17:14:40Z",
@@ -37,55 +37,55 @@
  },
  "calcofi-workflows": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-22T22:32:29Z",
-  "last_commit_url": "https://github.com/CalCOFI/workflows/commit/c50c9925ee5ccd9c60a3690742478656c058e1fb",
+  "last_commit": "2026-10-31T09:16:27Z",
+  "last_commit_url": "https://github.com/CalCOFI/workflows/commit/df667c5eba5f141f208f65a25fcec897b51fc935",
   "stars": 0
  },
  "calcofi4db": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-22T21:47:05Z",
-  "last_commit_url": "https://github.com/CalCOFI/calcofi4db/commit/6f513622e4c32396b6cb6477d938b61d84b2fe30",
+  "last_commit": "2026-10-30T13:00:13Z",
+  "last_commit_url": "https://github.com/CalCOFI/calcofi4db/commit/d59368607eb71ea9e1a41a56c1d665af92cc5644",
   "stars": 0,
-  "version": "4.30.0"
+  "version": "4.31.0"
  },
  "calcofi4py": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-07T06:03:07Z",
-  "last_commit_url": "https://github.com/CalCOFI/calcofi4py/commit/343c30ae0433b0896aac44c7f65549ccba015fbb",
+  "last_commit": "2026-10-31T08:59:21Z",
+  "last_commit_url": "https://github.com/CalCOFI/calcofi4py/commit/4ed85dd47d53d526c4d8cbf5a17809a1d39dad87",
   "stars": 0,
-  "version": "0.9.4"
+  "version": "0.9.5"
  },
  "calcofi4r": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-21T10:57:12Z",
-  "last_commit_url": "https://github.com/CalCOFI/calcofi4r/commit/e66b8a8afcc82df212275ea731de37483f65b956",
+  "last_commit": "2026-10-31T08:59:06Z",
+  "last_commit_url": "https://github.com/CalCOFI/calcofi4r/commit/ea8a8e6adc9e3002118d4cb0a9da9d19125f1229",
   "stars": 0,
-  "version": "1.28.1"
+  "version": "1.29.0"
  },
  "ctd-transects": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-21T11:30:35Z",
-  "last_commit_url": "https://github.com/CalCOFI/ctd-transects/commit/5221dd4e8ec550a2ef133051f839e3d4d4a8b2d1",
+  "last_commit": "2026-10-31T01:50:23Z",
+  "last_commit_url": "https://github.com/CalCOFI/ctd-transects/commit/aa1d224a634a3425756e8fcaf8c21dedac41ea5e",
   "stars": 0
  },
  "ctd-viz": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-08-25T14:39:05Z",
@@ -94,16 +94,16 @@
  },
  "db-query": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-21T10:44:19Z",
-  "last_commit_url": "https://github.com/CalCOFI/db-query/commit/366a3d9b103541868bdfae1a26285046da0d8b6f",
+  "last_commit": "2026-10-31T08:59:11Z",
+  "last_commit_url": "https://github.com/CalCOFI/db-query/commit/c62f2f5d9a3c0d80cffb978b3c1a64f916d77136",
   "stars": 0
  },
  "db-schema": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-09-11T08:47:39Z",
@@ -112,25 +112,25 @@
  },
  "erddap-places": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-24T17:08:13Z",
-  "last_commit_url": "https://github.com/oceanmetrics/erddap-places/commit/db2f7871c984fb45f66c3c8d4e5f224c841bcf4b",
+  "last_commit": "2026-11-01T19:36:07Z",
+  "last_commit_url": "https://github.com/oceanmetrics/erddap-places/commit/bb1287cedaeb652d1d1a5c2eaf0812dc2bd71bc8",
   "stars": 1
  },
  "explore": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-16T18:50:12Z",
-  "last_commit_url": "https://github.com/CalCOFI/explore/commit/637d837a3c0b45712ffaf9514df7bf0a2bcad8ba",
+  "last_commit": "2026-10-27T14:50:54Z",
+  "last_commit_url": "https://github.com/CalCOFI/explore/commit/748f8477c1e959a5138c5d6218483bba2bb9e457",
   "stars": 0
  },
  "extractr": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-06-29T19:30:53Z",
@@ -140,7 +140,7 @@
  },
  "marine-sdms": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-06-23T11:18:23Z",
@@ -149,16 +149,16 @@
  },
  "marinebon-org": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-23T16:11:36Z",
-  "last_commit_url": "https://github.com/marinebon/marinebon.github.io/commit/ff61069a109e8751f083bacabfafee405140711d",
+  "last_commit": "2026-10-28T14:23:38Z",
+  "last_commit_url": "https://github.com/marinebon/marinebon.github.io/commit/d5c3afe426c7ff58a12bc47f9b21e0874d752832",
   "stars": 1
  },
  "marinebon-ui": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-12T08:40:00Z",
@@ -168,7 +168,7 @@
  },
  "marinesensitivity-org": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-16T12:11:52Z",
@@ -177,17 +177,17 @@
  },
  "msens": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-22T12:49:38Z",
-  "last_commit_url": "https://github.com/MarineSensitivity/msens/commit/875f5753c0a3bdaebbc9446dca87d9d2bc055f31",
+  "last_commit": "2026-10-29T19:51:18Z",
+  "last_commit_url": "https://github.com/MarineSensitivity/msens/commit/64457327188082f18972ccf3173cc074c2d268aa",
   "stars": 0,
-  "version": "0.59.0"
+  "version": "0.60.2"
  },
  "msens-atlas": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-23T16:14:47Z",
@@ -197,7 +197,7 @@
  },
  "msens-docs": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-24T14:15:41Z",
@@ -206,16 +206,16 @@
  },
  "msens-query": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-22T13:01:56Z",
-  "last_commit_url": "https://github.com/MarineSensitivity/workflows/commit/04f59ce0c780b37a2a8bbba5b20e699ea46c9716",
+  "last_commit": "2026-11-01T15:36:38Z",
+  "last_commit_url": "https://github.com/MarineSensitivity/workflows/commit/f28bb63e50924f72338cf9a1a406622a850d357a",
   "stars": 0
  },
  "msens-stac": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-14T10:55:34Z",
@@ -224,7 +224,7 @@
  },
  "msens-stac-api": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-07-31T16:46:44Z",
@@ -233,16 +233,16 @@
  },
  "msens-workflows": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-22T13:01:56Z",
-  "last_commit_url": "https://github.com/MarineSensitivity/workflows/commit/04f59ce0c780b37a2a8bbba5b20e699ea46c9716",
+  "last_commit": "2026-11-01T15:36:38Z",
+  "last_commit_url": "https://github.com/MarineSensitivity/workflows/commit/f28bb63e50924f72338cf9a1a406622a850d357a",
   "stars": 0
  },
  "obis-hex": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-24T14:22:20Z",
@@ -251,17 +251,17 @@
  },
  "obisindicators": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-23T18:00:27Z",
-  "last_commit_url": "https://github.com/marinebon/obisindicators/commit/b3b9ce5e477b4630fe458cfaa12bf4ed195599f2",
+  "last_commit": "2026-11-01T19:36:05Z",
+  "last_commit_url": "https://github.com/marinebon/obisindicators/commit/6ca3b719dad3d3d45e25974af29124e9e35c3ce1",
   "stars": 8,
-  "version": "0.12.1"
+  "version": "0.12.2"
  },
  "om-atlas": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-24T14:28:22Z",
@@ -271,7 +271,7 @@
  },
  "om-erddap": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-07T17:18:43Z",
@@ -280,7 +280,7 @@
  },
  "om-workflows": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-23T19:14:00Z",
@@ -289,7 +289,7 @@
  },
  "places": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-24T14:20:19Z",
@@ -298,7 +298,7 @@
  },
  "pollutants": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-10-07T05:37:24Z",
@@ -307,7 +307,7 @@
  },
  "seascaper": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2024-11-11T19:28:52Z",
@@ -317,7 +317,7 @@
  },
  "stac-sdm": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
   "last_commit": "2026-06-23T23:06:56Z",
@@ -327,11 +327,11 @@
  },
  "station-explorer": {
   "archived": false,
-  "checked": "2026-10-26T12:54:11Z",
+  "checked": "2026-11-02T15:41:33Z",
   "default_branch": "main",
   "http": 200,
-  "last_commit": "2026-10-21T11:31:08Z",
-  "last_commit_url": "https://github.com/CalCOFI/db-viz-station/commit/ac79e291edb797a5a703695308fc5707e72566f3",
+  "last_commit": "2026-10-31T01:40:15Z",
+  "last_commit_url": "https://github.com/CalCOFI/db-viz-station/commit/3c468f7263173bdc4f0af137629b03376e8db29e",
   "stars": 0
  }
 }
