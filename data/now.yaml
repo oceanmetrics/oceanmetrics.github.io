@@ -1,0 +1,68 @@
+# What Ocean Metrics is working on right now. Read by /now/, the "Latest" block on each project page
+# and nothing else. Refreshed about monthly from the project logs; `updated` is the date of the last refresh.
+updated: 2026-11-06
+now: Shipping monthly releases of the CalCOFI database, a review build of the Marine Sensitivity Toolkit, and the Ocean Metrics atlas on its new storage.
+projects:
+  calcofi:
+    name: CalCOFI.io
+    page: /projects/calcofi/
+    site: https://calcofi.io
+    updated: 2026-11-06
+    phase: Year 1 of the SIO-CalCOFI Data Management Plan. The integrated database is released about monthly, with a DOI each time, and every held dataset is moving through a login-protected preview before release.
+    latest:
+      - date: 2026-11-06
+        text: Database release v2026.11.05 is live, with 26 tables and 385.9 million rows.
+        url: https://storage.calcofi.io/calcofi-db/ducklake/releases/v2026.11.05/RELEASE_NOTES.html
+      - date: 2026-11-02
+        text: The first quarter's Data Management Plan deliverables are complete and documented in the status record.
+        url: https://calcofi.io
+      - date: 2026-10-31
+        text: Release v2026.10.30 brought the July 2009 casts back to their cruise and minted DOI 10.5281/zenodo.23833029.
+        url: https://doi.org/10.5281/zenodo.23833029
+  marinesensitivity:
+    name: Marine Sensitivity
+    page: /projects/marinesensitivity/
+    site: https://marinesensitivity.org
+    updated: 2026-11-06
+    phase: BOEM Phase 2 of the Marine Sensitivity Toolkit, delivered monthly. Version 10 is on a review host for the sponsor; version 11 is in build; version 7 stays the public default.
+    latest:
+      - date: 2026-11-05
+        text: Version 10 published to the login-protected review host, with public and restricted layers verified.
+        url: https://marinesensitivity.org
+      - date: 2026-10-30
+        text: The 2023 Atlantic seabird models were ingested for version 11, with day-weighted annual summaries.
+        url: https://github.com/MarineSensitivity
+      - date: 2026-10-30
+        text: October brought about 370 commits across six repositories; the msens R package went from 0.45 to 0.59.
+        url: https://github.com/MarineSensitivity
+  marinebon:
+    name: Marine BON
+    page: /projects/marinebon/
+    site: https://marinebon.org
+    updated: 2026-11-06
+    phase: Leading the US MBON Biodiversity Indicators working group and maintaining marinebon.org.
+    latest:
+      - date: 2026-11-05
+        text: The revised manuscript "Coding Ocean Indicators, Patterns and People" was resubmitted to Progress in Physical Geography.
+      - date: 2026-10-20
+        text: A spam filter now guards the marinebon.org contact form; the live form was re-verified.
+        url: https://marinebon.org
+      - date: 2026-07-29
+        text: marinebon.org relaunched with a Methods section, a Network page and one Products catalog.
+        url: https://marinebon.org
+  atlas:
+    name: Ocean Metrics atlas
+    page: /tools/om-atlas/
+    site: https://oceanmetrics.io/atlas/
+    updated: 2026-11-06
+    phase: The platform behind Places, Indicators and Atlas. Storage moved to Cloudflare R2 in October; the OBIS biodiversity-by-hexagon product refreshes monthly.
+    latest:
+      - date: 2026-11-03
+        text: OBIS by H3 hexagon v20261101 published, 164.6 million records in 236,073 files, 2.0 GB.
+        url: https://storage.oceanmetrics.io
+      - date: 2026-10-24
+        text: The obis-hex app retired into the atlas; old links redirect.
+        url: https://oceanmetrics.io/atlas/
+      - date: 2026-10-16
+        text: AquaMaps EOV share product 1.0.0, 10,750 species and a 6.35 billion row cell-to-species table, published to the atlas.
+        url: https://github.com/oceanmetrics/workflows

@@ -1,0 +1,42 @@
+{{ define "main" }}
+{{ $n := hugo.Data.now }}
+<main>
+  <section class="page-header">
+    <div class="page-header__inner">
+      <span class="eyebrow eyebrow--rule eyebrow--ondark">Now · as of {{ (time.AsTime $n.updated).Format "2 January 2006" }}</span>
+      <h1>{{ .Title }}</h1>
+      <p class="page-header__lead">{{ $n.now }}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="now-grid">
+        {{ range $slug, $p := $n.projects }}
+        <article class="now-card" id="{{ $slug }}">
+          <div class="now-card__head">
+            <h2 class="now-card__title"><a href="{{ $p.page | relURL }}">{{ $p.name }}</a></h2>
+            <span class="now-card__asof">as of {{ (time.AsTime $p.updated).Format "2 Jan 2006" }}</span>
+          </div>
+          <p class="now-card__phase">{{ $p.phase }}</p>
+          <ol class="latest">
+            {{ range $p.latest }}
+            <li class="latest__item">
+              <time class="latest__date" datetime="{{ .date }}">{{ (time.AsTime .date).Format "2 Jan" }}</time>
+              <span class="latest__text">{{ if .url }}<a href="{{ .url }}"{{ if hasPrefix .url "http" }} target="_blank" rel="noopener"{{ end }}>{{ .text }}</a>{{ else }}{{ .text }}{{ end }}</span>
+            </li>
+            {{ end }}
+          </ol>
+          <div class="now-card__foot">
+            <a class="btn btn--outline btn--sm" href="{{ $p.page | relURL }}">About the project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            <a class="btn btn--sm" href="{{ $p.site }}" target="_blank" rel="noopener">Open the site <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+        </article>
+        {{ end }}
+      </div>
+      <p class="changes__foot">Dated entries, not a changelog: each project's full record is on its own site and in its repositories.
+        For the finished pieces, see the <a href="{{ "news/" | relURL }}">news</a>.</p>
+    </div>
+  </section>
+</main>
+{{ end }}
