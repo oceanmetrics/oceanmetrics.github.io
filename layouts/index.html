@@ -135,6 +135,28 @@
     </div>
   </section>
 
+  {{/* ===== NEWS: the latest three posts (content/news/), plus the link to /now/ ===== */}}
+  {{ $news := first 3 (where site.RegularPages "Section" "news") }}
+  {{ with $news }}
+  <section class="section section--tint" id="news">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow eyebrow--rule">News</span>
+          <h2>Recently finished</h2>
+        </div>
+        <div class="hero__actions" style="margin:0;">
+          <a class="btn btn--outline" href="{{ "news/" | relURL }}">All news <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+          <a class="btn btn--outline" href="{{ "now/" | relURL }}">What's happening now <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="news-strip">
+        {{ range . }}{{ partial "card-news.html" . }}{{ end }}
+      </div>
+    </div>
+  </section>
+  {{ end }}
+
   {{/* ===== SERVICES ===== */}}
   <section class="section section--tint">
     <div class="container">

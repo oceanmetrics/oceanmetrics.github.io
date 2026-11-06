@@ -1,0 +1,11 @@
+{{/* News card. Call with a Page (.) from content/news/. The project chip links to the project page (or the atlas tool page). */}}
+{{ $proj := index hugo.Data.now.projects (string .Params.project) }}
+<a class="news-card" href="{{ .RelPermalink }}">
+  <div class="news-card__meta">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+    {{ with $proj }}<span class="news-card__project">{{ .name }}</span>{{ end }}
+  </div>
+  <h3 class="news-card__title">{{ .Title }}</h3>
+  <p class="news-card__summary">{{ .Params.summary | default .Summary }}</p>
+  <span class="card__foot">Read <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+</a>

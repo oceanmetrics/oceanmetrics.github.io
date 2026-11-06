@@ -36,15 +36,18 @@ menu:
     - name: Projects
       pageRef: /projects
       weight: 1
+    - name: News
+      pageRef: /news
+      weight: 2
     - name: Tools
       pageRef: /tools
-      weight: 2
+      weight: 3
     - name: About
       pageRef: /about
-      weight: 3
+      weight: 4
     - name: Contact
       pageRef: /contact
-      weight: 4
+      weight: 5
 
 # no tags/categories on this brochure site
 disableKinds:

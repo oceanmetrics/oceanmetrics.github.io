@@ -1,0 +1,28 @@
+{{ define "main" }}
+{{ $proj := index hugo.Data.now.projects (string .Params.project) }}
+<main>
+  <section class="page-header">
+    <div class="page-header__inner">
+      <span class="eyebrow eyebrow--rule eyebrow--ondark">{{ .Date.Format "2 January 2006" }}{{ with $proj }} · {{ .name }}{{ end }}</span>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.summary }}<p class="page-header__lead">{{ . }}</p>{{ end }}
+    </div>
+  </section>
+  <section class="section">
+    <div class="container" style="max-width:760px;">
+      <div class="article" style="max-width:none; margin:0; padding:0;">{{ .Content }}</div>
+      {{ with .Params.links }}
+        <h2 style="font:var(--type-h3); margin-top:var(--space-6);">Links</h2>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:var(--space-2);">
+          {{ range . }}<li><a href="{{ .url }}" target="_blank" rel="noopener"><i class="fas fa-arrow-right" aria-hidden="true" style="font-size:.8em; color:var(--accent);"></i> {{ .label }}</a></li>{{ end }}
+        </ul>
+      {{ end }}
+      <div class="hero__actions" style="margin-top:var(--space-7);">
+        {{ with $proj }}<a class="btn btn--outline btn--sm" href="{{ .page | relURL }}">About {{ .name }} <i class="fas fa-arrow-right" aria-hidden="true"></i></a>{{ end }}
+        <a class="btn btn--outline btn--sm" href="{{ "news/" | relURL }}">All news</a>
+        <a class="btn btn--outline btn--sm" href="{{ "now/" | relURL }}">Now</a>
+      </div>
+    </div>
+  </section>
+</main>
+{{ end }}
