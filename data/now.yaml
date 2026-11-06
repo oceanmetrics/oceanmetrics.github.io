@@ -4,6 +4,7 @@ updated: 2026-11-06
 now: Shipping monthly releases of the CalCOFI database, a review build of the Marine Sensitivity Toolkit, and the Ocean Metrics atlas on its new storage.
 projects:
   calcofi:
+    order: 2
     name: CalCOFI.io
     page: /projects/calcofi/
     site: https://calcofi.io
@@ -20,6 +21,7 @@ projects:
         text: Release v2026.10.30 brought the July 2009 casts back to their cruise and minted DOI 10.5281/zenodo.23833029.
         url: https://doi.org/10.5281/zenodo.23833029
   marinesensitivity:
+    order: 1
     name: Marine Sensitivity
     page: /projects/marinesensitivity/
     site: https://marinesensitivity.org
@@ -36,6 +38,7 @@ projects:
         text: October brought about 370 commits across six repositories; the msens R package went from 0.45 to 0.59.
         url: https://github.com/MarineSensitivity
   marinebon:
+    order: 3
     name: Marine BON
     page: /projects/marinebon/
     site: https://marinebon.org
@@ -51,6 +54,7 @@ projects:
         text: marinebon.org relaunched with a Methods section, a Network page and one Products catalog.
         url: https://marinebon.org
   atlas:
+    order: 4
     name: Ocean Metrics atlas
     page: /tools/om-atlas/
     site: https://oceanmetrics.io/atlas/

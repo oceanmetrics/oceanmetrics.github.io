@@ -12,7 +12,8 @@
   <section class="section">
     <div class="container">
       <div class="now-grid">
-        {{ range $slug, $p := $n.projects }}
+        {{ range $p := sort $n.projects "order" }}{{ $slug := "" }}
+        {{ range $k, $v := $n.projects }}{{ if eq $v.name $p.name }}{{ $slug = $k }}{{ end }}{{ end }}
         <article class="now-card" id="{{ $slug }}">
           <div class="now-card__head">
             <h2 class="now-card__title"><a href="{{ $p.page | relURL }}">{{ $p.name }}</a></h2>
