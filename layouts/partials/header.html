@@ -1,6 +1,7 @@
 {{/* the one Ocean Metrics bar (@oceanmetrics/nav, pinned in package.json, mounted by hugo.yaml as assets/om-nav):
      the three doors, Alerts and Docs, then the studio menu and GitHub as links; the theme toggle
-     and the CTA ride in the slot. No door is current on the studio site. */}}
+     and the CTA ride in the slot. The bar's place search is off here (`nosearch`, Ben 2026-11-12: a search that finds
+     only places, not their indicators and data, is not worth the room yet). No door is current on the studio site. */}}
 {{ $items := slice
   (dict "id" "places" "label" "Places" "href" ("places/" | absURL) "door" true)
   (dict "id" "indicators" "label" "Indicators" "href" ("indicators/" | absURL) "door" true)
@@ -19,8 +20,8 @@
      in deploy.yml (never written in the repo); the bar loads it (@oceanmetrics/nav README "Analytics") */}}
 {{ $ga := trim (string site.Params.ga_id) " " }}
 {{ if not (findRE `^G-[A-Z0-9]{4,16}$` $ga) }}{{ $ga = "" }}{{ end }}
-{{/* eleven items and two controls need about 1,240 px: collapse below that */}}
-<om-nav items="{{ $items | jsonify }}"{{ with $current }} current="{{ . }}"{{ end }} home-href="{{ "" | relURL }}" collapse-at="1240"{{ with $ga }} data-ga="{{ . }}"{{ end }}>
+{{/* eleven items and two controls, without the search field, need about 1,040 px: collapse below that */}}
+<om-nav items="{{ $items | jsonify }}"{{ with $current }} current="{{ . }}"{{ end }} home-href="{{ "" | relURL }}" nosearch collapse-at="1040"{{ with $ga }} data-ga="{{ . }}"{{ end }}>
   <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><i class="fas fa-moon" aria-hidden="true"></i></button>
   <a class="btn btn--sm" href="{{ "contact" | relURL }}">Work with me <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
 </om-nav>
