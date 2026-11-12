@@ -1,11 +1,10 @@
 {{/* the one Ocean Metrics bar (@oceanmetrics/nav, pinned in package.json, mounted by hugo.yaml as assets/om-nav):
-     the three doors, "What changed", Alerts and Docs, then the studio menu and GitHub as links; the theme toggle
+     the three doors, Alerts and Docs, then the studio menu and GitHub as links; the theme toggle
      and the CTA ride in the slot. No door is current on the studio site. */}}
 {{ $items := slice
   (dict "id" "places" "label" "Places" "href" ("places/" | absURL) "door" true)
   (dict "id" "indicators" "label" "Indicators" "href" ("indicators/" | absURL) "door" true)
   (dict "id" "atlas" "label" "Atlas" "href" ("atlas/" | absURL) "door" true)
-  (dict "id" "changes" "label" "What changed" "href" ("#what-changed" | relURL))
   (dict "id" "alerts" "label" "Alerts" "href" ("alerts/" | relURL))
   (dict "id" "docs" "label" "Docs" "href" ("docs/" | relURL)) }}
 {{ $current := "" }}

@@ -28,7 +28,7 @@ content/               _index, projects/*, tools/*, about, contact
   projects/*.md        one file per current project (status: current|past, front matter drives the cards)
   tools/*.md           one file per tool in the gallery (see "Tools gallery" below)
 data/                  stats.yaml, clients.yaml, past_projects.yaml (EcoQuants archive)
-  counts.json          the front page's counts and "What changed" (scripts/counts.mjs at build; committed = last good)
+  counts.json          the front page's door counts (scripts/counts.mjs at build; committed = last good)
   tools_tags.yaml      facet registry for the gallery (project / kind / status / tech labels + colors)
   tools_status.json    AUTO: last commit, version, HTTP status per tool (scripts/tools_refresh.py)
   tools_shots.json     AUTO: when each screenshot was taken, whether a dark variant exists
@@ -41,7 +41,7 @@ static/img/            project screenshots, client logos, portrait
 static/CNAME           oceanmetrics.io
 scripts/check_links.py internal-link checker (fails CI on broken links)
 scripts/alerts.test.mjs node --test of the pure functions of static/js/alerts.js (`npm test`)
-scripts/counts.mjs     the front page's counts and "What changed" from the bucket -> data/counts.json (+ counts.test.mjs)
+scripts/counts.mjs     the front page's door counts from the bucket -> data/counts.json (+ counts.test.mjs)
 scripts/check-no-addresses.mjs  fails the build on any email address but the studio's own and RFC 2606 examples
 scripts/*-schemas.mjs  sync-schemas (copy schemas to their $id) and check-schemas (assert they are served)
 scripts/tools_*.py     gallery refresh: status from the GitHub API + Playwright screenshots
@@ -51,23 +51,21 @@ scripts/tools_*.py     gallery refresh: status from the GitHub API + Playwright 
 
 ## Front page (`/`)
 
-The front page leads with the platform (decision D4, 2026-10-23; `PRODUCT.md` notes the override): a hero with the one
-line (`params.platformHeadline`) and a place search, the three doors with their counts, "What changed", then the studio
-(intro, stats band, projects, services, about and clients, contact), unchanged in content.
+The studio leads (Ben 2026-11-12, replacing D4's platform-first page; `PRODUCT.md` has the note): the studio hero
+(`params.tagline`, `heroHeadline`, `heroLead`), the stats band, the platform's three doors with their counts
+(`params.platformEyebrow`, `platformHeadline`), projects, the News strip (the three newest `content/news/` posts),
+services, about and clients, contact. There is no place search on the page (the bar has one) and no "What changed"
+list (the changes are on `/alerts/` and in the feeds).
 
-- **The search** is a plain form to `https://oceanmetrics.io/places/?q=<text>`, the same hand-off as the bar's search;
-  the "Try" examples are `params.platformTry`.
-- **The counts and "What changed" are baked at build, no JavaScript.** `scripts/counts.mjs` (`npm run counts`; run by
+- **The counts are baked at build, no JavaScript.** `scripts/counts.mjs` (`npm run counts`; run by
   `deploy.yml` before `hugo`) reads the bucket through `@oceanmetrics/catalog/storage`, the one host rule the apps use
   (`OM_STORAGE`, else the package default: path-style S3 until the storage cutover), and writes `data/counts.json`:
   - Places: `gazetteer/index/layers.json` rows (layers) and the sum of each row's `n` (places);
   - Indicators: `indicators/indicators.json` indicators, and the distinct `place_id`s of `indicators/coverage.parquet`
-    (read with hyparquet; its `place_name` names the places in "What changed");
+    (read with hyparquet; its `place_name` names the places in `changes`);
   - Atlas: the `child` links of `atlas/catalog.json` (collections);
-  - What changed: the newest five entries of `indicators/feeds/all.xml` (title, place, date, kind, link) and
-    `indicators/changes/latest.json`'s `checked_at`. Each place links to its Place page (`/places/p/<id>/`), each
-    sentence to the indicators viewer, the section to `/alerts/` and the feed. The bar's "What changed" is
-    `/#what-changed`.
+  - `changes`: the newest five entries of `indicators/feeds/all.xml` and `indicators/changes/latest.json`'s
+    `checked_at`. Still written and tested, but no page shows it since 2026-11-12.
 - **Fallback.** `data/counts.json` is committed: if the bucket does not answer, the script keeps it (the last good
   numbers) and prints a warning annotation, so the build never fails on the bucket. Refresh it locally with
   `npm run counts` and commit when you like; CI does not commit it.
@@ -82,7 +80,7 @@ line (`params.platformHeadline`) and a place search, the three doors with their 
   glyphs a page uses into an inline `<style>` (no path typed by hand, not the whole 34 kB set).
 - **Tests.** `scripts/counts.test.mjs` (`node --test`, in `npm test`) runs every rule on the bucket-shaped fixtures in
   `scripts/fixtures/counts/` (including a six-row parquet) and the keep-the-last-good-file fallback. The `verify` job
-  checks the live front page has the doors and "What changed".
+  checks the live front page has the studio hero (`id="studio"`) and the doors.
 
 ## Alerts (`/alerts/`)
 
