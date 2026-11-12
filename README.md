@@ -54,7 +54,7 @@ scripts/tools_*.py     gallery refresh: status from the GitHub API + Playwright 
 The studio leads (Ben 2026-11-12, replacing D4's platform-first page; `PRODUCT.md` has the note): the studio hero
 (`params.tagline`, `heroHeadline`, `heroLead`), the stats band, the platform's three doors with their counts
 (`params.platformEyebrow`, `platformHeadline`), projects, the News strip (the three newest `content/news/` posts),
-services, about and clients, contact. There is no place search on the page (the bar has one) and no "What changed"
+services, about and clients, contact. There is no place search on the page or in the bar (`nosearch` on `om-nav`, `layouts/partials/header.html`) and no "What changed"
 list (the changes are on `/alerts/` and in the feeds).
 
 - **The counts are baked at build, no JavaScript.** `scripts/counts.mjs` (`npm run counts`; run by

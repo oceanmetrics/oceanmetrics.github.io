@@ -10,7 +10,7 @@ web
 
 ## Users
 
-**Front-page order (Ben 2026-11-12, replacing decision D4 of 2026-10-23):** the studio leads again: its hero, the stats band, then the platform's three doors (Places, Indicators and Atlas with their counts), projects, News, services and contact. D4's platform-first page (a place search on top and a "What changed" list) was too much for a landing page; the search stays in the bar and the changes stay on `/alerts/` and the feeds. The doors keep a third audience in view, sanctuary staff and the MBON and OBIS community, who arrive to look up a place.
+**Front-page order (Ben 2026-11-12, replacing decision D4 of 2026-10-23):** the studio leads again: its hero, the stats band, then the platform's three doors (Places, Indicators and Atlas with their counts), projects, News, services and contact. D4's platform-first page (a place search on top and a "What changed" list) was too much for a landing page; the bar's search is off on this site too, until it finds indicators and data as well as places, and the changes stay on `/alerts/` and the feeds. The doors keep a third audience in view, sanctuary staff and the MBON and OBIS community, who arrive to look up a place.
 
 Two first-tier audiences, weighted equally. **Federal and agency contacts** — program managers and contracting officers' representatives at BOEM, NOAA, NASA, and NREL — arrive evaluating Ocean Metrics as a contractor or subcontractor for a specific program need. **Research program leads and principal investigators** — at institutions running programs like CalCOFI and the Marine Biodiversity Observation Network — arrive looking for a technical lead or collaborator who can build and sustain the analytical infrastructure their science depends on.
 
