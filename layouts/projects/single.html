@@ -27,6 +27,9 @@
         </div>
       {{ end }}
 
+      {{/* ===== LATEST (data/now.yaml, keyed by slug) ===== */}}
+      {{ partial "latest-block.html" (path.BaseName .File.ContentBaseName) }}
+
       <div class="article" style="max-width:none; margin:0; padding:0;">{{ .Content }}</div>
 
       {{ with .Params.links }}

@@ -1,0 +1,29 @@
+{{ define "main" }}
+<main>
+  <section class="page-header">
+    <div class="page-header__inner">
+      <span class="eyebrow eyebrow--rule eyebrow--ondark">News</span>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.summary }}<p class="page-header__lead">{{ . }}</p>{{ end }}
+    </div>
+  </section>
+  <section class="section">
+    <div class="container" style="max-width:860px;">
+      <p class="changes__foot" style="margin:0 0 var(--space-6);">Finished pieces of work, dated. For what is in progress, see <a href="{{ "now/" | relURL }}">now</a>.</p>
+      <ol class="news-list">
+        {{ range .Pages }}
+        {{ $proj := index hugo.Data.now.projects (string .Params.project) }}
+        <li class="news-row">
+          <div class="news-row__meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+            {{ with $proj }}<a class="news-row__project" href="{{ .page | relURL }}">{{ .name }}</a>{{ end }}
+          </div>
+          <h2 class="news-row__title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <p class="news-row__summary">{{ .Params.summary | default .Summary }}</p>
+        </li>
+        {{ end }}
+      </ol>
+    </div>
+  </section>
+</main>
+{{ end }}

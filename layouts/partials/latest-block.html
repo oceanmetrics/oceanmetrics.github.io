@@ -1,0 +1,19 @@
+{{/* "Latest" block for a project page: the project's entry in data/now.yaml, keyed by the page's slug (.) */}}
+{{ $slug := . }}
+{{ with index hugo.Data.now.projects $slug }}
+<aside class="latest-block">
+  <div class="section-head" style="margin-bottom:var(--space-3);">
+    <span class="eyebrow eyebrow--rule">Latest · as of {{ (time.AsTime .updated).Format "2 Jan 2006" }}</span>
+    <a class="latest-block__more" href="{{ "now/" | relURL }}#{{ $slug }}">Everything now <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+  </div>
+  <p class="latest-block__phase">{{ .phase }}</p>
+  <ol class="latest">
+    {{ range .latest }}
+    <li class="latest__item">
+      <time class="latest__date" datetime="{{ .date }}">{{ (time.AsTime .date).Format "2 Jan" }}</time>
+      <span class="latest__text">{{ if .url }}<a href="{{ .url }}"{{ if hasPrefix .url "http" }} target="_blank" rel="noopener"{{ end }}>{{ .text }}</a>{{ else }}{{ .text }}{{ end }}</span>
+    </li>
+    {{ end }}
+  </ol>
+</aside>
+{{ end }}

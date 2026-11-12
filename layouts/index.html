@@ -1,35 +1,50 @@
 {{ define "main" }}
 <main>
-  {{/* the front page leads with the platform (decision D4, 2026-10-23): a place search, the three doors with their
-       counts, "What changed"; the studio follows. The numbers and the changes are baked at build from the bucket by
+  {{/* the studio leads again (Ben 2026-11-12, reversing D4's platform-first order): the studio hero, the stats band,
+       then the platform's three doors with their counts. The counts are baked at build from the bucket by
        scripts/counts.mjs into data/counts.json (no JavaScript on this page reads them). */}}
   {{ $c := hugo.Data.counts }}
   {{/* one example link under each door (data/examples.json, shared with /docs/ "Maps"; scripts/examples.test.mjs) */}}
   {{ $ex := hugo.Data.examples }}
   {{ $site := "https://oceanmetrics.io/" }}
-  {{ partial "om-icons-css.html" (slice "ui-search" "place-sanctuary" "view-scorecard" "view-map" "ui-calendar") }}
+  {{ partial "om-icons-css.html" (slice "place-sanctuary" "view-scorecard" "view-map") }}
 
-  {{/* ===== HERO: the platform's one line and the place search ===== */}}
-  <section class="hero hero--platform">
+  {{/* ===== HERO: the studio ===== */}}
+  <section class="hero" id="studio">
     <div class="hero__inner">
       <div class="hero__copy">
-        <span class="eyebrow eyebrow--rule">{{ site.Params.platformEyebrow }}</span>
-        <h1>{{ site.Params.platformHeadline }}</h1>
-        {{/* the same hand-off as the bar's search (om-nav): /places/?q=<text>, no script needed */}}
-        <form class="place-search" role="search" action="{{ $site }}places/" method="get">
-          <label class="visually-hidden" for="place-q">Search places</label>
-          <i class="om-i om-i-ui-search place-search__icon" aria-hidden="true"></i>
-          <input id="place-q" type="search" name="q" required placeholder="A sanctuary, an EEZ, a lease area…" autocomplete="off" enterkeyhint="search">
-          <button class="btn" type="submit">Search places</button>
-        </form>
-        <p class="place-search__try">Try
-          {{ range $i, $q := site.Params.platformTry }}{{ if $i }}, {{ end }}<a href="{{ $site }}places/?q={{ $q | urlquery }}">{{ $q }}</a>{{ end }}.</p>
+        <span class="eyebrow eyebrow--rule">{{ site.Params.tagline }}</span>
+        <h1>{{ site.Params.heroHeadline }}</h1>
+        <p class="hero__lead">{{ site.Params.heroLead }}</p>
+        <div class="hero__actions">
+          <a class="btn btn--lg" href="{{ "projects" | relURL }}">See the work <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+          <a class="btn btn--lg btn--outline" href="{{ "contact" | relURL }}">Work with me</a>
+        </div>
       </div>
-      <div class="hero__mark hero__mark--small">{{ readFile "static/img/logos/ocean-metrics-hero.svg" | safeHTML }}</div>
+      <div class="hero__mark">{{ readFile "static/img/logos/ocean-metrics-hero.svg" | safeHTML }}</div>
     </div>
+  </section>
 
-    {{/* ===== THE THREE DOORS ===== */}}
+  {{/* ===== STATS BAND ===== */}}
+  <section class="stats-band">
     <div class="container">
+      <div class="stat-strip stat-strip--center">
+        {{ range hugo.Data.stats }}
+          <div class="stat"><div class="stat__value">{{ .value }}</div><div class="stat__label">{{ .label }}</div></div>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  {{/* ===== THE PLATFORM: the three doors ===== */}}
+  <section class="section platform" id="platform">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow eyebrow--rule">{{ site.Params.platformEyebrow }}</span>
+          <h2>{{ site.Params.platformHeadline }}</h2>
+        </div>
+      </div>
       <ul class="doors">
         <li><a class="door" href="{{ $site }}places/">
           <span class="door__head"><i class="om-i om-i-place-sanctuary door__icon" aria-hidden="true"></i><span class="door__name">Places</span></span>
@@ -65,61 +80,6 @@
     </div>
   </section>
 
-  {{/* ===== WHAT CHANGED: the newest entries of indicators/feeds/all.xml ===== */}}
-  {{ with $c }}{{ with .changes }}
-  <section class="section changes" id="what-changed">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow eyebrow--rule">What changed</span>
-          <h2>The latest indicator changes</h2>
-        </div>
-        <a class="btn btn--outline" href="{{ "alerts/" | relURL }}">Alerts and feeds <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      </div>
-      <ol class="changes-list">
-        {{ range .entries }}{{ $e := . }}
-        <li class="change">
-          <a class="change__title" href="{{ .href }}">{{ .title }}</a>
-          <span class="change__meta">
-            {{ with .place_id }}<a class="change__place" href="{{ $site }}places/p/{{ replace (replace (urlquery .) "%3A" ":") "+" "%20" }}/">{{ or $e.place_name . }}</a>{{ end }}
-            <span class="change__date"><i class="om-i om-i-ui-calendar" aria-hidden="true"></i> <time datetime="{{ .date }}">{{ (time.AsTime .date).Format "2 Jan 2006" }}</time></span>
-            {{ with .kind }}<span class="change__kind change__kind--{{ . }}">{{ index (dict "new" "first value" "status" "status change" "period" "new period") . | default . }}</span>{{ end }}
-          </span>
-        </li>
-        {{ end }}
-      </ol>
-      <p class="changes__foot">
-        {{ with .checked }}Checked {{ (time.AsTime .).Format "2 Jan 2006" }}. {{ end }}
-        Every change is in the <a href="{{ .feed }}">Atom feed of all changes</a>; <a href="{{ "alerts/" | relURL }}">get an email</a> when an indicator you watch changes.
-      </p>
-    </div>
-  </section>
-  {{ end }}{{ end }}
-
-  {{/* ===== THE STUDIO (projects, services, about, contact): content unchanged, below the platform ===== */}}
-  <section class="section studio-intro" id="studio">
-    <div class="container">
-      <span class="eyebrow eyebrow--rule">{{ site.Params.tagline }}</span>
-      <h2 class="studio-intro__title">{{ site.Params.heroHeadline }}</h2>
-      <p class="studio-intro__lead">{{ site.Params.heroLead }}</p>
-      <div class="hero__actions">
-        <a class="btn btn--lg" href="{{ "projects" | relURL }}">See the work <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-        <a class="btn btn--lg btn--outline" href="{{ "contact" | relURL }}">Work with me</a>
-      </div>
-    </div>
-  </section>
-
-  {{/* ===== STATS BAND ===== */}}
-  <section class="stats-band">
-    <div class="container">
-      <div class="stat-strip stat-strip--center">
-        {{ range hugo.Data.stats }}
-          <div class="stat"><div class="stat__value">{{ .value }}</div><div class="stat__label">{{ .label }}</div></div>
-        {{ end }}
-      </div>
-    </div>
-  </section>
-
   {{/* ===== FEATURED (CURRENT) PROJECTS ===== */}}
   <section class="section">
     <div class="container">
@@ -134,6 +94,25 @@
       </div>
     </div>
   </section>
+
+  {{/* ===== NEWS: the latest three posts (content/news/) ===== */}}
+  {{ $news := first 3 (where site.RegularPages "Section" "news") }}
+  {{ with $news }}
+  <section class="section section--tint" id="news">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow eyebrow--rule">News</span>
+          <h2>Recently finished</h2>
+        </div>
+        <a class="btn btn--outline" href="{{ "news/" | relURL }}">All news <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      </div>
+      <div class="news-strip">
+        {{ range . }}{{ partial "card-news.html" . }}{{ end }}
+      </div>
+    </div>
+  </section>
+  {{ end }}
 
   {{/* ===== SERVICES ===== */}}
   <section class="section section--tint">

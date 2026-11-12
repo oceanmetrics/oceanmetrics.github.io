@@ -7,13 +7,12 @@ summaryLength: 30
 params:
   tagline: Ocean data science studio
   description: Ocean Metrics is the practice of Ben Best, PhD — building the analyses, maps, and open-data platforms behind federal and research ocean programs. Formerly EcoQuants.
-  # the front page leads with the platform (decision D4): its one line, the search's examples
-  platformEyebrow: Places · Indicators · Atlas
-  platformHeadline: Ocean indicators for any place, from open data
-  platformTry: [Channel Islands, Gulf of Maine, Monterey Bay]
-  # the studio's intro, below the platform on the front page
+  # the studio's hero, first on the front page
   heroHeadline: Measuring the ocean, from raw observations to decisions
   heroLead: I build the species models, interactive maps, and open-data platforms that ocean science relies on — rigorous, reproducible work for agencies and research programs.
+  # the platform's three doors, below the studio hero and the stats band
+  platformEyebrow: Places · Indicators · Atlas
+  platformHeadline: Ocean indicators for any place, from open data
   # a generated illustration can be dropped in here later (see PLAN.md §8); until then the hero uses a gradient
   heroImage: ""
   # contact / identity
@@ -36,15 +35,18 @@ menu:
     - name: Projects
       pageRef: /projects
       weight: 1
+    - name: News
+      pageRef: /news
+      weight: 2
     - name: Tools
       pageRef: /tools
-      weight: 2
+      weight: 3
     - name: About
       pageRef: /about
-      weight: 3
+      weight: 4
     - name: Contact
       pageRef: /contact
-      weight: 4
+      weight: 5
 
 # no tags/categories on this brochure site
 disableKinds:
